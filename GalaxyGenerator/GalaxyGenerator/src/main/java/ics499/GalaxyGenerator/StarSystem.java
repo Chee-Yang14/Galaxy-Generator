@@ -10,7 +10,7 @@ public class StarSystem {
   private int econemyLevel;
   private int spaceResources;
   private List<Planet> planets;
-  private double[][] location;
+  private double[] location;
 
 
   public StarSystem(String name, String type, String goverment, int population, int econemyLevel, int spaceResources, List<Planet> planets, double[][] location) {
