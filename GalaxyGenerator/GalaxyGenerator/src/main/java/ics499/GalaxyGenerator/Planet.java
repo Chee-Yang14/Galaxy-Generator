@@ -8,7 +8,7 @@ public class Planet {
   private int naturalResources;
   private int economyLevel;
   private String economyType;
-  private double[][] location;
+  private double[] location;
 
   public Planet(String name, String type, String description, int population, int naturalResources, int economyLevel, String economyType, double[][] location) {
     this.name = name;
