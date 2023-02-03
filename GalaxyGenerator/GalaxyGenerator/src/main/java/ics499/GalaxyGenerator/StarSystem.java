@@ -1,5 +1,6 @@
 package ics499.GalaxyGenerator;
 
+import java.awt.Point;
 import java.util.List;
 
 public class StarSystem {
@@ -10,10 +11,10 @@ public class StarSystem {
   private int econemyLevel;
   private int spaceResources;
   private List<Planet> planets;
-  private double[] location;
+  private Point location;
 
 
-  public StarSystem(String name, String type, String goverment, int population, int econemyLevel, int spaceResources, List<Planet> planets, double[][] location) {
+  public StarSystem(String name, String type, String goverment, int population, int econemyLevel, int spaceResources, List<Planet> planets, Point location) {
     this.name = name;
     this.type = type;
     this.goverment = goverment;
@@ -94,11 +95,11 @@ public class StarSystem {
     this.planets = planets;
   }
 
-  public double[][] getLocation() {
+  public Point getLocation() {
     return this.location;
   }
 
-  public void setLocation(double[][] location) {
+  public void setLocation(Point location) {
     this.location = location;
   }
 }

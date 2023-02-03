@@ -1,5 +1,7 @@
 package ics499.GalaxyGenerator;
 
+import java.awt.Point;
+
 public class Planet {
   private String name;
   private String type;
@@ -8,9 +10,9 @@ public class Planet {
   private int naturalResources;
   private int economyLevel;
   private String economyType;
-  private double[] location;
+  private Point location;
 
-  public Planet(String name, String type, String description, int population, int naturalResources, int economyLevel, String economyType, double[][] location) {
+  public Planet(String name, String type, String description, int population, int naturalResources, int economyLevel, String economyType, Point location) {
     this.name = name;
     this.type = type;
     this.description = description;
@@ -92,11 +94,11 @@ public class Planet {
     this.economyType = economyType;
   }
 
-  public double[][] getLocation() {
+  public Point getLocation() {
     return this.location;
   }
 
-  public void setLocation(double[][] location) {
+  public void setLocation(Point location) {
     this.location = location;
   }
   
