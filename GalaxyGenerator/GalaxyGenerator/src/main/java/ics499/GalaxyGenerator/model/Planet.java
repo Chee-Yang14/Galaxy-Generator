@@ -1,8 +1,17 @@
-package ics499.GalaxyGenerator;
+package ics499.GalaxyGenerator.model;
 
 import java.awt.Point;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
+
+@Entity
 public class Planet {
+  private Integer id;
   private String name;
   private String type;
   private String description;
@@ -12,7 +21,8 @@ public class Planet {
   private String economyType;
   private Point location;
 
-  public Planet(String name, String type, String description, int population, int naturalResources, int economyLevel, String economyType, Point location) {
+  public Planet(Integer id, String name, String type, String description, int population, int naturalResources, int economyLevel, String economyType, Point location) {
+    this.id = id;
     this.name = name;
     this.type = type;
     this.description = description;
@@ -22,22 +32,33 @@ public class Planet {
     this.economyType = economyType;
     this.location = location;
   }
-
+  
   public Planet() {
   }
-
+  
   public void generate(){
     /**
      * TODO
      */
   }
-
+  
   public void onClick(){
     /**
      * TODO
      */
   }
+  
+  @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+  public Integer getId() {
+    return this.id;
+  }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+	@Column(name = "name", nullable = false)
   public String getName() {
     return this.name;
   }
@@ -46,6 +67,7 @@ public class Planet {
     this.name = name;
   }
 
+	@Column(name = "planet_type", nullable = false)
   public String getType() {
     return this.type;
   }
@@ -54,6 +76,7 @@ public class Planet {
     this.type = type;
   }
 
+	@Column(name = "planet_desc", nullable = false)
   public String getDescription() {
     return this.description;
   }
@@ -62,6 +85,7 @@ public class Planet {
     this.description = description;
   }
 
+	@Column(name = "population", nullable = false)
   public int getPopulation() {
     return this.population;
   }
@@ -70,6 +94,7 @@ public class Planet {
     this.population = population;
   }
 
+	@Column(name = "natural_resource", nullable = false)
   public int getNaturalResources() {
     return this.naturalResources;
   }
@@ -78,6 +103,7 @@ public class Planet {
     this.naturalResources = naturalResources;
   }
 
+	@Column(name = "economy_level", nullable = false)
   public int getEconomyLevel() {
     return this.economyLevel;
   }
@@ -86,6 +112,7 @@ public class Planet {
     this.economyLevel = economyLevel;
   }
 
+	@Column(name = "government_type", nullable = false)
   public String getEconomyType() {
     return this.economyType;
   }
@@ -94,6 +121,7 @@ public class Planet {
     this.economyType = economyType;
   }
 
+  @Transient
   public Point getLocation() {
     return this.location;
   }
@@ -101,5 +129,4 @@ public class Planet {
   public void setLocation(Point location) {
     this.location = location;
   }
-  
 }
