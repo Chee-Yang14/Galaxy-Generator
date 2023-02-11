@@ -3,7 +3,17 @@ package ics499.GalaxyGenerator.model;
 import java.awt.Point;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+@Entity
+@Table(name="starsystem")
 public class StarSystem {
+  private Integer id;
   private String name;
   private String type;
   private String goverment;
@@ -39,6 +49,17 @@ public class StarSystem {
      */
   }
 
+  @Id
+  @GeneratedValue
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  @Column(name = "name", nullable = false)
   public String getName() {
     return this.name;
   }
@@ -47,6 +68,7 @@ public class StarSystem {
     this.name = name;
   }
 
+  @Column(name = "star_type", nullable = false)
   public String getType() {
     return this.type;
   }
@@ -55,6 +77,7 @@ public class StarSystem {
     this.type = type;
   }
 
+  @Column(name = "government_type", nullable = false)
   public String getGoverment() {
     return this.goverment;
   }
@@ -63,6 +86,7 @@ public class StarSystem {
     this.goverment = goverment;
   }
 
+  @Column(name = "population", nullable = false)
   public int getPopulation() {
     return this.population;
   }
@@ -71,6 +95,7 @@ public class StarSystem {
     this.population = population;
   }
 
+  @Column(name = "economy_level", nullable = false)
   public int getEconemyLevel() {
     return this.econemyLevel;
   }
@@ -79,6 +104,7 @@ public class StarSystem {
     this.econemyLevel = econemyLevel;
   }
 
+  @Column(name = "space_resource", nullable = false)
   public int getSpaceResources() {
     return this.spaceResources;
   }
@@ -87,6 +113,7 @@ public class StarSystem {
     this.spaceResources = spaceResources;
   }
 
+  @Transient
   public List<Planet> getPlanets() {
     return this.planets;
   }
@@ -95,6 +122,7 @@ public class StarSystem {
     this.planets = planets;
   }
 
+  @Transient
   public Point getLocation() {
     return this.location;
   }

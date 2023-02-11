@@ -15,6 +15,7 @@ import ics499.GalaxyGenerator.repository.PlanetRepository;
 
 @RestController
 public class PlanetController {
+
   @Autowired
   private PlanetRepository repo;
 
