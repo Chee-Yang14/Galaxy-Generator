@@ -1,4 +1,13 @@
-#ics499
-Galaxy Generator
+#ics499 Galaxy Generator
 
-This branch is me working on some sql code, not ready to merge to the master branch - Lam
+Go to postgres, copy the query in 'postgres script.sql', execute
+
+Change the username, password,and database name in application.properties
+
+To get all planets -> https://localhost:8080/planets
+
+To get specific planet -> https://localhost:8080/planet/{id}
+
+To get all starsystem -> https://localhost:8080/starsystems
+
+To get specific starsystem -> https://localhost:8080/starsystem/{id}
