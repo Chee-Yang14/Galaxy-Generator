@@ -1,4 +1,4 @@
 #ics499
 Galaxy Generator
 
-Andy Pham, Chee Yang, Lam Truong, Joseph Jarosch
+This branch is me working on some sql code, not ready to merge to the master branch - Lam
