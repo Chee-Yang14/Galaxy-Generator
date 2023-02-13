@@ -1,3 +1,7 @@
+#ics499
+Galaxy Generator
+
+Andy Pham, Chee Yang, Lam Truong, Joseph Jarosch
 #ics499 Galaxy Generator
 
 Go to postgres, copy the query in 'postgres script.sql', execute
