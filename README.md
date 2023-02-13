@@ -2,6 +2,7 @@
 Galaxy Generator
 
 Andy Pham, Chee Yang, Lam Truong, Joseph Jarosch
+
 #ics499 Galaxy Generator
 
 Go to postgres, copy the query in 'postgres script.sql', execute
@@ -15,3 +16,4 @@ To get specific planet -> https://localhost:8080/planet/{id}
 To get all starsystem -> https://localhost:8080/starsystems
 
 To get specific starsystem -> https://localhost:8080/starsystem/{id}
+
