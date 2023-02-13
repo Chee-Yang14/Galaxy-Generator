@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-Creators: Chee yang, lam truong, andy phan, joseph jarosch
-
-# ics499
-=======
 #ics499
 Galaxy Generator
 
