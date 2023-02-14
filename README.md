@@ -2,16 +2,26 @@
 
 #ics499 Galaxy Generator
 
-Go to postgres, copy the query in 'postgres script.sql', execute
+- GET all planets -> localhost:8080/planets
 
-Change the username, password,and database name in application.properties
+- GET planet with id -> localhost:8080/planet/{id}
 
-To get all planets -> https://localhost:8080/planets
+- POST planet, remember to include data in body as json -> localhost:8080/addplanet
 
-To get specific planet -> https://localhost:8080/planet/{id}
+- PUT planet, remember to include data in body as json -> localhost:8080/planet{id}
 
-To get all starsystem -> https://localhost:8080/starsystems
+- DELETE planet -> localhost:8080/planet/{id}
 
-To get specific starsystem -> https://localhost:8080/starsystem/{id}
+---
+
+- GET all starsytems -> localhost:8080/starsytems
+
+- GET starsytem with id -> localhost:8080/starsytem/{id}
+
+- POST starsytem, remember to include data in body as json -> localhost:8080/addstarsytem
+
+- PUT starsytem, remember to include data in body as json -> localhost:8080/starsytem{id}
+
+- DELETE starsytem -> localhost:8080/starsytem/{id}
 
 
