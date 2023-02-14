@@ -12,6 +12,8 @@
 
 
 - PUT planet, remember to include data in body as json -> localhost:8080/planet{id}
+![image](https://user-images.githubusercontent.com/76791917/218817744-927c5a3f-d31d-43a0-9388-e63bb7e9ffd9.png)
+
 
 - DELETE planet -> localhost:8080/planet/{id}
 
