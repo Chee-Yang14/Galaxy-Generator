@@ -1,4 +1,4 @@
-package ics499.GalaxyGenerator;
+package ics499.GalaxyGenerator.model;
 
 import java.util.List;
 
