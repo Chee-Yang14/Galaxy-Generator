@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.Transient;
 public class StarSystem {
   @Id
   @GeneratedValue
+  @SequenceGenerator(name = "starsystem", allocationSize = 1)
   private Integer id;
 
   private String name;
