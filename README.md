@@ -8,6 +8,9 @@
 
 - POST planet, remember to include data in body as json -> localhost:8080/addplanet
 
+![image](https://user-images.githubusercontent.com/76791917/218817402-f235108b-6709-4223-a4d4-9c50ad67db48.png)
+
+
 - PUT planet, remember to include data in body as json -> localhost:8080/planet{id}
 
 - DELETE planet -> localhost:8080/planet/{id}
