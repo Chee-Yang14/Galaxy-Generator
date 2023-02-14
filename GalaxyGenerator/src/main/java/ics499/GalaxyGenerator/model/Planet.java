@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import java.util.Random;
 
 @Entity
 @Table(name="planet")
@@ -14,7 +15,6 @@ public class Planet {
   @GeneratedValue
   @SequenceGenerator(name = "planet", allocationSize = 1)
   private Integer id;
-
   private String name;
   private int size;
   private long population;
@@ -41,6 +41,38 @@ public class Planet {
   }
   
   public void generate(){
+	  Random random = new Random();
+	  this.size = random.nextInt(250000000 - 100000000) + 100000000;
+	  if (this.size < 120000000) {
+		  this.population = this.size * (random.nextLong(20 - 10) + 10);
+	  }
+	  else if (this.size < 140000000) {
+		  this.population = this.size * (random.nextLong(25 - 15) + 15);
+	  }
+	  else if (this.size < 160000000) {
+		  this.population = this.size * (random.nextLong(30 - 20) + 20);
+	  }
+	  else if (this.size < 180000000) {
+		  this.population = this.size * (random.nextLong(35 - 25) + 25);
+	  }
+	  else if (this.size < 200000000) {
+		  this.population = this.size * (random.nextLong(40 - 30) + 30);
+	  }
+	  else if (this.size < 220000000) {
+		  this.population = this.size * (random.nextLong(45 - 35) + 35);
+	  }
+	  else if (this.size < 250000000) {
+		  this.population = this.size * (random.nextLong(55 - 45) + 45);
+	  }
+	  
+	  int roll = random.nextInt(100 - 1) + 1;
+	  if (roll <= 20) {
+		  this.population *= random.nextDouble(.6 - .1) + .1;
+	  }
+	  else if (roll == 100) {
+		  this.population *= random.nextInt(8 - 3) + 3;
+	  }
+	  
     /**
      * TODO
      */
