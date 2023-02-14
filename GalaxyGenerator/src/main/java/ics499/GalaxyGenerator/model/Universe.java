@@ -2,7 +2,15 @@ package ics499.GalaxyGenerator.model;
 
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 public class Universe {
+
+  private Integer id;
   private String shape;
   private List<StarSystem> starSystem;
 

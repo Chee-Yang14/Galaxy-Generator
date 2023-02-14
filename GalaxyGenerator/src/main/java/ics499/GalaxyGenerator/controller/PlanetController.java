@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +37,36 @@ public class PlanetController {
     catch (NoSuchElementException e) {
       return new ResponseEntity<Planet>(HttpStatus.NOT_FOUND);
     }
+  }
+
+  @PostMapping("/addplanet")
+  public Planet create(@RequestBody final Planet planetToAdd) {
+    return repo.saveAndFlush(planetToAdd);
+  }
+
+  @PutMapping("/planet/{id}")
+  public ResponseEntity<?> update(@RequestBody Planet planetToUpdate, @PathVariable Integer id){
+    try {
+      Planet existedPlanet = repo.findById(id).get();
+
+      existedPlanet.setSize(planetToUpdate.getSize());
+      existedPlanet.setEconomyLevel(planetToUpdate.getEconomyLevel());
+      existedPlanet.setLocation(planetToUpdate.getLocation());
+      existedPlanet.setNaturalResources(planetToUpdate.getNaturalResources());
+      existedPlanet.setPopulation(planetToUpdate.getPopulation());
+      existedPlanet.setName(planetToUpdate.getName());
+
+      repo.save(existedPlanet);
+      new ResponseEntity<>(HttpStatus.OK);
+      return ResponseEntity.ok("Update successfully");
+    }
+    catch (NoSuchElementException e) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+  }
+
+  @DeleteMapping("/planet/{id}")
+  public void delete(@PathVariable(value = "id") Integer planetId) {
+    repo.deleteById(planetId);
   }
 }

@@ -1,7 +1,5 @@
 package ics499.GalaxyGenerator.model;
 
-import java.awt.Point;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,25 +10,29 @@ import jakarta.persistence.Transient;
 @Entity
 @Table(name="planet")
 public class Planet {
+  
+  @Id
+  @GeneratedValue
   private Integer id;
+
   private String name;
-  // private String type;
   private int size;
-  // private String description;
-  private int population;
+  private long population;
   private int naturalResources;
   private int economyLevel;
-  // private String economyType;
   private int[] location;
+  // private String economyType;
+  // private String description;
+  // private String type;
 
-  public Planet(Integer id, String name, String type, String description, int population, int naturalResources, int economyLevel, String economyType, Point location) {
+  public Planet(Integer id, String name, String type, String description, long population, int naturalResources, int economyLevel, String economyType, int[] location) {
     this.id = id;
     this.name = name;
-    // this.type = type;
-    // this.description = description;
     this.population = population;
     this.naturalResources = naturalResources;
     this.economyLevel = economyLevel;
+    // this.type = type;
+    // this.description = description;
     // this.economyType = economyType;
     // this.location = location;
   }
@@ -49,18 +51,7 @@ public class Planet {
      * TODO
      */
   }
-  
-  @Id
-	@GeneratedValue
-  public Integer getId() {
-    return this.id;
-  }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-	@Column(name = "name", nullable = false)
   public String getName() {
     return this.name;
   }
@@ -88,7 +79,6 @@ public class Planet {
   // }
 
 
-	@Column(name = "size", nullable = false)
   public int getSize() {
     return this.size;
   }
@@ -97,16 +87,14 @@ public class Planet {
     this.size = size;
   }
 
-	@Column(name = "population", nullable = false)
-  public int getPopulation() {
+  public long getPopulation() {
     return this.population;
   }
 
-  public void setPopulation(int population) {
+  public void setPopulation(long population) {
     this.population = population;
   }
 
-	@Column(name = "natural_resource", nullable = false)
   public int getNaturalResources() {
     return this.naturalResources;
   }
@@ -115,7 +103,6 @@ public class Planet {
     this.naturalResources = naturalResources;
   }
 
-	@Column(name = "economy", nullable = false)
   public int getEconomyLevel() {
     return this.economyLevel;
   }
@@ -133,7 +120,6 @@ public class Planet {
   //   this.economyType = economyType;
   // }
 
-  @Column(name = "location")
   public int[] getLocation() {
     return this.location;
   }
