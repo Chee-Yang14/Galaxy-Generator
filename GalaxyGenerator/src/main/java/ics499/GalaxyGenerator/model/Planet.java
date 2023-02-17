@@ -78,6 +78,82 @@ public class Planet {
      */
   }
   
+  public String createDescription() {
+    String descList[][] = {
+        { "<line1 <line2 for <line3", "<line1 <line2 for <line3 and <line3", "<line4 by <line5",
+            "<line1 <line2 for <line3 but <line4 by <line5", "a <line6 <line7" }, // fix a-n
+        /* <line1 */{ "very", "mildly", "most", "reasonably", "" },
+        /* <line2 */{ "fabled", "notable", "well known", "famous", "noted" },
+        /* <line3 */{ "its <line8 <line9", "the <random name <line10 <line11",
+            "its inhabitants' <line12 <line13", "<line14", "its <line15 <line16" },
+        /* <line4 */{ "is threatened", "is plagued", "is ravaged", "is cursed", "scourged" },
+        /* <line5 */{ "<line17 nuclear war", "<line18 <line10 <line11", "a <line18 disease",
+            "<line17 natural disasters", "<line37" },
+        /* <line6 */{ " unremarkable", " boring", " dull", " tedious", " revolting" },
+        /* <line7 */{ "planet", "world", "place", "little planet", "dump" },
+        /* <line8 */{ "ancient", "<line19", "great", "vast", "pink" },
+        /* <line9 */{ "<line22 <line21 plantations", "mountains", "<line20", "<line23 forests", "oceans" },
+        /* <line10 */{ "3-headed", "golden", "giant", "fire", "river" },
+        /* <line11 */{ "<line24", "<line32", "<line26", "<line31", "<line30" },
+        /* <line12 */{ "ancient", "exceptional", "eccentric", "fascinating", "<line19" },
+        /* <line13 */{ "strength", "religion & beliefs", "intelligence", "ammount of <line25",
+            "love for <line25" },
+        /* <line14 */{ "<line28 <line27", "<random name> <line24 <line34", "its <line15 <line32 <line34",
+            "<line35 <line36", "<line28 <line27" },
+        /* <line15 */{ "fabulous", "exotic", "breathtaking", "unusual", "exciting" },
+        /* <line16 */{ "cuisine", "wildlife", "scenery", "culture", " <line33 " },
+        /* <line17 */{ "frequent", "occasional", "unpredictable", "dreadful", "deadly" },
+        /* <line18 */{ "killer", "deadly", "evil", "lethal", "vicious" },
+        /* <line19 */{ "funny", "weird", "unusual", "strange", "peculiar" },
+        /* <line20 */{ "biofluorescent flora", "dust clouds", "ice bergs", "rock formations", "volcanoes" },
+        /* <line21 */{ "plant", "tulip", "banana", "corn", "apple" },
+        /* <line22 */{ "B2", "<random name> ", "<random name> <line18", "inhabitant", "<random name> B2" },
+        /* <line23 */{ "tropical", "dense", "rain", "impenetrable", "exuberant" },
+        /* <line24 */{ "dragon", "lion", "bison", "snake", "wolf" },
+        /* <line25 */{ "natural resources", "technology and inventions", "poetry", "music", "<line16" },
+        /* <line26 */{ "talking tree", "crab", "bat", "dragon", "B2" },
+        /* <line27 */{ "juice", "brandy", "water", "brew", "gargle blasters" },
+        /* <line28 */{ "B2", "<random name> <line11", "<random name> ", "<random name> <line18", "<line18 B2" },
+        /* <line29 */{ "B0", "The planet B0", "The world B0", "This planet", "This world" },
+        /* <line30 */{ "wasp", "aligator", "spider", "ant", "B2" },
+        /* <line31 */{ "bees", "plants", "scorpions", "anaconda", "slug" },
+        /* <line32 */{ "leopard", "cat", "shark", "goat", "eagles" },
+        /* <line33 */{ "<line28 <line27", "<random name> <line24 <line34", "its <line15 <line32 <line34",
+            "<line35 <line36", "<line28 <line27" },
+        /* <line34 */{ "meat", "cutlet", "steak", "burgers", "soup" },
+        /* <line35 */{ "ice", "mud", "underwater", "swamp", "<random name> ultimate" },
+        /* <line36 */{ "hockey", "soccer", "karate", "baseball", "tennis" },
+        /* <line36 */{ "famine", "alien invasion", "cannibal tribes", "black holes", "asteroid" },
+        { "<name", "The planet <name", "The world <name", "This planet", "This world" },
+    };
+
+    Random rand = new Random();
+
+    String[] descrArray = (descList[38][rand.nextInt(5)] + " " + descList[0][rand.nextInt(5)]).split(" ");
+    ArrayList<String> stringList = new ArrayList<String>();
+
+    for (int i = 0; i < descrArray.length; i++) {
+      stringList.add(descrArray[i]);
+    }
+
+    for (int i = 0; i < stringList.size(); i++) {
+      if (stringList.get(i).toString().contains("<line")) {
+        int index = Integer.parseInt(stringList.get(i).toString().substring(5));
+        String[] nexStrings = descList[index][rand.nextInt(5)].split(" ");
+        ArrayList<String> subList = new ArrayList<String>();
+
+        for (int j = 0; j < nexStrings.length; j++) {
+          subList.add(nexStrings[j]);
+        }
+
+        stringList.addAll(i + 1, subList);
+        stringList.remove(i);
+        i--;
+      }
+    }
+    return String.join(" ", stringList);
+  }
+	
   public void onClick(){
     /**
      * TODO
