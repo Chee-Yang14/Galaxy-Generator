@@ -25,6 +25,9 @@ public class Universe {
   public Universe(){}
   
   public String newName() {
+	  if(names.size()<=2) {
+		  generateNames(1000);
+	  }
 	  return names.pop();
   }
 
