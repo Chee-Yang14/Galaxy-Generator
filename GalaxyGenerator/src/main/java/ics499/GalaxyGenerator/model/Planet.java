@@ -44,7 +44,6 @@ public class Planet {
   }
   
   public void generate(){
-	  Random random = new Random();
 	  this.size = createSize();
 	  this.population = createPopulation();
 	  this.type = createType();
@@ -224,9 +223,8 @@ public class Planet {
         { "<name", "The planet <name", "The world <name", "This planet", "This world" },
     };
 
-    Random rand = new Random();
 
-    String[] descrArray = (descList[38][rand.nextInt(5)] + " " + descList[0][rand.nextInt(5)]).split(" ");
+    String[] descrArray = (descList[38][random.nextInt(5)] + " " + descList[0][random.nextInt(5)]).split(" ");
     ArrayList<String> stringList = new ArrayList<String>();
 
     for (int i = 0; i < descrArray.length; i++) {
@@ -236,7 +234,7 @@ public class Planet {
     for (int i = 0; i < stringList.size(); i++) {
       if (stringList.get(i).toString().contains("<line")) {
         int index = Integer.parseInt(stringList.get(i).toString().substring(5));
-        String[] nexStrings = descList[index][rand.nextInt(5)].split(" ");
+        String[] nexStrings = descList[index][random.nextInt(5)].split(" ");
         ArrayList<String> subList = new ArrayList<String>();
 
         for (int j = 0; j < nexStrings.length; j++) {
