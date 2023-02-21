@@ -5,12 +5,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 @Entity
 @Table(name="planet")
 public class Planet {
-  
+  Random random = new Random();
   @Id
   @GeneratedValue
   @SequenceGenerator(name = "planet", allocationSize = 1)
@@ -23,7 +26,7 @@ public class Planet {
   private int[] location;
   // private String economyType;
   // private String description;
-  // private String type;
+  private String type;
 
   public Planet(Integer id, String name, String type, String description, long population, int naturalResources, int economyLevel, String economyType, int[] location) {
     this.id = id;
@@ -31,7 +34,7 @@ public class Planet {
     this.population = population;
     this.naturalResources = naturalResources;
     this.economyLevel = economyLevel;
-    // this.type = type;
+    this.type = type;
     // this.description = description;
     // this.economyType = economyType;
     // this.location = location;
@@ -42,41 +45,135 @@ public class Planet {
   
   public void generate(){
 	  Random random = new Random();
-	  this.size = random.nextInt(250000000 - 100000000) + 100000000;
-	  if (this.size < 120000000) {
-		  this.population = this.size * (random.nextLong(20 - 10) + 10);
-	  }
-	  else if (this.size < 140000000) {
-		  this.population = this.size * (random.nextLong(25 - 15) + 15);
-	  }
-	  else if (this.size < 160000000) {
-		  this.population = this.size * (random.nextLong(30 - 20) + 20);
-	  }
-	  else if (this.size < 180000000) {
-		  this.population = this.size * (random.nextLong(35 - 25) + 25);
-	  }
-	  else if (this.size < 200000000) {
-		  this.population = this.size * (random.nextLong(40 - 30) + 30);
-	  }
-	  else if (this.size < 220000000) {
-		  this.population = this.size * (random.nextLong(45 - 35) + 35);
-	  }
-	  else if (this.size < 250000000) {
-		  this.population = this.size * (random.nextLong(55 - 45) + 45);
-	  }
+	  this.size = createSize();
+	  this.population = createPopulation();
+	  this.type = createType();
+	  this.naturalResources = createResource();
 	  
-	  int roll = random.nextInt(100 - 1) + 1;
-	  if (roll <= 20) {
-		  this.population *= random.nextDouble(.6 - .1) + .1;
-	  }
-	  else if (roll == 100) {
-		  this.population *= random.nextInt(8 - 3) + 3;
-	  }
+	  //end
+	  
+	  
 	  
     /**
      * TODO
      */
   }
+  
+  private String createType() {
+	  String type = "";
+	  int roll = random.nextInt(10000 - 1) + 1;
+	  if (roll <= 4000) {
+		  type = "Barren";
+	  }
+	  else if (roll <= 6400) {
+		  type = "Ymirian"; 
+	  }
+	  else if (roll <= 7700) {
+		  type = "Arean";
+	  }
+	  else if (roll <= 8900) {
+		  type = "Cytherian"; 
+	  }
+	  else if (roll <= 9800) {
+		  type = "Europan"; 
+	  }
+	  else if (roll <= 9895) {
+		  type = "Euarean"; 
+	  }
+	  else if (roll <= 9990) {
+		  type = "Eucytherian"; 
+	  }
+	  else if (roll <= 10000) {
+		  type = "terran"; 
+	  }
+	  return type;
+  }
+  
+  private int createResource() {
+	  int resource = 0;
+	  switch (this.type) {
+		  case "Barren":
+			  resource = (int)((random.nextInt(1000 - 100) + 100) * 0.5);
+			  break;
+		  case "Ymirian":
+			  resource = (int)((random.nextInt(1000 - 100) + 100) * 0.7);
+			  break;
+		  case "Arean":
+			  resource = (int)((random.nextInt(1000 - 100) + 100) * 0.9);
+			  break;
+		  case "Cytherian":
+			  resource = (random.nextInt(1000 - 100) + 100) * 1;
+			  break;
+		  case "Europan":
+			  resource = (random.nextInt(1000 - 100) + 100) * 1;
+			  break;
+		  case "Euarean":
+			  resource = (int)((random.nextInt(1000 - 500) + 500) * 1.1);
+			  break;
+		  case "Eucytherian":
+			  resource = (int)((random.nextInt(1000 - 500) + 500) * 1.1);
+			  break;
+		  case "terran":
+			  resource = (int)((random.nextInt(2000 - 700) + 700) * 1.5);
+			  break;
+	  }
+	  return resource;
+  }
+  
+  private long createPopulation() {
+	  long population = 0;
+	  if (this.size < 120000000) {
+		  population = this.size * (random.nextLong(20 - 10) + 10);
+	  }
+	  else if (this.size < 140000000) {
+		  population = this.size * (random.nextLong(25 - 15) + 15);
+	  }
+	  else if (this.size < 160000000) {
+		  population = this.size * (random.nextLong(30 - 20) + 20);
+	  }
+	  else if (this.size < 180000000) {
+		  population = this.size * (random.nextLong(35 - 25) + 25);
+	  }
+	  else if (this.size < 200000000) {
+		  population = this.size * (random.nextLong(40 - 30) + 30);
+	  }
+	  else if (this.size < 220000000) {
+		  population = this.size * (random.nextLong(45 - 35) + 35);
+	  }
+	  else if (this.size < 250000000) {
+		  population = this.size * (random.nextLong(55 - 45) + 45);
+	  }
+	  int roll = random.nextInt(100 - 1) + 1;
+	  if (roll <= 20) {
+		  population *= random.nextDouble(.6 - .1) + .1;
+	  }
+	  else if (roll == 100) {
+		  population *= random.nextInt(8 - 3) + 3;
+	  }
+	  return population;
+  }
+  
+  private int createSize() {
+	  return random.nextInt(250000000 - 100000000) + 100000000;
+  }
+  
+  
+//  private String createEconType() {
+//	  int roll = random.nextInt(4);
+//	  switch (roll) {
+//		  case 0:
+//			  return "Market Economy";
+//		  case 1:
+//			  return "Planned Economy";
+//		  case 2:
+//			  return "Centrally Planned Economy";
+//		  case 3:
+//			  return "Socialist";
+//		  case 4:
+//			  return "Communist Economies";
+//	  }
+//	  return "Market Economy";
+//  }
   
   public String createDescription() {
     String descList[][] = {
