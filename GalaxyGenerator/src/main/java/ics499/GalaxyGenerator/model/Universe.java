@@ -1,6 +1,8 @@
 package ics499.GalaxyGenerator.model;
 
 import java.util.List;
+import java.util.Random;
+import java.util.Stack;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
