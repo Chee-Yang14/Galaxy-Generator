@@ -23,8 +23,8 @@ public class Planet {
   private int naturalResources;
   private int economyLevel;
   private int[] location;
-  // private String economyType;
-  // private String description;
+  private String economyType;
+  private String description;
   private String type;
 
   public Planet(Integer id, String name, String type, String description, long population, int naturalResources, int economyLevel, String economyType, int[] location) {
@@ -34,8 +34,8 @@ public class Planet {
     this.naturalResources = naturalResources;
     this.economyLevel = economyLevel;
     this.type = type;
-    // this.description = description;
-    // this.economyType = economyType;
+    this.setDescription(description);
+     this.setEconomyType(economyType);
     // this.location = location;
   }
   
@@ -43,15 +43,13 @@ public class Planet {
   }
   
   public void generate(){
-	  this.size = createSize();
-	  this.population = createPopulation();
+	  this.setSize(createSize());
+	  this.setPopulation(createPopulation());
 	  this.type = createType();
-	  this.naturalResources = createResource();
-	  
-	  //end
-	  
-	  
-	  
+	  this.setNaturalResources(createResource());
+	  this.setEconomyType(createEconType());
+	  this.setDescription(createDescription());
+	  this.setEconomyLevel(createEconLevel());
     /**
      * TODO
      */
@@ -156,24 +154,93 @@ public class Planet {
   }
   
   
-//  private String createEconType() {
-//	  int roll = random.nextInt(4);
-//	  switch (roll) {
-//		  case 0:
-//			  return "Market Economy";
-//		  case 1:
-//			  return "Planned Economy";
-//		  case 2:
-//			  return "Centrally Planned Economy";
-//		  case 3:
-//			  return "Socialist";
-//		  case 4:
-//			  return "Communist Economies";
-//	  }
-//	  return "Market Economy";
-//  }
+  private String createEconType() {
+	  int roll = random.nextInt(3);
+	  switch (roll) {
+		  case 0:
+			  return "Traditional economic system";
+		  case 1:
+			  return "Command economic system";
+		  case 2:
+			  return "Market economic system";
+		  case 3:
+			  return "Mixed system";
+	  }
+	  return "Market Economy";
+  }
   
-  public String createDescription() {
+  /**
+   * method use to calculate the economy level of the planet. 
+   * first find the mid point of the the resource amount by the formula = (min + max) / 2
+   * if the resource falls below the mid point, the level will be in range 1 - 5, if above mid point level 5 - 10
+   * example: barren have .5 multiplier with random resource 100-1000. min = 100 * .5 = 50, max = 1000 * .5 = 500. (500 + 50) / 2 = 275
+   * 			planet resource = 250, 250 < 275 = true, level = 3
+   * @return random value between 1-10
+   */
+  private int createEconLevel() {
+	switch (this.type) {
+		case "Barren":
+			if (this.naturalResources < ((500 + 50)/ 2)) {
+				return random.nextInt(5 - 1) + 1;
+			}
+			else {
+				return random.nextInt(10 - 5) + 5;
+			}
+		case "Ymirian":
+			if (this.naturalResources < ((700 + 70) / 2)) {
+				return random.nextInt(5 - 1) + 1;
+			}
+			else {
+				return random.nextInt(10 - 5) + 5;
+			}
+		case "Arean":
+			if (this.naturalResources < ((900 + 90) / 2)) {
+				return random.nextInt(5 - 1) + 1;
+			}
+			else {
+				return random.nextInt(10 - 5) + 5;
+			}
+		case "Cytherian":
+			if (this.naturalResources < ((1000 + 100) / 2)) {
+				return random.nextInt(5 - 1) + 1;
+			}
+			else {
+				return random.nextInt(10 - 5) + 5;
+			}
+		case "Europan":
+			if (this.naturalResources < ((1000 + 100) / 2)) {
+				return random.nextInt(5 - 1) + 1;
+			}
+			else {
+				return random.nextInt(10 - 5) + 5;
+			}
+		case "Euarean":
+			if (this.naturalResources < ((1100 + 550) / 2)) {
+				return random.nextInt(5 - 1) + 1;
+			}
+			else {
+				return random.nextInt(10 - 5) + 5;
+			}
+		case "Eucytherian":
+			if (this.naturalResources < ((1100 + 550) / 2)) {
+				return random.nextInt(5 - 1) + 1;
+			}
+			else {
+				return random.nextInt(10 - 5) + 5;
+			}
+		case "terran":
+			if (this.naturalResources < ((3000 + 1050) / 2)) {
+				return random.nextInt(5 - 1) + 1;
+			}
+			else {
+				return random.nextInt(10 - 5) + 5;
+			}
+	}
+	return economyLevel;
+	  
+  }
+  
+  private String createDescription() {
     String descList[][] = {
         { "<line1 <line2 for <line3", "<line1 <line2 for <line3 and <line3", "<line4 by <line5",
             "<line1 <line2 for <line3 but <line4 by <line5", "a <line6 <line7" }, // fix a-n
@@ -337,4 +404,20 @@ public class Planet {
   public void setLocation(int[]location) {
     this.location = location;
   }
+
+public String getEconomyType() {
+	return economyType;
+}
+
+public void setEconomyType(String economyType) {
+	this.economyType = economyType;
+}
+
+public String getDescription() {
+	return description;
+}
+
+public void setDescription(String description) {
+	this.description = description;
+}
 }
