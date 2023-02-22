@@ -6,7 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
-import java.util.Arraysimport java.util.Random;
+import java.util.Arrays;
+import java.util.Random;
 
 @Entity
 @Table(name="planet")
