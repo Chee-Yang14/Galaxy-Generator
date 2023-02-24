@@ -12,7 +12,7 @@ import java.util.Random;
 @Entity
 @Table(name="planet")
 public class Planet {
-  private static Random random;
+  private static Random random = new Random();
   @Id
   @GeneratedValue
   @SequenceGenerator(name = "planet", allocationSize = 1)
