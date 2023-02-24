@@ -12,7 +12,7 @@ import java.util.Random;
 @Entity
 @Table(name="planet")
 public class Planet {
-  Random random = new Random();
+  Random random;
   @Id
   @GeneratedValue
   @SequenceGenerator(name = "planet", allocationSize = 1)
@@ -42,7 +42,8 @@ public class Planet {
   public Planet() {
   }
   
-  public void generate(){
+  public void generate(Random r){
+	  random = r;
 	  this.setSize(createSize());
 	  this.setPopulation(createPopulation());
 	  this.type = createType();

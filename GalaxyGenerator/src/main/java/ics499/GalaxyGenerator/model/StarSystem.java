@@ -1,6 +1,7 @@
 package ics499.GalaxyGenerator.model;
 
 import java.util.List;
+import java.util.Random;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,19 +17,20 @@ public class StarSystem {
   @GeneratedValue
   @SequenceGenerator(name = "starsystem", allocationSize = 1)
   private Integer id;
-
+  private Universe u;
+  private Random rand;
   private String name;
-  private String type;
+  private StarType type;
   private String goverment;
   private long population;
   private int economyLevel;
   private int spaceResources;
   @Transient
   private List<Planet> planets;
-  private int[] location;
+  private int[] location;//X, Y
 
 
-  public StarSystem(String name, String type, String goverment, long population, int economyLevel, int spaceResources, List<Planet> planets, int[] location) {
+  public StarSystem(String name, StarType type, String goverment, long population, int economyLevel, int spaceResources, List<Planet> planets, int[] location) {
     this.name = name;
     this.type = type;
     this.goverment = goverment;
@@ -38,10 +40,54 @@ public class StarSystem {
     this.planets = planets;
     this.location = location;
   }
+  
+  public StarSystem(Universe u) {
+	  GalaxyShape shape = u.getShape();
+	  Random r = u.getRandom();
+	  if(shape.equals(GalaxyShape.SCATTER)) {
+		  location = new int[] {r.nextInt(100), r.nextInt(100)};
+	  }else if(shape.equals(GalaxyShape.CLUSTER)) {
+		  location = new int[] {r.nextInt(50) + r.nextInt(50), r.nextInt(50) + r.nextInt(50)};
+		  
+	  }
+	  
+	  int starTableRoll = r.nextInt(1000);	//The real probabilities of the star types can be found here https://en.wikipedia.org/wiki/Stellar_classification
+	  if(starTableRoll < 450) {				//I have fudged the numbers a little bit for a bir more even a spread.
+		 this.type = StarType.M;
+	  }else if (starTableRoll < 750 ) {
+		  this.type = StarType.K;
+	  }else if (starTableRoll < 900 ) {
+		  this.type = StarType.G;
+	  }else if (starTableRoll < 950 ) {
+		  this.type = StarType.F;
+	  }else if (starTableRoll < 990 ) {
+		  this.type = StarType.A;
+	  }else if (starTableRoll < 996 ) {
+		  this.type = StarType.B;
+	  }else {
+		  this.type = StarType.O;
+	  }
+	  
+	  this.population = 0;
+	  this.economyLevel = 0;
+	  int sizeA = r.nextInt(10);
+	  int sizeB = r.nextInt(10);
+	  int iPlanets = Math.min(sizeA, sizeB); //roll two 10-sided dice, take the lower. There could be up to 12 planets, with the average being aprox 4.5
+	  for(int i = 0; i<iPlanets; i++) {
+		  Planet newPlanet = new Planet();
+		  newPlanet.generate(r);
+		  this.population += newPlanet.getPopulation();
+		  this.economyLevel += newPlanet.getEconomyLevel();
+		  planets.add(newPlanet);
+	  }
+	  //In the future, we may want the system totals to be higher than the sum of it's planets. We will need to work out the formula.
+	  
+  }
 
   public StarSystem(){}
 
-  public void generate(){
+  public static StarSystem generate(Universe u){
+	  return new StarSystem(u);
     /**
      * TODO 
      */
@@ -69,11 +115,11 @@ public class StarSystem {
     this.name = name;
   }
 
-  public String getType() {
+  public StarType getType() {
     return this.type;
   }
 
-  public void setType(String type) {
+  public void setType(StarType type) {
     this.type = type;
   }
 

@@ -14,14 +14,21 @@ public class Universe {
 
   private Integer id;
   private int seed;
-  private String shape;
+  private GalaxyShape shape;
   private List<StarSystem> starSystem;
   private Stack<String> names;
   private Random rand;
 
-  public Universe(String shape, List<StarSystem> starSystem){
+  public Universe(GalaxyShape shape, Random randoom, int size, int seed){
     this.shape = shape;
-    this.starSystem = starSystem;
+    //this.starSystem = starSystem;
+    this.rand = randoom;
+    this.names = new Stack<String>();
+	generateNames(1000);
+	for(int i = 0; i < size; i++) {
+		starSystem.add(StarSystem.generate(this));
+	}
+	
   }
 
   public Universe(){}
@@ -32,12 +39,17 @@ public class Universe {
 	  }
 	  return names.pop();
   }
+  
+  public Random getRandom() {
+	  return rand;
+  }
 
-  public void generate(){
-	  seed = 1; //seed will be given value by input, eventually
-	  rand = new Random(seed);
-	  names = new Stack<String>();
-	  generateNames(1000);
+  public static Universe generate(int randSeed, int gSize, GalaxyShape gShape){
+	  //seed will be given value by input, eventually
+	  Random nRandom = new Random(randSeed);
+	  Universe u = new Universe(gShape, nRandom, gSize, randSeed );
+	  return u;
+	  
 	  
 	  
     /**
@@ -45,11 +57,11 @@ public class Universe {
      */
   }
 
-  public String getShape() {
+  public GalaxyShape getShape() {
     return this.shape;
   }
 
-  public void setShape(String shape) {
+  public void setShape(GalaxyShape shape) {
     this.shape = shape;
   }
 
