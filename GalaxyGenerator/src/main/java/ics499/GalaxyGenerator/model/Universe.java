@@ -7,16 +7,22 @@ import java.util.Stack;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-
+@Entity
+@Table(name="Universe")
 public class Universe {
-
+  @Id
+  @GeneratedValue
+  @SequenceGenerator(name = "Universe", allocationSize = 1)
   private Integer id;
   private int seed;
   private GalaxyShape shape;
+  @Transient
   private List<StarSystem> starSystem;
   private Stack<String> names;
+  @Transient
   private Random rand;
 
   public Universe(GalaxyShape shape, Random randoom, int size, int seed){
