@@ -74,8 +74,7 @@ public class StarSystem {
 	  int sizeB = r.nextInt(10);
 	  int iPlanets = Math.min(sizeA, sizeB); //roll two 10-sided dice, take the lower. There could be up to 12 planets, with the average being aprox 4.5
 	  for(int i = 0; i<iPlanets; i++) {
-		  Planet newPlanet = new Planet();
-		  newPlanet.generate(r);
+		  Planet newPlanet = Planet.generate(r);
 		  this.population += newPlanet.getPopulation();
 		  this.economyLevel += newPlanet.getEconomyLevel();
 		  planets.add(newPlanet);
