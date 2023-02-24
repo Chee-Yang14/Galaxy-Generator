@@ -1,11 +1,15 @@
 package ics499.GalaxyGenerator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -16,7 +20,7 @@ public class StarSystem {
   @Id
   @GeneratedValue
   @SequenceGenerator(name = "starsystem", allocationSize = 1)
-  private Integer id;
+  private Integer starsystemId;
   @Transient
   private Universe u;
   private Random rand;
@@ -26,8 +30,8 @@ public class StarSystem {
   private long population;
   private int economyLevel;
   private int spaceResources;
-  @Transient
-  private List<Planet> planets;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  private List<Planet> planets = new ArrayList<Planet>();
   private int[] location;// X, Y
 
   public StarSystem(String name, StarType type, String goverment, long population, int economyLevel, int spaceResources,
@@ -103,12 +107,12 @@ public class StarSystem {
      */
   }
 
-  public Integer getId() {
-    return this.id;
+  public Integer getStarsystemId() {
+    return this.starsystemId;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setStarsystemId(Integer id) {
+    this.starsystemId = id;
   }
 
   public String getName() {

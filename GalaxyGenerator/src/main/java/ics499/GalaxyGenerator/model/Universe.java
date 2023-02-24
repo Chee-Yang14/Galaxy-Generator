@@ -1,12 +1,16 @@
 package ics499.GalaxyGenerator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -17,19 +21,20 @@ public class Universe {
   @Id
   @GeneratedValue
   @SequenceGenerator(name = "Universe", allocationSize = 1)
-  private Integer id;
+  private Integer universeId;
+  @Transient
   private int seed;
   private GalaxyShape shape;
-  @Transient
-  private List<StarSystem> starSystem;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  private List<StarSystem> starSystem = new ArrayList<StarSystem>();
   private Stack<String> names;
   @Transient
   private Random rand;
 
-  public Universe(GalaxyShape shape, Random randoom, int size, int seed) {
+  public Universe(GalaxyShape shape, Random random, int size, int seed) {
     this.shape = shape;
-    // this.starSystem = starSystem;
-    this.rand = randoom;
+    this.seed = seed;
+    this.rand = random;
     this.names = new Stack<String>();
     generateNames(1000);
     for (int i = 0; i < size; i++) {
@@ -45,10 +50,6 @@ public class Universe {
       generateNames(1000);
     }
     return names.pop();
-  }
-
-  public Random getRandom() {
-    return rand;
   }
 
   public static Universe generate(int randSeed, int gSize, GalaxyShape gShape) {
@@ -90,12 +91,12 @@ public class Universe {
     }
   }
 
-  public Integer getId() {
-    return this.id;
+  public Integer getUniverseId() {
+    return this.universeId;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setUniverseId(Integer id) {
+    this.universeId = id;
   }
 
   public GalaxyShape getShape() {
@@ -112,5 +113,13 @@ public class Universe {
 
   public void setStarSystem(List<StarSystem> starSystem) {
     this.starSystem = starSystem;
+  }
+
+  public Random getRandom() {
+    return this.rand;
+  }
+
+  public void setRandom(Random rand) {
+    this.rand = rand;
   }
 }

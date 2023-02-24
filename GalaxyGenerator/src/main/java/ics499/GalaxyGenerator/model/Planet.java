@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 @Entity
@@ -16,7 +15,7 @@ public class Planet {
 	@Id
 	@GeneratedValue
 	@SequenceGenerator(name = "planet", allocationSize = 1)
-	private Integer id;
+	private Integer planetId;
 	private String name;
 	private int size;
 	private long population;
@@ -29,7 +28,7 @@ public class Planet {
 
 	public Planet(Integer id, String name, String type, String description, long population, int naturalResources,
 			int economyLevel, String economyType, int[] location) {
-		this.id = id;
+		this.planetId = id;
 		this.name = name;
 		this.population = population;
 		this.naturalResources = naturalResources;
@@ -251,10 +250,10 @@ public class Planet {
 				{ "<line1 <line2 for <line3", "<line1 <line2 for <line3 and <line3", "<line4 by <line5",
 						"<line1 <line2 for <line3 but <line4 by <line5", "a <line6 <line7" }, // fix a-n
 				/* <line1 */{ "very", "mildly", "mostly", "reasonably", "" },
-				/* <line2 */{ "is fabled", "is notable", "is well known", "is famous", "is noted" },
+				/* <line2 */{ "fabled", "notable", "well known", "famous", "noted" },
 				/* <line3 */{ "its <line8 <line9", "the <randomName> <line10 <line11",
 						"its inhabitants' <line12 <line13", "<line14", "its <line15 <line16" },
-				/* <line4 */{ "is threatened", "is plagued", "is ravaged", "is cursed", "is scourged" },
+				/* <line4 */{ "threatened", "plagued", "ravaged", "cursed", "scourged" },
 				/* <line5 */{ "<line17 nuclear war", "<line18 <line10 <line11", "a <line18 disease",
 						"<line17 natural disasters", "<line37" },
 				/* <line6 */{ "unremarkable", "boring", "dull", "tedious", "revolting" },
@@ -294,7 +293,7 @@ public class Planet {
 				/* <line35 */{ "ice", "mud", "underwater", "swamp", "<randomName> ultimate" },
 				/* <line36 */{ "hockey", "soccer", "karate", "baseball", "tennis" },
 				/* <line36 */{ "famine", "alien invasion", "cannibal tribes", "black holes", "asteroid" },
-				{ "<name", "The planet <name", "The world <name", "This planet", "This world" },
+				{ "<name is", "The planet <name is", "The world <name is", "This planet is", "This world is" },
 		};
 
 		String[] descrArray = (descList[38][random.nextInt(5)] + " " + descList[0][random.nextInt(5)]).split(" ");
@@ -334,12 +333,12 @@ public class Planet {
 		 */
 	}
 
-	public Integer getId() {
-		return this.id;
+	public Integer getPlanetId() {
+		return this.planetId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setPlanetId(Integer id) {
+		this.planetId = id;
 	}
 
 	public String getName() {

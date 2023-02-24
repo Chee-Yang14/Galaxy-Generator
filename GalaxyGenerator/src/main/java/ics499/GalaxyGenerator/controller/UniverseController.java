@@ -19,49 +19,45 @@ import ics499.GalaxyGenerator.repository.UniverseRepository;
 
 @RestController
 public class UniverseController {
-	
+
 	@Autowired
 	private UniverseRepository repo;
-	
+
 	@GetMapping("/universes")
 	public List<Universe> getAllStarSystems() {
-	    return repo.findAll();
+		return repo.findAll();
 	}
-	
+
 	@GetMapping("/universe/{id}")
 	public ResponseEntity<Universe> getStarSystemById(@PathVariable(value = "id") Integer universeId) {
-	    try {
-	      Universe newUniverse = repo.findById(universeId).get();
-	      return new ResponseEntity<Universe>(newUniverse, HttpStatus.OK);
-	    }
-	    catch (NoSuchElementException e)  {
-	      return new ResponseEntity<Universe>(HttpStatus.NOT_FOUND);
-	    }
+		try {
+			Universe newUniverse = repo.findById(universeId).get();
+			return new ResponseEntity<Universe>(newUniverse, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<Universe>(HttpStatus.NOT_FOUND);
+		}
 	}
-	
+
 	@PostMapping("/adduniverse")
-	public Universe create(@RequestBody final Universe universeToAdd) {
-	    return repo.saveAndFlush(universeToAdd);
+	public Universe create(@RequestBody Universe universeToAdd) {
+		return repo.saveAndFlush(universeToAdd);
 	}
-	
+
 	@PutMapping("/universe/{id}")
-	public ResponseEntity<?> update(@RequestBody Universe UniverseUpdate, @PathVariable Integer id){
-	    try {
-	    	Universe existedUniverse = repo.findById(id).get();
-	    	
+	public ResponseEntity<?> update(@RequestBody Universe UniverseUpdate, @PathVariable Integer id) {
+		try {
+			Universe existedUniverse = repo.findById(id).get();
 
-
-		    repo.save(existedUniverse);
-		    new ResponseEntity<>(HttpStatus.OK);
-		    return ResponseEntity.ok("Update successfully");
-	    }
-	    catch (NoSuchElementException e) {
-	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
+			repo.save(existedUniverse);
+			new ResponseEntity<>(HttpStatus.OK);
+			return ResponseEntity.ok("Update successfully");
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
-	
-	@DeleteMapping("/universe/{id}") 
+
+	@DeleteMapping("/universe/{id}")
 	public void delete(@PathVariable(value = "id") Integer UniverseId) {
-	    repo.deleteById(UniverseId);
+		repo.deleteById(UniverseId);
 	}
 }
