@@ -17,6 +17,7 @@ public class StarSystem {
   @GeneratedValue
   @SequenceGenerator(name = "starsystem", allocationSize = 1)
   private Integer id;
+  @Transient
   private Universe u;
   private Random rand;
   private String name;
