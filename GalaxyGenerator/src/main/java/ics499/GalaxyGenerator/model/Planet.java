@@ -39,14 +39,15 @@ public class Planet {
     // this.location = location;
   }
   
-  private Planet() {
+  public Planet() {
 	  this.setSize(createSize());
 	  this.setPopulation(createPopulation());
 	  this.type = createType();
 	  this.setNaturalResources(createResource());
 	  this.setEconomyType(createEconType());
-	  this.setDescription(createDescription());
 	  this.setEconomyLevel(createEconLevel());
+	  this.setName(generateNames());
+	  this.setDescription(createDescription());
   }
   
   
@@ -240,6 +241,30 @@ public class Planet {
 	  
   }
   
+  private String generateNames() {
+	  String name = "";
+	  String[] firstSylable = {"Ame","Shi", "Kiin", "Kael", "Sal","Sale", "Her", "Hur", "Hue", "New",
+				"Old", "Bri", "Twi", "Kel", "Lit", "Le","Lye", "Deep", "Dark", "Alt", "Ber", "Bres", "Sat", "Fal",
+				"Ka", "Ca", "Sej", "Con"};
+	  String[] secondSylable = {"rash", "nar", "'kan", "kan", "sho", "del", "le","la","ta","coru","mel",
+				"'coru", "sin", "shin", "ba","sed","dro"};
+	  String[] thirdSylable = {"shin", "shen", "dale", "dreg", "je", "se", "ae", "te","to","toe","ri",
+				"dro", "dra","jra","del","rel","ni"};
+
+	  int num = random.nextInt(3);
+	  if(num == 0) {
+		  name = firstSylable[random.nextInt(firstSylable.length)];
+	  }else if(num == 1) {
+		  name = firstSylable[random.nextInt(firstSylable.length)] + secondSylable[random.nextInt(secondSylable.length)];
+	  }else if(num == 2) {
+		  name = firstSylable[random.nextInt(firstSylable.length)] + secondSylable[random.nextInt(secondSylable.length)] + thirdSylable[random.nextInt(thirdSylable.length)];
+	  }else {
+		  System.out.println("Random number somehow out of range");
+	  }
+	  return name;
+			
+	}
+
   private String createDescription() {
     String descList[][] = {
         { "<line1 <line2 for <line3", "<line1 <line2 for <line3 and <line3", "<line4 by <line5",
@@ -298,6 +323,9 @@ public class Planet {
     }
 
     for (int i = 0; i < stringList.size(); i++) {
+      if (stringList.get(i).toString().contains("<name")) {
+    	  stringList.set(i, this.name);
+      }
       if (stringList.get(i).toString().contains("<line")) {
         int index = Integer.parseInt(stringList.get(i).toString().substring(5));
         String[] nexStrings = descList[index][random.nextInt(5)].split(" ");
