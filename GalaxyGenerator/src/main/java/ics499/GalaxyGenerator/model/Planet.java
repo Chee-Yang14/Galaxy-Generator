@@ -12,7 +12,7 @@ import java.util.Random;
 @Entity
 @Table(name="planet")
 public class Planet {
-  Random random;
+  private static Random random;
   @Id
   @GeneratedValue
   @SequenceGenerator(name = "planet", allocationSize = 1)
@@ -35,15 +35,11 @@ public class Planet {
     this.economyLevel = economyLevel;
     this.type = type;
     this.setDescription(description);
-     this.setEconomyType(economyType);
+    this.setEconomyType(economyType);
     // this.location = location;
   }
   
-  public Planet() {
-  }
-  
-  public void generate(Random r){
-	  random = r;
+  private Planet() {
 	  this.setSize(createSize());
 	  this.setPopulation(createPopulation());
 	  this.type = createType();
@@ -51,9 +47,12 @@ public class Planet {
 	  this.setEconomyType(createEconType());
 	  this.setDescription(createDescription());
 	  this.setEconomyLevel(createEconLevel());
-    /**
-     * TODO
-     */
+  }
+  
+  
+  public static Planet generate(Random r){
+	  random = r;
+	  return new Planet();
   }
   
   private String createType() {
