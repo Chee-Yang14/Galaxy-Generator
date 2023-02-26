@@ -37,6 +37,8 @@ public class Universe {
     this.rand = random;
     this.names = new Stack<String>();
     generateNames(1000);
+    
+    this.universeId = rand.nextInt(900000) + 100000;
     for (int i = 0; i < size; i++) {
       starSystem.add(StarSystem.generate(this));
     }
@@ -63,6 +65,7 @@ public class Universe {
      */
   }
 
+  
   private void generateNames(int number) {
     String[] firstSylable = { "Ame", "Shi", "Kiin", "Kael", "Sal", "Sale", "Her", "Hur", "Hue", "New",
         "Old", "Bri", "Twi", "Kel", "Lit", "Le", "Lye", "Deep", "Dark", "Alt", "Ber", "Bres", "Sat", "Fal",
@@ -122,4 +125,12 @@ public class Universe {
   public void setRandom(Random rand) {
     this.rand = rand;
   }
+
+@Override
+public String toString() {
+	return "Universe [universeId=" + universeId + ", seed=" + seed + ", shape=" + shape + ", starSystem=" + starSystem
+			+"]";
+}
+  
+  
 }

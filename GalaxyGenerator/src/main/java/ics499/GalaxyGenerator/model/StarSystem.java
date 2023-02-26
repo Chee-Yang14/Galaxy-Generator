@@ -1,6 +1,7 @@
 package ics499.GalaxyGenerator.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -178,4 +179,14 @@ public class StarSystem {
   public void setLocation(int[] location) {
     this.location = location;
   }
+
+@Override
+public String toString() {
+	return "StarSystem [starsystemId=" + starsystemId + ", u=" + u + ", rand=" + rand + ", name=" + name + ", type="
+			+ type + ", goverment=" + goverment + ", population=" + population + ", economyLevel=" + economyLevel
+			+ ", spaceResources=" + spaceResources + ", planets=" + planets + ", location=" + Arrays.toString(location)
+			+ "]";
+}
+  
+  
 }
