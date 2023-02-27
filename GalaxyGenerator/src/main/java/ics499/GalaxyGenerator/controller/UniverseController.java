@@ -2,6 +2,7 @@ package ics499.GalaxyGenerator.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ics499.GalaxyGenerator.model.GalaxyShape;
 import ics499.GalaxyGenerator.model.Universe;
 import ics499.GalaxyGenerator.repository.UniverseRepository;
 
@@ -40,6 +42,7 @@ public class UniverseController {
 
 	@PostMapping("/adduniverse")
 	public Universe create(@RequestBody Universe universeToAdd) {
+		universeToAdd = new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6);
 		return repo.saveAndFlush(universeToAdd);
 	}
 
