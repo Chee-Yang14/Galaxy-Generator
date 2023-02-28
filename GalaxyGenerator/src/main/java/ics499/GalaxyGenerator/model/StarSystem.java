@@ -48,15 +48,11 @@ public class StarSystem {
 	}
 
 	public StarSystem(Universe u) {
-		int sizeA = random.nextInt(10);
-		int sizeB = random.nextInt(10);
-		int iPlanets = Math.min(sizeA, sizeB); // roll two 10-sided dice, take the lower. There could be up to 12 planets,
-		// with the average being aprox 4.5
+		this.setPlanets(createPlanets());
 		this.setUniverse(u);
 		this.setName(generateNames());
 		this.setType(createStarType());
 		this.setLocation(createLocation());
-		this.setPlanets(createPlanets(iPlanets));
 		this.setPopulation(createPopulation());
 		this.setEconomyLevel(createEconLevel());
 		this.setSpaceResources(createSpaceResource());
@@ -67,14 +63,10 @@ public class StarSystem {
 	}
 
 	public StarSystem() {
-		int sizeA = random.nextInt(10);
-		int sizeB = random.nextInt(10);
-		int iPlanets = Math.min(sizeA, sizeB); // roll two 10-sided dice, take the lower. There could be up to 12 planets,
-		// with the average being aprox 4.5
+		this.setPlanets(createPlanets());
 		this.setName(generateNames());
 		this.setType(createStarType());
 		this.setLocation(createLocation());
-		this.setPlanets(createPlanets(iPlanets));
 		this.setPopulation(createPopulation());
 		this.setEconomyLevel(createEconLevel());
 		this.setSpaceResources(createSpaceResource());
@@ -94,38 +86,51 @@ public class StarSystem {
 		 */
 	}
 
+	public ArrayList<Planet> createPlanets() {
+		ArrayList<Planet> planetList = new ArrayList<>();
+		int sizeA = random.nextInt(10 - 1) + 1;
+		int sizeB = random.nextInt(10 - 1) + 1;
+		int iPlanets = Math.min(sizeA, sizeB);
+		
+		for (int i = 0; i < iPlanets; i++) {
+			Planet newPlanet = Planet.generate(random);
+			planetList.add(newPlanet);
+		}
+		return planetList;
+	}
+	
 	public String createGovernment() {
 		int num = random.nextInt(10);
 		String government = "";
 		switch (num) {
-			case 1:
+			case 0:
 				government = "Democracy";
 				break;
-			case 2:
+			case 1:
 				government = "Communism";
 				break;
-			case 3:
+			case 2:
 				government = "Socialism";
 				break;
-			case 4:
+			case 3:
 				government = "Oligarchy";
 				break;
-			case 5:
+			case 4:
 				government = "Aristocracy";
 				break;
-			case 6:
+			case 5:
 				government = "Monarchy";
 				break;
-			case 7:
+			case 6:
 				government = "Theocracy";
 				break;
-			case 8:
+			case 7:
 				government = "Colonialism";
 				break;
-			case 9:
+			case 8:
 				government = "Totalitarianism";
 				break;
-			case 10:
+			case 9:
 				government = "Military Dictatorship";
 				break;
 		}
@@ -188,15 +193,6 @@ public class StarSystem {
 			level += planets.get(i).getEconomyLevel();
 		}
 		return level;
-	}
-
-	public ArrayList<Planet> createPlanets(int num) {
-		ArrayList<Planet> planetList = new ArrayList<>();
-		for (int i = 0; i < num; i++) {
-			Planet newPlanet = Planet.generate(random);
-			planetList.add(newPlanet);
-		}
-		return planetList;
 	}
 
 	public int createSpaceResource() {
