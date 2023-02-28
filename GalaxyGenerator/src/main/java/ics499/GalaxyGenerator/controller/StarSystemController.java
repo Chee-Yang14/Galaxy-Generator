@@ -43,8 +43,6 @@ public class StarSystemController {
 
   @PostMapping("/addstarsystem")
   public StarSystem create(@RequestBody StarSystem starSystemToAdd) {
-    Universe universe = new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6);
-    starSystemToAdd = new StarSystem(universe);
     return repo.saveAndFlush(starSystemToAdd);
   }
 
