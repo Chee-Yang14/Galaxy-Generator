@@ -299,12 +299,13 @@ public class StarSystem {
 		this.location = location;
 	}
 
+
 	@Override
 	public String toString() {
-		return "StarSystem [starsystemId=" + starsystemId + ", u=" + u + ", rand=" + random + ", name=" + name + ", type="
-				+ type + ", goverment=" + goverment + ", population=" + population + ", economyLevel=" + economyLevel
-				+ ", spaceResources=" + spaceResources + ", planets=" + planets + ", location=" + Arrays.toString(location)
-				+ "]";
+		return "StarSystem [starsystemId=" + starsystemId + ", name=" + name + ", type=" + type
+				+ ", goverment=" + goverment + ", population=" + population + ", economyLevel=" + economyLevel
+				+ ", spaceResources=" + spaceResources + ", planets=" + planets + ", location="
+				+ Arrays.toString(location) + "]";
 	}
 
 	public Universe getUniverse() {

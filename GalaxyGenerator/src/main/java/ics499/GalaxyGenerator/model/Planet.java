@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 @Entity
@@ -431,4 +432,14 @@ public class Planet {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public String toString() {
+		return "Planet [planetId=" + planetId + ", name=" + name + ", size=" + size + ", population=" + population
+				+ ", naturalResources=" + naturalResources + ", economyLevel=" + economyLevel + ", location="
+				+ Arrays.toString(location) + ", economyType=" + economyType + ", description=" + description
+				+ ", type=" + type + "]";
+	}
+	
+	
 }

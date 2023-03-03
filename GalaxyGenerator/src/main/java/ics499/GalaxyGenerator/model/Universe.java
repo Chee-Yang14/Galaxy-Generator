@@ -44,9 +44,6 @@ public class Universe {
     }
   }
 
-  public Universe() {
-  }
-
   public String newName() {
     if (names.size() <= 2) {
       generateNames(1000);
@@ -129,8 +126,10 @@ public class Universe {
 @Override
 public String toString() {
 	return "Universe [universeId=" + universeId + ", seed=" + seed + ", shape=" + shape + ", starSystem=" + starSystem
-			+"]";
+			+ ", names=" + names + "]";
 }
+
+
   
   
 }
