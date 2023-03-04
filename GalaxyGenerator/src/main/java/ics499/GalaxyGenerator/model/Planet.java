@@ -10,9 +10,12 @@ import java.util.Arrays;
 import java.util.Random;
 /**
  * Planet is a class that simulate a planet. 
- * It contains various a typical planet would have such as a name, population, size, natural resource amount, etc.
+ * It contains various things a typical planet would have such as a name, population, size, natural resource amount, etc.
  * 
- * @author Chee Yang, Lam Truong, Joseph jarosch, andy phan
+ * @author Chee Yang
+ * @author Lam Truong
+ * @author Joseph jarosch
+ * @author andy phan
  */
 @Entity
 @Table(name = "planet")

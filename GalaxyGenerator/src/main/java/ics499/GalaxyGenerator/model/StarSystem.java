@@ -14,7 +14,17 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-
+/**
+ * StarSystem is a class that simulate a Star system. 
+ * It has a star and then planets that orbit around it.
+ * The planets are represent in an array. 
+ * The star system would typically be occupy and thus have government and population values.
+ *  
+ * @author Chee Yang
+ * @author Lam Truong
+ * @author Joseph jarosch
+ * @author andy phan
+ */
 @Entity
 @Table(name = "starsystem")
 public class StarSystem {
@@ -34,7 +44,18 @@ public class StarSystem {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Planet> planets = new ArrayList<Planet>();
 	private int[] location;// X, Y
-
+	/**
+	 * This is the default constructor. 
+	 * 
+	 * @param name used to determine the name
+	 * @param type is used to determine the star type
+	 * @param goverment
+	 * @param population
+	 * @param economyLevel
+	 * @param spaceResources
+	 * @param planets
+	 * @param location
+	 */
 	public StarSystem(String name, StarType type, String goverment, long population, int economyLevel, int spaceResources,
 			List<Planet> planets, int[] location) {
 		this.setStarsystemId(random.nextInt(900000) + 100000);
