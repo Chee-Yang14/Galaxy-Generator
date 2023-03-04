@@ -37,6 +37,7 @@ public class StarSystem {
 
 	public StarSystem(String name, StarType type, String goverment, long population, int economyLevel, int spaceResources,
 			List<Planet> planets, int[] location) {
+		this.setStarsystemId(random.nextInt(900000) + 100000);
 		this.name = name;
 		this.type = type;
 		this.goverment = goverment;
@@ -49,6 +50,7 @@ public class StarSystem {
 
 	public StarSystem(Universe u) {
 		this.setPlanets(createPlanets());
+		this.setStarsystemId(random.nextInt(900000) + 100000);
 		this.setUniverse(u);
 		this.setName(generateNames());
 		this.setType(createStarType());

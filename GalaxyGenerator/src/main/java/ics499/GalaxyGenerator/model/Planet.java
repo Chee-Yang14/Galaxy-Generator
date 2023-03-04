@@ -43,6 +43,7 @@ public class Planet {
 	public Planet() {
 		this.setSize(createSize());
 		this.setPopulation(createPopulation());
+		this.setPlanetId(random.nextInt(900000) + 100000);
 		this.type = createType();
 		this.setNaturalResources(createResource());
 		this.setEconomyType(createEconType());
