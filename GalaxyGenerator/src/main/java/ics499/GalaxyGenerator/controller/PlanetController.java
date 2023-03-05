@@ -13,28 +13,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import ics499.GalaxyGenerator.model.Planet;
 import ics499.GalaxyGenerator.repository.PlanetRepository;
 
-@RestController
+@Controller
 public class PlanetController {
 
   @Autowired
   private PlanetRepository repo;
 
-  @GetMapping("/planets")
-  public List<Planet> getALlPlanets() {
-    return repo.findAll();
-  }
+  // @GetMapping("/planets")
+  // public List<Planet> getALlPlanets() {
+  // return repo.findAll();
+  // }
 
-  @GetMapping("/planet/{id}") 
+  @GetMapping("/planet/{id}")
   public ResponseEntity<Planet> getPlanetById(@PathVariable(value = "id") Integer planetId) {
     try {
       Planet planet = repo.findById(planetId).get();
       return new ResponseEntity<Planet>(planet, HttpStatus.OK);
-    }
-    catch (NoSuchElementException e) {
+    } catch (NoSuchElementException e) {
       return new ResponseEntity<Planet>(HttpStatus.NOT_FOUND);
     }
   }
@@ -44,8 +45,15 @@ public class PlanetController {
     return repo.saveAndFlush(planetToAdd);
   }
 
+  @GetMapping("/planets")
+  public String listPlanets(Model model) {
+    List<Planet> listPlanets = repo.findAll();
+    model.addAttribute("listPlanets", listPlanets);
+    return "planets";
+  }
+
   @PutMapping("/planet/{id}")
-  public ResponseEntity<?> update(@RequestBody Planet planetToUpdate, @PathVariable Integer id){
+  public ResponseEntity<?> update(@RequestBody Planet planetToUpdate, @PathVariable Integer id) {
     try {
       Planet existedPlanet = repo.findById(id).get();
 
@@ -59,8 +67,7 @@ public class PlanetController {
       repo.save(existedPlanet);
       new ResponseEntity<>(HttpStatus.OK);
       return ResponseEntity.ok("Update successfully");
-    }
-    catch (NoSuchElementException e) {
+    } catch (NoSuchElementException e) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }

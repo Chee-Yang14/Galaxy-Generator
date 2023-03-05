@@ -24,7 +24,8 @@ public class WebSecurityConfig { // this class is needed for authentication
             .defaultSuccessUrl("/index") // return to home after sucessful login
             .usernameParameter("email") // email from User model is used as login parameter
             .permitAll())
-        .logout((logout) -> logout.permitAll());
+        .logout((logout) -> logout.permitAll())
+        .csrf().disable();
     return http.build();
   }
 
