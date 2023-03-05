@@ -19,7 +19,7 @@ import org.springframework.ui.Model;
 import ics499.GalaxyGenerator.model.Planet;
 import ics499.GalaxyGenerator.repository.PlanetRepository;
 
-@Controller
+@RestController
 public class PlanetController {
 
   @Autowired
@@ -43,13 +43,6 @@ public class PlanetController {
   @PostMapping("/addplanet")
   public Planet create(@RequestBody final Planet planetToAdd) {
     return repo.saveAndFlush(planetToAdd);
-  }
-
-  @GetMapping("/planets")
-  public String listPlanets(Model model) {
-    List<Planet> listPlanets = repo.findAll();
-    model.addAttribute("listPlanets", listPlanets);
-    return "planets";
   }
 
   @PutMapping("/planet/{id}")

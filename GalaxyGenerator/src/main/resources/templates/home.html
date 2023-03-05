@@ -12,6 +12,8 @@
       <p>Click <a th:href="@{/login}">here</a> to login.</p>
       <p>Click <a th:href="@{/register}">here</a> to register.</p>
     </div>
-    <div sec:authorize="isAuthenticated()">You are logged in.</div>
+    <div sec:authorize="isAuthenticated()">
+      <p>Click <a th:href="@{/planets}">here</a> to see list of planets.</p>
+    </div>
   </body>
 </html>
