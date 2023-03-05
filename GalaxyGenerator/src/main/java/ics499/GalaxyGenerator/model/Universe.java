@@ -37,8 +37,8 @@ public class Universe {
     this.rand = random;
     this.names = new Stack<String>();
     generateNames(1000);
-    
     this.universeId = rand.nextInt(900000) + 100000;
+    
     for (int i = 0; i < size; i++) {
       starSystem.add(StarSystem.generate(this));
     }
