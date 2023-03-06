@@ -14,12 +14,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+
 /**
- * StarSystem is a class that simulate a Star system. 
+ * StarSystem is a class that simulate a Star system.
  * It has a star and then planets that orbit around it.
- * The planets are represent in an array. 
- * The star system would typically be occupy and thus have government and population values.
- *  
+ * The planets are represent in an array.
+ * The star system would typically be occupy and thus have government and
+ * population values.
+ * 
  * @author Chee Yang
  * @author Lam Truong
  * @author Joseph jarosch
@@ -41,14 +43,15 @@ public class StarSystem {
 	private long population;
 	private int economyLevel;
 	private int spaceResources;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private List<Planet> planets = new ArrayList<Planet>();
 	private int[] location;// X, Y
+
 	/**
-	 * This is the default constructor. 
+	 * This is the default constructor.
 	 * 
-	 * @param name used to determine the name
-	 * @param type is used to determine the star type
+	 * @param name           used to determine the name
+	 * @param type           is used to determine the star type
 	 * @param goverment
 	 * @param population
 	 * @param economyLevel
@@ -114,14 +117,14 @@ public class StarSystem {
 		int sizeA = random.nextInt(10 - 1) + 1;
 		int sizeB = random.nextInt(10 - 1) + 1;
 		int iPlanets = Math.min(sizeA, sizeB);
-		
+
 		for (int i = 0; i < iPlanets; i++) {
 			Planet newPlanet = Planet.generate(random);
 			planetList.add(newPlanet);
 		}
 		return planetList;
 	}
-	
+
 	public String createGovernment() {
 		int num = random.nextInt(10);
 		String government = "";
@@ -159,19 +162,17 @@ public class StarSystem {
 		}
 		return government;
 	}
-	
+
 	public int[] createLocation() {
 		int[] location = {};
 		try {
 			GalaxyShape shape = u.getShape();
 			if (shape.equals(GalaxyShape.SCATTER)) {
 				location = new int[] { random.nextInt(100), random.nextInt(100) };
-			} 
-			else if (shape.equals(GalaxyShape.CLUSTER)) {
+			} else if (shape.equals(GalaxyShape.CLUSTER)) {
 				location = new int[] { random.nextInt(50) + random.nextInt(50), random.nextInt(50) + random.nextInt(50) };
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 		}
 		return location;
 	}
@@ -182,21 +183,17 @@ public class StarSystem {
 		// https://en.wikipedia.org/wiki/Stellar_classification
 		if (starTableRoll < 450) { // I have fudged the numbers a little bit for a bir more even a spread.
 			type = StarType.M;
-		} 
-		else if (starTableRoll < 750) {
+		} else if (starTableRoll < 750) {
 			type = StarType.K;
-		} 
-		else if (starTableRoll < 900) {
+		} else if (starTableRoll < 900) {
 			type = StarType.G;
-		} 
-		else if (starTableRoll < 950) {
+		} else if (starTableRoll < 950) {
 			type = StarType.F;
 		} else if (starTableRoll < 990) {
 			type = StarType.A;
 		} else if (starTableRoll < 996) {
 			type = StarType.B;
-		} 
-		else {
+		} else {
 			type = StarType.O;
 		}
 		return type;
@@ -322,7 +319,6 @@ public class StarSystem {
 		this.location = location;
 	}
 
-
 	@Override
 	public String toString() {
 		return "StarSystem [starsystemId=" + starsystemId + ", name=" + name + ", type=" + type
@@ -338,6 +334,5 @@ public class StarSystem {
 	public void setUniverse(Universe u) {
 		this.u = u;
 	}
-
 
 }

@@ -25,11 +25,11 @@ public class Universe {
   @Transient
   private int seed;
   private GalaxyShape shape;
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
   private List<StarSystem> starSystem = new ArrayList<StarSystem>();
   private Stack<String> names;
   @Transient
-  private Random rand;
+  private Random rand = new Random();
 
   public Universe(GalaxyShape shape, Random random, int size, int seed) {
     this.shape = shape;
@@ -38,10 +38,13 @@ public class Universe {
     this.names = new Stack<String>();
     generateNames(1000);
     this.universeId = rand.nextInt(900000) + 100000;
-    
+
     for (int i = 0; i < size; i++) {
       starSystem.add(StarSystem.generate(this));
     }
+  }
+
+  public Universe() {
   }
 
   public String newName() {
@@ -62,8 +65,9 @@ public class Universe {
      */
   }
 
-  
   private void generateNames(int number) {
+    Random temp = new Random();
+    this.rand = temp;
     String[] firstSylable = { "Ame", "Shi", "Kiin", "Kael", "Sal", "Sale", "Her", "Hur", "Hue", "New",
         "Old", "Bri", "Twi", "Kel", "Lit", "Le", "Lye", "Deep", "Dark", "Alt", "Ber", "Bres", "Sat", "Fal",
         "Ka", "Ca", "Sej", "Con" };
@@ -115,21 +119,10 @@ public class Universe {
     this.starSystem = starSystem;
   }
 
-  public Random getRandom() {
-    return this.rand;
+  @Override
+  public String toString() {
+    return "Universe [universeId=" + universeId + ", seed=" + seed + ", shape=" + shape + ", starSystem=" + starSystem
+        + ", names=" + names + "]";
   }
 
-  public void setRandom(Random rand) {
-    this.rand = rand;
-  }
-
-@Override
-public String toString() {
-	return "Universe [universeId=" + universeId + ", seed=" + seed + ", shape=" + shape + ", starSystem=" + starSystem
-			+ ", names=" + names + "]";
-}
-
-
-  
-  
 }

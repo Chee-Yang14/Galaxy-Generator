@@ -8,9 +8,11 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
 /**
- * Planet is a class that simulate a planet. 
- * It contains various things a typical planet would have such as a name, population, size, natural resource amount, etc.
+ * Planet is a class that simulate a planet.
+ * It contains various things a typical planet would have such as a name,
+ * population, size, natural resource amount, etc.
  * 
  * @author Chee Yang
  * @author Lam Truong
@@ -37,17 +39,17 @@ public class Planet {
 
 	/**
 	 * This the constructor of the planet class
-	 * where it create the planet that has all these param. 
+	 * where it create the planet that has all these param.
 	 * 
-	 * @param id is the planet id
-	 * @param name is name of the planet 
-	 * @param type describe what type of planet this is
-	 * @param description gives a little discription of the planet
-	 * @param population is how many people are living on the planet
+	 * @param id               is the planet id
+	 * @param name             is name of the planet
+	 * @param type             describe what type of planet this is
+	 * @param description      gives a little discription of the planet
+	 * @param population       is how many people are living on the planet
 	 * @param naturalResources is how many natural resource do this planet have
-	 * @param economyLevel is the economy level
-	 * @param economyType describe what type of economy the planet has.
-	 * @param location coordinate of where the planet is. 
+	 * @param economyLevel     is the economy level
+	 * @param economyType      describe what type of economy the planet has.
+	 * @param location         coordinate of where the planet is.
 	 */
 	public Planet(Integer id, String name, String type, String description, long population, int naturalResources,
 			int economyLevel, String economyType, int[] location) {
@@ -63,7 +65,8 @@ public class Planet {
 	}
 
 	/**
-	 * like the planet constructor but instead of taking in input and using those to create a planet
+	 * like the planet constructor but instead of taking in input and using those to
+	 * create a planet
 	 * this method create a planet with every input randomized.
 	 * in short it create a planet with randomized features
 	 */
@@ -93,14 +96,15 @@ public class Planet {
 	/**
 	 * determine the planet type
 	 * chances of this planet being each of these planet type are:
-	 * Barren	    40%
-	 * Ymirian	    24%
-	 * Arean	    13%
-	 * Cytherian	12%
-	 * Europan	    9%
-	 * Euarean	    1.00%
-	 * Eucytherian	1.00%
-	 * terran	    0.10%
+	 * Barren 40%
+	 * Ymirian 24%
+	 * Arean 13%
+	 * Cytherian 12%
+	 * Europan 9%
+	 * Euarean 1.00%
+	 * Eucytherian 1.00%
+	 * terran 0.10%
+	 * 
 	 * @return the planet type it lands on
 	 */
 	private String createType() {
@@ -127,8 +131,11 @@ public class Planet {
 	}
 
 	/**
-	 * using the planet type this method return the amount of resource the planet has.
-	 * formula is = random number multipy a constant multiplier based on the planet type. 
+	 * using the planet type this method return the amount of resource the planet
+	 * has.
+	 * formula is = random number multipy a constant multiplier based on the planet
+	 * type.
+	 * 
 	 * @return the resource the planet have
 	 */
 	private int createResource() {
@@ -164,8 +171,9 @@ public class Planet {
 
 	/**
 	 * determine the planet population based on the size
-	 * the formula being 
+	 * the formula being
 	 * Size multipying a random long plus a number based on the size
+	 * 
 	 * @return return the planet population
 	 */
 	private long createPopulation() {
@@ -196,6 +204,7 @@ public class Planet {
 
 	/**
 	 * create a random number for size between 100 million and 250 million
+	 * 
 	 * @return the size
 	 */
 	private int createSize() {
@@ -203,7 +212,8 @@ public class Planet {
 	}
 
 	/**
-	 * determine the economy type based on the roll 
+	 * determine the economy type based on the roll
+	 * 
 	 * @return the economy type
 	 */
 	private String createEconType() {
@@ -294,6 +304,7 @@ public class Planet {
 	 * a random number determine how many sylable the name will have
 	 * The sylable are added if there more than one
 	 * the end result is the name
+	 * 
 	 * @return the randomly created name
 	 */
 	private String generateNames() {
@@ -322,8 +333,9 @@ public class Planet {
 
 	/**
 	 * This method create a random description for each planet
-	 * the method contains a 2d array that holds varys descriptions and phrase. 
-	 * using for loops and if statement, this method creates a random description for a planet. 
+	 * the method contains a 2d array that holds varys descriptions and phrase.
+	 * using for loops and if statement, this method creates a random description
+	 * for a planet.
 	 * 
 	 * @return the string that has the description
 	 */
@@ -345,7 +357,7 @@ public class Planet {
 				/* <line10 */{ "3-headed", "golden", "giant", "fire", "river" },
 				/* <line11 */{ "<line24", "<line32", "<line26", "<line31", "<line30" },
 				/* <line12 */{ "ancient", "exceptional", "eccentric", "fascinating", "<line19" },
-				/* <line13 */{ "strength", "religion & beliefs", "intelligence", "ammount of <line25",
+				/* <line13 */{ "strength", "religion & beliefs", "intelligence", "amount of <line25",
 						"love for <line25" },
 				/* <line14 */{ "<line28 <line27", "<randomName> <line24 <line34", "its <line15 <line32 <line34",
 						"<line35 <line36", "<line28 <line27" },
@@ -521,6 +533,5 @@ public class Planet {
 				+ Arrays.toString(location) + ", economyType=" + economyType + ", description=" + description
 				+ ", type=" + type + "]";
 	}
-	
-	
+
 }
