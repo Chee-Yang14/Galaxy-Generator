@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ics499.GalaxyGenerator.model.GalaxyShape;
+import ics499.GalaxyGenerator.model.Planet;
 import ics499.GalaxyGenerator.model.StarSystem;
 import ics499.GalaxyGenerator.model.Universe;
 import ics499.GalaxyGenerator.repository.StarSystemRepository;
