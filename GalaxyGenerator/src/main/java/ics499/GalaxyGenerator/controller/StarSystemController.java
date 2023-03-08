@@ -72,4 +72,10 @@ public class StarSystemController {
   public void delete(@PathVariable(value = "id") Integer starSystemId) {
     repo.deleteById(starSystemId);
   }
+
+  @GetMapping("/planetfromstarsystem/{id}")
+  public List<Object> getPlanetsFromStarSystemById(@PathVariable(value = "id") Integer starSystemId) {
+    List<Object> planets = repo.findPlanetsByStarSystem(starSystemId);
+    return planets;
+  }
 }

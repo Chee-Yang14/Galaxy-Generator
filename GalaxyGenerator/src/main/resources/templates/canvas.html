@@ -15,30 +15,21 @@
     ></script>
   </head>
   <body>
-    <canvas
-      id="myCanvas"
-      width="900"
-      height="450"
-      style="border: 3px solid #000000"
-    >
-      <div>
-        <script th:inline="javascript" th:each="starSystem: ${listStarSystems}">
-          var c = document.getElementById("myCanvas");
-          var ctx = c.getContext("2d");
-          ctx.fillStyle = "#FF0000";
-          ctx.fillRect(
-            /*[[${starSystem.location[0]}]]*/ 20,
-            /*[[${starSystem.location[1]}]]*/ 20,
-            5,
-            5
-          );
-
-          ctx.onclick = function (e) {
-            window.location.href =
-              "http://localhost:8080/planetfromstarsystem/[[${starSystem.location[0]}]]";
-          };
-        </script>
-      </div>
-    </canvas>
+    <!-- <div style="position: relative" th:each="starSystem: ${listStarSystems}"> -->
+    <div style="position: relative">
+      <button
+        th:each="starSystem : ${listStarSystems}"
+        type="button"
+        th:inline="javascript"
+        style="
+          position: absolute;
+          padding: 18px;
+          border-radius: 50%;
+          background-color: green;
+        "
+        th:text="${starSystem.location[0]+ 'px'}"
+        th:styleappend="'left:${starSystem.location[0]+ 'px'}'"
+      ></button>
+    </div>
   </body>
 </html>
