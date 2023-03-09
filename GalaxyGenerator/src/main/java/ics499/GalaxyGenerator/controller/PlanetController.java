@@ -44,9 +44,8 @@ public class PlanetController {
     }
   }
 
-  @PostMapping("/addplanet")
-  public Planet create(@RequestBody final Integer starSystemId) {
-    Planet planetToAdd = new Planet();
+  @PostMapping("/addplanet/{starSystemId}")
+  public Planet create(@RequestBody Planet planetToAdd, @PathVariable Integer starSystemId) {
     StarSystem parentStarSystem = starSystemRepo.findById(starSystemId).get();
     parentStarSystem.addPlanet(planetToAdd);
     return repo.saveAndFlush(planetToAdd);

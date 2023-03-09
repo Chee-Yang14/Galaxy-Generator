@@ -46,10 +46,9 @@ public class StarSystemController {
     }
   }
 
-  @PostMapping("/addstarsystem")
-  public StarSystem create(@RequestBody Integer universeId) {
+  @PostMapping("/addstarsystem/{universeId}")
+  public StarSystem create(@PathVariable Integer universeId, @RequestBody StarSystem starSystemToAdd) {
     Universe parentUniverse = universeRepo.findById(universeId).get();
-    StarSystem starSystemToAdd = new StarSystem();
     parentUniverse.addStarSystem(starSystemToAdd);
     return repo.saveAndFlush(starSystemToAdd);
   }
