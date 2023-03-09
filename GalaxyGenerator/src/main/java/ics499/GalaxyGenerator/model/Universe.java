@@ -9,6 +9,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
@@ -19,13 +20,13 @@ import jakarta.persistence.Transient;
 @Table(name = "Universe")
 public class Universe {
   @Id
-  @GeneratedValue
-  @SequenceGenerator(name = "Universe", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @SequenceGenerator(name = "universe", allocationSize = 1)
   private Integer universeId;
   @Transient
   private int seed;
   private GalaxyShape shape;
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<StarSystem> starSystem = new ArrayList<StarSystem>();
   private Stack<String> names;
   @Transient
@@ -37,8 +38,7 @@ public class Universe {
     this.rand = random;
     this.names = new Stack<String>();
     generateNames(1000);
-    this.universeId = rand.nextInt(900000) + 100000;
-
+    this.universeId = rand.nextInt(9000) + 1000;
     for (int i = 0; i < size; i++) {
       starSystem.add(StarSystem.generate(this));
     }
@@ -123,6 +123,10 @@ public class Universe {
   public String toString() {
     return "Universe [universeId=" + universeId + ", seed=" + seed + ", shape=" + shape + ", starSystem=" + starSystem
         + ", names=" + names + "]";
+  }
+
+  public void addStarSystem(StarSystem starSystemToAdd) {
+    this.starSystem.add(starSystemToAdd);
   }
 
 }

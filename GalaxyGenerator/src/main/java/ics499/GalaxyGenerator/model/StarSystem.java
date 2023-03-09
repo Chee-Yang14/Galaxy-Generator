@@ -9,6 +9,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
@@ -31,9 +32,10 @@ import jakarta.persistence.Transient;
 @Table(name = "starsystem")
 public class StarSystem {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "starsystem", allocationSize = 1)
 	private Integer starsystemId;
+
 	@Transient
 	private Universe u;
 	private Random random = new Random();
@@ -43,7 +45,7 @@ public class StarSystem {
 	private long population;
 	private int economyLevel;
 	private int spaceResources;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Planet> planets = new ArrayList<Planet>();
 	private int[] location;// X, Y
 
@@ -59,9 +61,10 @@ public class StarSystem {
 	 * @param planets
 	 * @param location
 	 */
-	public StarSystem(String name, StarType type, String goverment, long population, int economyLevel, int spaceResources,
+	public StarSystem(Integer id, String name, StarType type, String goverment, long population, int economyLevel,
+			int spaceResources,
 			List<Planet> planets, int[] location) {
-		this.setStarsystemId(random.nextInt(900000) + 100000);
+		this.starsystemId = id;
 		this.name = name;
 		this.type = type;
 		this.goverment = goverment;
@@ -74,7 +77,6 @@ public class StarSystem {
 
 	public StarSystem(Universe u) {
 		this.setPlanets(createPlanets());
-		this.setStarsystemId(random.nextInt(900000) + 100000);
 		this.setUniverse(u);
 		this.setName(generateNames());
 		this.setType(createStarType());
@@ -309,6 +311,10 @@ public class StarSystem {
 
 	public void setPlanets(List<Planet> planets) {
 		this.planets = planets;
+	}
+
+	public void addPlanet(Planet planet) {
+		this.planets.add(planet);
 	}
 
 	public int[] getLocation() {

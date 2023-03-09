@@ -19,13 +19,17 @@ import ics499.GalaxyGenerator.model.GalaxyShape;
 import ics499.GalaxyGenerator.model.Planet;
 import ics499.GalaxyGenerator.model.StarSystem;
 import ics499.GalaxyGenerator.model.Universe;
+import ics499.GalaxyGenerator.repository.PlanetRepository;
 import ics499.GalaxyGenerator.repository.StarSystemRepository;
+import ics499.GalaxyGenerator.repository.UniverseRepository;
 
 @RestController
 public class StarSystemController {
 
   @Autowired
   private StarSystemRepository repo;
+  @Autowired
+  private UniverseRepository universeRepo;
 
   @GetMapping("/starsystems")
   public List<StarSystem> getAllStarSystems() {
@@ -43,8 +47,10 @@ public class StarSystemController {
   }
 
   @PostMapping("/addstarsystem")
-  public StarSystem create(@RequestBody StarSystem starSystemToAdd) {
-    starSystemToAdd = new StarSystem(new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6));
+  public StarSystem create(@RequestBody Integer universeId) {
+    Universe parentUniverse = universeRepo.findById(universeId).get();
+    StarSystem starSystemToAdd = new StarSystem();
+    parentUniverse.addStarSystem(starSystemToAdd);
     return repo.saveAndFlush(starSystemToAdd);
   }
 
