@@ -41,8 +41,8 @@ public class UniverseController {
 	}
 
 	@PostMapping("/adduniverse")
-	public Universe create(@RequestBody Universe universeToAdd) {
-		universeToAdd = new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6);
+	public Universe create() {
+		Universe universeToAdd = new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6);
 		return repo.saveAndFlush(universeToAdd);
 	}
 

@@ -16,15 +16,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ics499.GalaxyGenerator.model.GalaxyShape;
+import ics499.GalaxyGenerator.model.Planet;
 import ics499.GalaxyGenerator.model.StarSystem;
 import ics499.GalaxyGenerator.model.Universe;
+import ics499.GalaxyGenerator.repository.PlanetRepository;
 import ics499.GalaxyGenerator.repository.StarSystemRepository;
+import ics499.GalaxyGenerator.repository.UniverseRepository;
 
 @RestController
 public class StarSystemController {
 
   @Autowired
   private StarSystemRepository repo;
+  @Autowired
+  private UniverseRepository universeRepo;
 
   @GetMapping("/starsystems")
   public List<StarSystem> getAllStarSystems() {
@@ -42,8 +47,10 @@ public class StarSystemController {
   }
 
   @PostMapping("/addstarsystem")
-  public StarSystem create(@RequestBody StarSystem starSystemToAdd) {
-    starSystemToAdd = new StarSystem(new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6));
+  public StarSystem create(@RequestBody Integer universeId) {
+    Universe parentUniverse = universeRepo.findById(universeId).get();
+    StarSystem starSystemToAdd = new StarSystem();
+    parentUniverse.addStarSystem(starSystemToAdd);
     return repo.saveAndFlush(starSystemToAdd);
   }
 
@@ -70,5 +77,11 @@ public class StarSystemController {
   @DeleteMapping("/starsystem/{id}")
   public void delete(@PathVariable(value = "id") Integer starSystemId) {
     repo.deleteById(starSystemId);
+  }
+
+  @GetMapping("/planetfromstarsystem/{id}")
+  public List<Object> getPlanetsFromStarSystemById(@PathVariable(value = "id") Integer starSystemId) {
+    List<Object> planets = repo.findPlanetsByStarSystem(starSystemId);
+    return planets;
   }
 }

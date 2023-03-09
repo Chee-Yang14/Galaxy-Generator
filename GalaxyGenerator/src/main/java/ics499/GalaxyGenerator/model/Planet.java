@@ -2,6 +2,7 @@ package ics499.GalaxyGenerator.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -24,7 +25,7 @@ import java.util.Random;
 public class Planet {
 	private static Random random = new Random();
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "planet", allocationSize = 1)
 	private Integer planetId;
 	private String name;
@@ -73,7 +74,7 @@ public class Planet {
 	public Planet() {
 		this.setSize(createSize());
 		this.setPopulation(createPopulation());
-		this.setPlanetId(random.nextInt(900000) + 100000);
+		// this.setPlanetId(random.nextInt(900000) + 100000);
 		this.type = createType();
 		this.setNaturalResources(createResource());
 		this.setEconomyType(createEconType());
@@ -533,5 +534,4 @@ public class Planet {
 				+ Arrays.toString(location) + ", economyType=" + economyType + ", description=" + description
 				+ ", type=" + type + "]";
 	}
-
 }

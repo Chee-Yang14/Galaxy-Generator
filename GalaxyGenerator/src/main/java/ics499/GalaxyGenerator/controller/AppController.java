@@ -7,12 +7,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import ics499.GalaxyGenerator.model.Planet;
+import ics499.GalaxyGenerator.model.StarSystem;
 import ics499.GalaxyGenerator.model.User;
 import ics499.GalaxyGenerator.repository.PlanetRepository;
+import ics499.GalaxyGenerator.repository.StarSystemRepository;
 import ics499.GalaxyGenerator.repository.UserRepository;
 
 @Controller
@@ -21,6 +24,8 @@ public class AppController {
   UserRepository userRepo;
   @Autowired
   PlanetRepository planetRepo;
+  @Autowired
+  StarSystemRepository starSystemRepo;
 
   @GetMapping("")
   public String homePage() { // this returns home.html
@@ -50,4 +55,19 @@ public class AppController {
     model.addAttribute("listPlanets", listPlanets);
     return "planets";
   }
+
+  @GetMapping("/canvas")
+  public String listStarSystems(Model model) {
+    List<StarSystem> listStarSystems = starSystemRepo.findAll();
+    model.addAttribute("listStarSystems", listStarSystems);
+    return "canvas";
+  }
+
+  // @GetMapping("/planetfromstarsystem/{id}")
+  // public String getPlanetsFromStarSystemById(@PathVariable(value = "id")
+  // Integer starSystemId, Model model) {
+  // List<Object> planets = starSystemRepo.findPlanetsByStarSystem(starSystemId);
+  // model.addAttribute("planets", planets);
+  // return "planets from starsystem";
+  // }
 }

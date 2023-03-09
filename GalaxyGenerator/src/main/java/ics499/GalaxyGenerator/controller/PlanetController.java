@@ -17,13 +17,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import ics499.GalaxyGenerator.model.Planet;
+import ics499.GalaxyGenerator.model.StarSystem;
 import ics499.GalaxyGenerator.repository.PlanetRepository;
+import ics499.GalaxyGenerator.repository.StarSystemRepository;
 
 @RestController
 public class PlanetController {
 
   @Autowired
   private PlanetRepository repo;
+  @Autowired
+  private StarSystemRepository starSystemRepo;
 
   // @GetMapping("/planets")
   // public List<Planet> getALlPlanets() {
@@ -41,7 +45,10 @@ public class PlanetController {
   }
 
   @PostMapping("/addplanet")
-  public Planet create(@RequestBody final Planet planetToAdd) {
+  public Planet create(@RequestBody final Integer starSystemId) {
+    Planet planetToAdd = new Planet();
+    StarSystem parentStarSystem = starSystemRepo.findById(starSystemId).get();
+    parentStarSystem.addPlanet(planetToAdd);
     return repo.saveAndFlush(planetToAdd);
   }
 
@@ -69,4 +76,5 @@ public class PlanetController {
   public void delete(@PathVariable(value = "id") Integer planetId) {
     repo.deleteById(planetId);
   }
+
 }
