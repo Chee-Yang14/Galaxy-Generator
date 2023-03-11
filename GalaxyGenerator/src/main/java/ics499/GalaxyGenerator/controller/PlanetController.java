@@ -21,7 +21,7 @@ import ics499.GalaxyGenerator.model.StarSystem;
 import ics499.GalaxyGenerator.repository.PlanetRepository;
 import ics499.GalaxyGenerator.repository.StarSystemRepository;
 /**
- * This planetController class is used to handle HTTP rest. 
+ * This planetController class is used to handle HTTP request. 
  * This mean it uses http request like GET, PUT ,POST and delete to manipulate data. 
  * the data being planets from models package. 
  * 
