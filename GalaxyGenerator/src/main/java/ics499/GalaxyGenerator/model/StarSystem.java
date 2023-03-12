@@ -52,14 +52,14 @@ public class StarSystem {
 	/**
 	 * This is the default constructor.
 	 * 
-	 * @param name           used to determine the name
-	 * @param type           is used to determine the star type
-	 * @param goverment
-	 * @param population
-	 * @param economyLevel
-	 * @param spaceResources
-	 * @param planets
-	 * @param location
+	 * @param name            used to determine the name
+	 * @param type            is used to determine the star type 
+	 * @param goverment       determine what the government will be 
+	 * @param population      determine what population is - population is how many people live on the starsystem
+	 * @param economyLevel    determine the economylevel - which is how good the economy is
+	 * @param spaceResources  determine spaceResource - how many resource are there are from all their planet combine
+	 * @param planets         determine the planets that orbit this starsystem.
+	 * @param location		  determine this star system location in the universe. 
 	 */
 	public StarSystem(Integer id, String name, StarType type, String goverment, long population, int economyLevel,
 			int spaceResources,
@@ -75,6 +75,11 @@ public class StarSystem {
 		this.location = location;
 	}
 
+	/**
+	 * a another constructor that generate a star system with randomized features
+	 * the only parameter it take in is a universe where the star system will be in
+	 * @param u the universe where this star system will be put in
+	 */
 	public StarSystem(Universe u) {
 		this.setPlanets(createPlanets());
 		this.setUniverse(u);
@@ -89,7 +94,9 @@ public class StarSystem {
 		// it's planets. We will need to work out the formula.
 
 	}
-
+	/**
+	 * another construtor that generate a starsytem with randomize features but this time it has no universe.
+	 */
 	public StarSystem() {
 		this.setPlanets(createPlanets());
 		this.setName(generateNames());
@@ -100,7 +107,13 @@ public class StarSystem {
 		this.setSpaceResources(createSpaceResource());
 		this.setGoverment(createGovernment());
 	}
-
+	
+	/**
+	 * this method generate a single starsytem with randomized feature and then return it
+	 * 
+	 * @param u take in the universe to give to the starsystem so it is generated with the universe as it universe. 
+	 * @return a single starsystem with randomized features
+	 */
 	public static StarSystem generate(Universe u) {
 		return new StarSystem(u);
 		/**
@@ -114,6 +127,13 @@ public class StarSystem {
 		 */
 	}
 
+	/**
+	 * this method create planets for the starsytem. 
+	 * it take two random number between 1 and 10. 
+	 * and used it to determine how many planets the starsytem will have.
+	 * then it generated the planet, which will all have randomized features. 
+	 * @return the list of planets
+	 */
 	public ArrayList<Planet> createPlanets() {
 		ArrayList<Planet> planetList = new ArrayList<>();
 		int sizeA = random.nextInt(10 - 1) + 1;
@@ -127,6 +147,13 @@ public class StarSystem {
 		return planetList;
 	}
 
+	/**
+	 * this method randomly determine what the starsystem government is gonna be
+	 * there a randomized number that range from 1 to 10. 
+	 * depending on the random number the government is determine
+	 * through the switch, landing where the number is. 
+	 * @return the government
+	 */
 	public String createGovernment() {
 		int num = random.nextInt(10);
 		String government = "";
@@ -165,6 +192,13 @@ public class StarSystem {
 		return government;
 	}
 
+	/**
+	 * this method determine the starsytem location
+	 * there is a star shape which is either scatter or cluster. 
+	 * using that we use it to determine the starsystem location so that along with other starsytem 
+	 * it make a cluster or scatter on the map. 
+	 * @return the location 
+	 */
 	public int[] createLocation() {
 		int[] location = {};
 		try {
@@ -179,6 +213,21 @@ public class StarSystem {
 		return location;
 	}
 
+	/**
+	 * This method determine what the starsystem star stype will be. 
+	 * there a randomized number that is generated 
+	 * and depending on that randomized number a star type is determine
+	 * the star type are taken from stellar_classification wikipedia
+	 * this the star type along with the percent chance of the star sytem being that star type
+	 * O 55%
+	 * B 25%
+	 * A 10%
+	 * F  5%
+	 * G  1&
+	 * K .4%
+	 * M  what ever is left
+	 * @return the star type
+	 */
 	public StarType createStarType() {
 		int starTableRoll = random.nextInt(1000); // The real probabilities of the star types can be found here
 		StarType type = null;
@@ -201,6 +250,12 @@ public class StarSystem {
 		return type;
 	}
 
+	/**
+	 * the method is used to determine the population of the star syste. 
+	 * the method goes through all the planets and by adding the population up
+	 * it is able to find the total population
+	 * @return the population
+	 */
 	public long createPopulation() {
 		long population = 0;
 		for (int i = 0; i < planets.size(); i++) {
@@ -209,6 +264,12 @@ public class StarSystem {
 		return population;
 	}
 
+	/**
+	 * this method determine what the econLevel on the starsytem will be.
+	 * 
+	 * It is able to determine the econlevel by adding all the econlevel from each planet up. 
+	 * @return the econlevel
+	 */
 	public int createEconLevel() {
 		int level = 0;
 		for (int i = 0; i < planets.size(); i++) {
@@ -217,6 +278,12 @@ public class StarSystem {
 		return level;
 	}
 
+	/**
+	 * this method determine how much natural resource the star system have
+	 * 
+	 * this is determine by adding all the planets natural resource up.
+	 * @return the natural resource
+	 */
 	public int createSpaceResource() {
 		int resource = 0;
 		for (int i = 0; i < planets.size(); i++) {
@@ -224,7 +291,15 @@ public class StarSystem {
 		}
 		return resource;
 	}
-
+	/**
+	 * this method generate a random name for the star system
+	 * It has three array that hold a bunchs of words represting a sylable
+	 * a random number determine how many sylable the name will have
+	 * The sylable are added if there more than one
+	 * the end result is the name
+	 * 
+	 * @return the randomly created name
+	 */
 	private String generateNames() {
 		String name = "";
 		String[] firstSylable = { "Ame", "Shi", "Kiin", "Kael", "Sal", "Sale", "Her", "Hur", "Hue", "New",
