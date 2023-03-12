@@ -129,6 +129,7 @@ public class StarSystemController {
     repo.deleteById(starSystemId);
   }
 
+
   /**
    * the method accept a http request to return all planets of a star system
    * the http request come with an id of the star system you want the planet of.
@@ -143,4 +144,5 @@ public class StarSystemController {
     List<Object> planets = repo.findPlanetsByStarSystem(starSystemId);
     return planets;
   }
+
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="ISO-8859-1" />
-    <title>List Planets</title>
+    <title>List Planets Under A Star System</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -14,10 +14,10 @@
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
   </head>
-  <body>
+  <body style="background-color: black">
       <div>
         <h1 class="text-center">
-          List of Planets
+          List of Planets from Star System
         </h1>
       </div>
       <div>
@@ -33,13 +33,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="planet: ${listPlanets}">
-              <td th:text="${planet.name}"></td>
-              <td th:text="${planet.population}"></td>
-              <td th:text="${planet.description}"></td>
-              <td th:text="${planet.economyLevel}"></td>
-              <td th:text="${planet.economyType}"></td>
-              <td th:text="${planet.naturalResources}"></td>
+            <tr th:each="planet: ${planets}">
+              <td th:text="${planet[5]}"></td>
+              <td th:text="${planet[7]}"></td>
+              <td th:text="${planet[1]}"></td>
+              <td th:text="${planet[2]}"></td>
+              <td th:text="${planet[3]}"></td>
+              <td th:text="${planet[6]}"></td>
             </tr>
           </tbody>
         </table>

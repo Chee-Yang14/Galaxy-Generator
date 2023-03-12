@@ -63,11 +63,10 @@ public class AppController {
     return "canvas";
   }
 
-  // @GetMapping("/planetfromstarsystem/{id}")
-  // public String getPlanetsFromStarSystemById(@PathVariable(value = "id")
-  // Integer starSystemId, Model model) {
-  // List<Object> planets = starSystemRepo.findPlanetsByStarSystem(starSystemId);
-  // model.addAttribute("planets", planets);
-  // return "planets from starsystem";
-  // }
+  @GetMapping("/planetfromstarsystem/{id}")
+  public String getPlanetsFromStarSystemById(@PathVariable(value = "id") Integer starSystemId, Model model) {
+    List<Object> planets = starSystemRepo.findPlanetsByStarSystem(starSystemId);
+    model.addAttribute("planets", planets);
+    return "planets_from_starsystem";
+  }
 }
