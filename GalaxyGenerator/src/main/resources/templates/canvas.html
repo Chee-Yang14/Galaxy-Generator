@@ -14,7 +14,13 @@
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
   </head>
-  <body style="background-color: black">
+  <body
+    style="
+      background-image: url('https://images.wallpaperscraft.com/image/single/stars_space_dark_139528_1920x1080.jpg');
+      background-size: cover;
+      background-position: center;
+    "
+  >
     <div style="position: relative">
       <button
         th:each="starSystem : ${listStarSystems}"
@@ -23,16 +29,21 @@
         th:inline="javascript"
         style="
           position: absolute;
-          height: 38px;
-          width: 38px;
-          border-radius: 50%;
-          background-color: white;
+          height: 1px;
+          width: 1px;
+          padding: 0px;
+          background-size: cover;
         "
-        th:text="${starSystem.starsystemId}"
         th:styleappend="|left: ${starSystem.location[0]*10}px; top: ${starSystem.location[1]*10}px|"
         th:data-url="@{http://localhost:8080/planetfromstarsystem/{id}(id=${starSystem.starsystemId})}"
         onclick="window.open(this.getAttribute('data-url'))"
-      ></button>
+      >
+        <img
+          src="https://www.universetoday.com/wp-content/uploads/2013/10/milky_way.jpg"
+          width="50px"
+          height="50px"
+        />
+      </button>
     </div>
   </body>
 </html>

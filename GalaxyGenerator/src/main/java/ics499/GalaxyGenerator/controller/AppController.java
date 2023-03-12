@@ -63,6 +63,15 @@ public class AppController {
     return "canvas";
   }
 
+  /**
+   * the method accept a http request to return all planets of a star system
+   * the http request come with an id of the star system you want the planet of.
+   * the method search for the star system in the repository using the id
+   * if a match is found it return that star system's planets
+   * 
+   * @param starSystemId id of the starsystem you want
+   * @return the planets of the matching id star system
+   */
   @GetMapping("/planetfromstarsystem/{id}")
   public String getPlanetsFromStarSystemById(@PathVariable(value = "id") Integer starSystemId, Model model) {
     List<Object> planets = starSystemRepo.findPlanetsByStarSystem(starSystemId);
