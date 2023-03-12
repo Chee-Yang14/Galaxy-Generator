@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="ISO-8859-1" />
-    <title>List Users</title>
+    <title>All star systems</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -14,21 +14,24 @@
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
   </head>
-  <body>
-    <!-- <div style="position: relative" th:each="starSystem: ${listStarSystems}"> -->
+  <body style="background-color: black">
     <div style="position: relative">
       <button
         th:each="starSystem : ${listStarSystems}"
         type="button"
+        id="buttonMaster"
         th:inline="javascript"
         style="
           position: absolute;
-          padding: 18px;
+          height: 38px;
+          width: 38px;
           border-radius: 50%;
-          background-color: green;
+          background-color: white;
         "
-        th:text="${starSystem.location[0]+ 'px'}"
-        th:styleappend="'left:${starSystem.location[0]+ 'px'}'"
+        th:text="${starSystem.starsystemId}"
+        th:styleappend="|left: ${starSystem.location[0]*10}px; top: ${starSystem.location[1]*10}px|"
+        th:data-url="@{http://localhost:8080/planetfromstarsystem/{id}(id=${starSystem.starsystemId})}"
+        onclick="window.open(this.getAttribute('data-url'))"
       ></button>
     </div>
   </body>
