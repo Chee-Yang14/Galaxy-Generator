@@ -94,7 +94,8 @@ public class UniverseController {
 	public ResponseEntity<?> update(@RequestBody Universe UniverseUpdate, @PathVariable Integer id) {
 		try {
 			Universe existedUniverse = repo.findById(id).get();
-
+			existedUniverse.setShape(UniverseUpdate.getShape());
+			existedUniverse.setStarSystem(UniverseUpdate.getStarSystem());
 			repo.save(existedUniverse);
 			new ResponseEntity<>(HttpStatus.OK);
 			return ResponseEntity.ok("Update successfully");
