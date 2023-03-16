@@ -18,8 +18,10 @@ import org.springframework.ui.Model;
 
 import ics499.GalaxyGenerator.model.Planet;
 import ics499.GalaxyGenerator.model.StarSystem;
+import ics499.GalaxyGenerator.model.Universe;
 import ics499.GalaxyGenerator.repository.PlanetRepository;
 import ics499.GalaxyGenerator.repository.StarSystemRepository;
+import ics499.GalaxyGenerator.repository.UniverseRepository;
 /**
  * This planetController class is used to handle HTTP request. 
  * This mean it uses http request like GET, PUT ,POST and delete to manipulate data. 
@@ -37,6 +39,10 @@ public class PlanetController {
   private PlanetRepository repo;
   @Autowired
   private StarSystemRepository starSystemRepo;
+  @Autowired
+  private UniverseRepository universeRepo;
+  @Autowired
+  private UniverseController universeController;
 
   // @GetMapping("/planets")
   // public List<Planet> getALlPlanets() {
@@ -113,6 +119,32 @@ public class PlanetController {
    */
   @DeleteMapping("/planet/{id}")
   public void delete(@PathVariable(value = "id") Integer planetId) {
+	List<Universe> universeList = universeRepo.findAll();
+	for (int i = 0; i < universeList.size(); i++) {
+		boolean indicator = false;
+		List<StarSystem> starSystems = universeList.get(i).getStarSystem();
+		for (int x = 0; x < starSystems.size(); x++) {
+			boolean indicator2 = false;
+			List<Planet> Planets = starSystems.get(x).getPlanets();
+			for (int y = 0; y < Planets.size(); y++) {
+				if (Planets.get(y).getPlanetId() == planetId) {
+					Planets.remove(y);
+					indicator2 = true;
+					break;
+				}
+			}
+			if (indicator2 == true) {
+				starSystems.get(x).setPlanets(Planets);
+				indicator = true;
+				break;
+			}
+		}
+		if (indicator == true) {
+			universeList.get(i).setStarSystem(starSystems);
+			universeController.update(universeList.get(i), universeList.get(i).getUniverseId());
+			break;
+		}
+	}
     repo.deleteById(planetId);
   }
 
