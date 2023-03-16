@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ics499.GalaxyGenerator.controller.UniverseController;
+import ics499.GalaxyGenerator.model.GalaxyShape;
 import ics499.GalaxyGenerator.model.StarSystem;
 import ics499.GalaxyGenerator.model.Universe;
 import ics499.GalaxyGenerator.repository.UniverseRepository;
@@ -87,7 +88,14 @@ public class UniverseControllerTest {
 	
 	@Test
 	void testUpdate() {
+		Universe uni = controller.create();
+		Universe uni2 = controller.create();
 		
+			controller.update(uni, uni2.getUniverseId());
+		
+		
+		assertThat(uni.getShape()).isEqualByComparingTo(uni2.getShape());
+		assertThat(uni.getStarSystem().equals(uni2.getStarSystem()));
 	}
 	
 	@Test
