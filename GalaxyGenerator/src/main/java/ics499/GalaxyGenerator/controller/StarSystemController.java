@@ -41,7 +41,10 @@ public class StarSystemController {
   private StarSystemRepository repo;
   @Autowired
   private UniverseRepository universeRepo;
-
+  @Autowired
+  private UniverseController universeController;
+  
+  
   /**
    * this method accept an http request for all star system
    * the method then return all the star system in it repository back
@@ -136,6 +139,23 @@ public class StarSystemController {
    */
   @DeleteMapping("/starsystem/{id}")
   public void delete(@PathVariable(value = "id") Integer starSystemId) {
+	List<Universe> universes = universeRepo.findAll();
+	for (int i = 0; i < universes.size(); i++) {
+		boolean indicator = false;
+		List<StarSystem> starSystems = universes.get(i).getStarSystem();
+		for (int x = 0; x < starSystems.size(); x++) {
+			if (starSystems.get(x).getStarsystemId() == starSystemId) {
+				starSystems.remove(x);
+				indicator = true;
+				break;
+			}
+		}
+		if (indicator == true) {
+			universes.get(i).setStarSystem(starSystems);
+			universeController.update(universes.get(i), universes.get(i).getUniverseId());
+			break;
+		}
+	}
     repo.deleteById(starSystemId);
   }
 
