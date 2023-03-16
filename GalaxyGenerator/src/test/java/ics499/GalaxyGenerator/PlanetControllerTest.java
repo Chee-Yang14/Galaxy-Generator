@@ -2,6 +2,8 @@ package ics499.GalaxyGenerator;
 
 import static org.junit.Assert.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ class PlanetControllerTest {
 	void testCreatePlanet() throws Exception{
 		Planet newPlanet = new Planet();
 		Planet planetAdded = controller.create(newPlanet, 1);
+		controller.update(planetAdded, 1);
 		assertNotNull(planetAdded.getPlanetId());
 		assertSame(newPlanet, planetAdded);
 		
@@ -61,6 +64,15 @@ class PlanetControllerTest {
 		
 		ResponseEntity<Planet> responsePlanetChanged = controller.getPlanetById(1);
 		assertNotSame(responsePlanet, responsePlanetChanged);
+	}
+	
+	@Test
+	void testDeletePlanet() {
+		Planet planet = new Planet();
+		controller.delete(1);
+		ResponseEntity<Planet> responsePlanet = controller.getPlanetById(1);
+		assertSame(HttpStatus.NOT_FOUND, responsePlanet.getStatusCode());
+		controller.update(planet, 1);
 	}
 
 }
