@@ -90,4 +90,19 @@ public class UniverseControllerTest {
 		
 	}
 	
+	@Test
+	void testDelete() {
+		
+		
+		Universe uni = controller.create();
+		long uniBefore = repo.count();
+		
+		controller.delete(uni.getUniverseId());
+		
+		long uniAfter= repo.count();
+		
+		assert uniBefore>uniAfter;
+		assertThat(repo.findById(uni.getUniverseId()).isEmpty());
+	}
+	
 }
