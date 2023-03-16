@@ -41,7 +41,7 @@ public class UniverseController {
 	 * @return all the universe in repo
 	 */
 	@GetMapping("/universes")
-	public List<Universe> getAllStarSystems() {
+	public List<Universe> getAllUniverse() {
 		return repo.findAll();
 	}
 
@@ -56,7 +56,7 @@ public class UniverseController {
 	 * @return the universe with the given id
 	 */
 	@GetMapping("/universe/{id}")
-	public ResponseEntity<Universe> getStarSystemById(@PathVariable(value = "id") Integer universeId) {
+	public ResponseEntity<Universe> getUniverseById(@PathVariable(value = "id") Integer universeId) {
 		try {
 			Universe newUniverse = repo.findById(universeId).get();
 			return new ResponseEntity<Universe>(newUniverse, HttpStatus.OK);
