@@ -9,5 +9,4 @@ class GalaxyGeneratorApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
