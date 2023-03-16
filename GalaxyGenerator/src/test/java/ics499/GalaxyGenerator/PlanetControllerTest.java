@@ -55,7 +55,7 @@ class PlanetControllerTest {
 	}
 	
 	@Test
-	void testPutPlanet() {
+	void testPutPlanet() { 
 		Planet newPlanet = new Planet();
 		ResponseEntity<Planet> responsePlanet = controller.getPlanetById(1);
 		ResponseEntity<?> response = controller.update(newPlanet, 1);
