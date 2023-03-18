@@ -68,6 +68,20 @@ public class UniverseController {
 	}
 
 	/**
+	 * this method add a universe to the repository
+	 * When the HTTP request is send
+	 * universe is created
+	 * and then added, saved and flushed
+	 *
+	 * @return repo with newly added universe
+	 */
+	@PostMapping("/adduniverse")
+	public Universe create() {
+		Universe universeToAdd = new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6);
+		return repo.saveAndFlush(universeToAdd);
+	}
+
+	/**
 	 * this method update the universe
 	 * When the HTTP request is send
 	 * the method take the argument id and use it to find the universe to be changed
@@ -85,7 +99,7 @@ public class UniverseController {
 		try {
 			Universe existedUniverse = repo.findById(id).get();
 			existedUniverse.setShape(UniverseUpdate.getShape());
-			existedUniverse.setStarSystem(UniverseUpdate.getStarSystem()); 
+			existedUniverse.setStarSystem(UniverseUpdate.getStarSystem());
 			repo.save(existedUniverse);
 			new ResponseEntity<>(HttpStatus.OK);
 			return ResponseEntity.ok("Update successfully");

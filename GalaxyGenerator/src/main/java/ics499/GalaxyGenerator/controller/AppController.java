@@ -97,7 +97,7 @@ public class AppController {
     return "generator";
   }
 
-  @PostMapping("/adduniverse")
+  @PostMapping("/generateuniverse")
   public String addUniverse(Universe universe) {
     Universe newUniverse = universe.generate(6, universe.getSize(), universe.getShape());
     universeRepo.save(newUniverse);
