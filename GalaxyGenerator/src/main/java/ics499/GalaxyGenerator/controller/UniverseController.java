@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ics499.GalaxyGenerator.model.GalaxyShape;
 import ics499.GalaxyGenerator.model.Universe;
 import ics499.GalaxyGenerator.repository.UniverseRepository;
+
 /**
- * this UniverseController class is used to handle HTTP request. 
+ * this UniverseController class is used to handle HTTP request.
  * like planets and starsystem controller this class uses HTTP request like
- * like GET, PUT ,POST and delete to manipulate universe data. 
+ * like GET, PUT ,POST and delete to manipulate universe data.
  * 
  * @author Chee Yang
  * @author Lam Truong
@@ -38,6 +39,7 @@ public class UniverseController {
 	 * This method find all the universe in the repository
 	 * Upon GET request
 	 * the method search the repository for all the star system
+	 * 
 	 * @return all the universe in repo
 	 */
 	@GetMapping("/universes")
@@ -48,7 +50,7 @@ public class UniverseController {
 	/**
 	 * this method find a specific universe using its id
 	 * The HTTP request require an id
-	 * when given it search through the universe repositories 
+	 * when given it search through the universe repositories
 	 * matching each universes id with the given id to find a match
 	 * once found it return it
 	 * 
@@ -66,29 +68,17 @@ public class UniverseController {
 	}
 
 	/**
-	 * this method add a universe to the repository
-	 * When the HTTP request is send 
-	 * universe is created
-	 * and then added, saved and flushed
-	 *
-	 * @return repo with newly added universe
-	 */
-	@PostMapping("/adduniverse")
-	public Universe create() {
-		Universe universeToAdd = new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6);
-		return repo.saveAndFlush(universeToAdd);
-	}
-
-	/**
 	 * this method update the universe
 	 * When the HTTP request is send
 	 * the method take the argument id and use it to find the universe to be changed
-	 * then with the argument universeupdate it change it with the universe that have the id
+	 * then with the argument universeupdate it change it with the universe that
+	 * have the id
 	 * updating the repository
 	 * 
-	 * @param UniverseUpdate universe you want 
-	 * @param id is the id of the universe you want to change
-	 * @return responseEntity with HHttpStatus.OK on sucess or HttpStatus.Not_Found on failure
+	 * @param UniverseUpdate universe you want
+	 * @param id             is the id of the universe you want to change
+	 * @return responseEntity with HHttpStatus.OK on sucess or HttpStatus.Not_Found
+	 *         on failure
 	 */
 	@PutMapping("/universe/{id}")
 	public ResponseEntity<?> update(@RequestBody Universe UniverseUpdate, @PathVariable Integer id) {
@@ -106,7 +96,9 @@ public class UniverseController {
 	/**
 	 * this method delete a universe
 	 * Upon the HTTP request
-	 * the method use the id to find the universe with the given id and then delete it
+	 * the method use the id to find the universe with the given id and then delete
+	 * it
+	 * 
 	 * @param UniverseId the id of the universe you want to delete
 	 */
 	@DeleteMapping("/universe/{id}")

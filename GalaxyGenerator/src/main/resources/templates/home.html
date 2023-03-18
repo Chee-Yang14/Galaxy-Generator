@@ -4,19 +4,39 @@
   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 >
   <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/webjars/bootstrap/css/bootstrap.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="/webjars/bootstrap/js/bootstrap.min.js"
+    ></script>
     <title>Home page</title>
   </head>
   <body>
-    <h1>Welcome!</h1>
+    <h1 class="text-center">Welcome!</h1>
+    <br />
+    <br />
     <div sec:authorize="!isAuthenticated()">
-      <p>Click <a th:href="@{/login}">here</a> to login.</p>
-      <p>Click <a th:href="@{/register}">here</a> to register.</p>
+      <h4 class="text-center">
+        Click <a th:href="@{/login}">here</a> to login.
+      </h4>
+      <h4 class="text-center">
+        Click <a th:href="@{/register}">here</a> to register.
+      </h4>
     </div>
     <div sec:authorize="isAuthenticated()">
-      <p>Click <a th:href="@{/planets}">here</a> to see list of planets.</p>
-      <p>
-        Click <a th:href="@{/canvas}">here</a> to see locations of star systems.
-      </p>
+      <h4 class="text-center">
+        Click <a th:href="@{/planets}">here</a> to see list of planets.
+      </h4>
+      <h4 class="text-center">
+        Click <a th:href="@{/canvas}">here</a> to see map of star systems.
+      </h4>
+      <h4 class="text-center">
+        Click <a th:href="@{/generator}">here</a> to generate a universe.
+      </h4>
     </div>
   </body>
 </html>

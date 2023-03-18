@@ -21,7 +21,7 @@ public class WebSecurityConfig { // this class is needed for authentication
             // .requestMatchers("/planets").authenticated()
             .anyRequest().permitAll()) // anything is permit (does not require log in)
         .formLogin((form) -> form
-            .defaultSuccessUrl("/index") // return to home after sucessful login
+            .defaultSuccessUrl("/home") // return to home after sucessful login
             .usernameParameter("email") // email from User model is used as login parameter
             .permitAll())
         .logout((logout) -> logout.permitAll())

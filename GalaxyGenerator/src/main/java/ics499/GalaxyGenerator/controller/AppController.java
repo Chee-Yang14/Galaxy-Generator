@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import ics499.GalaxyGenerator.model.Planet;
 import ics499.GalaxyGenerator.model.StarSystem;
+import ics499.GalaxyGenerator.model.Universe;
 import ics499.GalaxyGenerator.model.User;
 import ics499.GalaxyGenerator.repository.PlanetRepository;
 import ics499.GalaxyGenerator.repository.StarSystemRepository;
+import ics499.GalaxyGenerator.repository.UniverseRepository;
 import ics499.GalaxyGenerator.repository.UserRepository;
 
 @Controller
@@ -26,6 +28,8 @@ public class AppController {
   PlanetRepository planetRepo;
   @Autowired
   StarSystemRepository starSystemRepo;
+  @Autowired
+  UniverseRepository universeRepo;
 
   @GetMapping("")
   public String homePage() { // this returns home.html
@@ -77,5 +81,26 @@ public class AppController {
     List<Object> planets = starSystemRepo.findPlanetsByStarSystem(starSystemId);
     model.addAttribute("planets", planets);
     return "planets_from_starsystem";
+  }
+
+  /**
+   * this method add a universe to the repository
+   * When the HTTP request is send
+   * universe is created
+   * and then added, saved and flushed
+   *
+   * @return repo with newly added universe
+   */
+  @GetMapping("/generator")
+  public String generateUniverse(Model model) {
+    model.addAttribute("universe", new Universe());
+    return "generator";
+  }
+
+  @PostMapping("/adduniverse")
+  public String addUniverse(Universe universe) {
+    Universe newUniverse = universe.generate(6, universe.getSize(), universe.getShape());
+    universeRepo.save(newUniverse);
+    return "generate_success";
   }
 }
