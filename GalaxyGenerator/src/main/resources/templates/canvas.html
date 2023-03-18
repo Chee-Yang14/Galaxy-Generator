@@ -34,14 +34,14 @@
           padding: 0px;
           background-size: cover;
         "
-        th:styleappend="|left: ${starSystem.location[0]*10}px; top: ${starSystem.location[1]*10}px|"
+        th:styleappend="|left: ${starSystem.location[0]*40}px; top: ${starSystem.location[1]*40}px|"
         th:data-url="@{http://localhost:8080/planetfromstarsystem/{id}(id=${starSystem.starsystemId})}"
         onclick="window.open(this.getAttribute('data-url'))"
       >
         <img
           src="https://www.universetoday.com/wp-content/uploads/2013/10/milky_way.jpg"
-          width="50px"
-          height="50px"
+          width="90px"
+          height="90px"
         />
       </button>
     </div>
