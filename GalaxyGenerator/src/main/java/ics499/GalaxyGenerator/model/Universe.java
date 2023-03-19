@@ -17,8 +17,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 /**
- * This class simulate the universe. It holds everything in it whether it the star system or planets. 
- * It also have name and shape among others. 
+ * This class simulate the universe. It holds everything in it whether it the
+ * star system or planets.
+ * It also have name and shape among others.
  * 
  * @author Chee Yang
  * @author Lam Truong
@@ -28,45 +29,55 @@ import jakarta.persistence.Transient;
 @Entity
 @Table(name = "Universe")
 public class Universe {
+
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @SequenceGenerator(name = "universe", allocationSize = 1)
   private Integer universeId;
-  @Transient
-  private int seed;
-  private GalaxyShape shape;
+
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<StarSystem> starSystem = new ArrayList<StarSystem>();
+
+  private int size;
+  private GalaxyShape shape;
   private Stack<String> names;
   @Transient
   private Random rand = new Random();
+  @Transient
+  private int seed;
 
   /**
    * this is the default constructor
    * it generate a universe with the given parameters.
    * 
-   * @param shape determine what shape the galaxy will be.
+   * @param shape  determine what shape the galaxy will be.
    * @param random a randomizer that planets and starsystem
-   * @param size determine how big the universe is
-   * @param seed a seed, so the universe can return the same universe with the seed. 
+   * @param size   determine how big the universe is
+   * @param seed   a seed, so the universe can return the same universe with the
+   *               seed.
    */
   public Universe(GalaxyShape shape, Random random, int size, int seed) {
     this.shape = shape;
     this.seed = seed;
     this.rand = random;
+    this.size = size;
     this.names = new Stack<String>();
     generateNames(1000);
     this.universeId = rand.nextInt(9000) + 1000;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < this.size; i++) {
       starSystem.add(StarSystem.generate(this));
     }
   }
 
   public Universe() {
+    this.seed = 6;
+    for (int i = 0; i < this.size; i++) {
+      starSystem.add(StarSystem.generate(this));
+    }
   }
 
   /**
-   * this method is used to generate a name for the universe. 
+   * this method is used to generate a name for the universe.
    * if the names stack has less than two name it generate a bunch of new name
    * otherwise the method pop a name and return it.
    *
@@ -83,8 +94,8 @@ public class Universe {
    * this method generate a universe and return it
    * 
    * @param randSeed the seed number
-   * @param gSize the size of the universe
-   * @param gShape the shape of the galaxy
+   * @param gSize    the size of the universe
+   * @param gShape   the shape of the galaxy
    * @return the universe
    */
   public static Universe generate(int randSeed, int gSize, GalaxyShape gShape) {
@@ -92,23 +103,19 @@ public class Universe {
     Random nRandom = new Random(randSeed);
     Universe u = new Universe(gShape, nRandom, gSize, randSeed);
     return u;
-
-    /**
-     * TODO
-     */
   }
 
   /**
-	 * this method generate a random name for the star system
-	 * It has three array that hold a bunchs of words represting a sylable
-	 * 
-	 * the paramenter number determine how many names there will be
-	 * there a random generated number ever for loops
-	 * the random generated number determine how many sylable there will be
-	 * The sylable are added if there more than one
-	 * the end result is the stack names having tons of randomly generated names
-	 * 
-	 */
+   * this method generate a random name for the star system
+   * It has three array that hold a bunchs of words represting a sylable
+   * 
+   * the paramenter number determine how many names there will be
+   * there a random generated number ever for loops
+   * the random generated number determine how many sylable there will be
+   * The sylable are added if there more than one
+   * the end result is the stack names having tons of randomly generated names
+   * 
+   */
   private void generateNames(int number) {
     Random temp = new Random();
     this.rand = temp;
@@ -173,4 +180,11 @@ public class Universe {
     this.starSystem.add(starSystemToAdd);
   }
 
+  public int getSize() {
+    return this.size;
+  }
+
+  public void setSize(int size) {
+    this.size = size;
+  }
 }
