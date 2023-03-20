@@ -37,7 +37,6 @@ public class StarSystem {
 	private Integer starsystemId;
 
 	@Transient
-	private Integer starSystemID;
 	private Universe u;
 	private Random random = new Random();
 	private String name;
@@ -49,14 +48,6 @@ public class StarSystem {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Planet> planets = new ArrayList<Planet>();
 	private int[] location;// X, Y
-	
-	public Integer getStarSystemId() {
-		return starSystemID;
-	}
-	
-	public void setStarSystemId(Integer id) {
-		starSystemID = id;
-	}
 
 	/**
 	 * This is the default constructor.

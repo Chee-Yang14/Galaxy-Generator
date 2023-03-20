@@ -38,12 +38,12 @@ public class StarSystemControllerTest {
 		  StarSystem newStarSystem = new StarSystem();
 			StarSystem starSystemAdded = controller.create(1, newStarSystem);
 			controller.update(starSystemAdded, 1);
-			assertNotNull(repo.findById(starSystemAdded.getStarSystemId()));
+			assertNotNull(repo.findById(starSystemAdded.getStarsystemId()));
 			assertSame(starSystemAdded, newStarSystem);
 			
 			StarSystem starSystem2Added = controller.create(1, new StarSystem());
-			assertNotNull(repo.findById(starSystem2Added.getStarSystemId()));
-			assertTrue(repo.existsById(starSystem2Added.getStarSystemId()));
+			assertNotNull(repo.findById(starSystem2Added.getStarsystemId()));
+			assertTrue(repo.existsById(starSystem2Added.getStarsystemId()));
 	  }
 	  
 	  @Test
