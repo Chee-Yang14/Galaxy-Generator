@@ -14,18 +14,21 @@
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
   </head>
-  <body
-    style="
-      background-image: url('https://images.wallpaperscraft.com/image/single/stars_space_dark_139528_1920x1080.jpg');
-      background-size: cover;
-      background-position: center;
-    "
-  >
-    <div style="position: relative">
+  <body>
+    <div
+      style="
+        position: relative;
+        background-image: url('https://images.wallpaperscraft.com/image/single/stars_space_dark_139528_1920x1080.jpg');
+        background-position: center;
+        width: 70%;
+        height: 720px;
+        float: left;
+      "
+    >
       <button
         th:each="starSystem : ${listStarSystems}"
         type="button"
-        id="buttonMaster"
+        id="${starSystem.starsystemId}"
         th:inline="javascript"
         style="
           position: absolute;
@@ -44,6 +47,9 @@
           height="40px"
         />
       </button>
+    </div>
+    <div style="width: 30%; height: 720px; float: left">
+      <textarea rows="10" cols="50"></textarea>
     </div>
   </body>
 </html>
