@@ -37,7 +37,7 @@ public class Universe {
 
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<StarSystem> starSystem = new ArrayList<StarSystem>();
-
+  @Transient
   private int size;
   private GalaxyShape shape;
   private Stack<String> names;
