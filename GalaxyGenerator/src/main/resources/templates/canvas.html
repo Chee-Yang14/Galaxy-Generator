@@ -22,10 +22,11 @@
     "
   >
     <div style="position: relative">
+
       <button
         th:each="starSystem : ${listStarSystems}"
         type="button"
-        id="buttonMaster"
+        id="${starSystem.starsystemId}"
         th:inline="javascript"
         style="
           position: absolute;
@@ -44,6 +45,9 @@
           height="40px"
         />
       </button>
+    </div>
+    <div style="width: 30%; height: 720px; float: left">
+      <textarea rows="10" cols="50"></textarea>
     </div>
   </body>
 </html>
