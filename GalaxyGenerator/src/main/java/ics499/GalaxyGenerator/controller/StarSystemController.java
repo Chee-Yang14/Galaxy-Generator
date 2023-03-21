@@ -114,7 +114,9 @@ public class StarSystemController {
       StarSystem existedStarSystem = repo.findById(id).get();
       existedStarSystem.setEconomyLevel(starSystemToUpdate.getEconomyLevel());
       existedStarSystem.setGoverment(starSystemToUpdate.getGoverment());
-      existedStarSystem.setLocation(starSystemToUpdate.getLocation());
+      if (starSystemToUpdate.getLocation().length != 0) {
+    	  existedStarSystem.setLocation(starSystemToUpdate.getLocation());
+      }
       existedStarSystem.setName(starSystemToUpdate.getName());
       existedStarSystem.setPopulation(starSystemToUpdate.getPopulation());
       existedStarSystem.setSpaceResources(starSystemToUpdate.getSpaceResources());
