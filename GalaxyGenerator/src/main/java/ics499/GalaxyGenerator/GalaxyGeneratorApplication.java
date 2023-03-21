@@ -14,13 +14,5 @@ public class GalaxyGeneratorApplication {
 
 		GalaxyShape s = GalaxyShape.SCATTER;
 		Universe universe = Universe.generate(0, 10, s.SCATTER);
-
-		for (int i = 0; i < 10; i++) {
-			// System.out.println(universe.getStarSystem().get(i));
-		}
-
-		// Planet planet = new Planet();
-		// for (int i = 0; i < 25; i++)
-		// System.out.println(planet.createDescription());
 	}
 }

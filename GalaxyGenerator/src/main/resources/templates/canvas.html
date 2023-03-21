@@ -8,6 +8,10 @@
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      th:href="@{'css/style.css'}"
+    />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script
       type="text/javascript"
@@ -52,17 +56,21 @@
       <div
         th:id="'div'+${starSystem.starsystemId}"
         th:each="starSystem : ${listStarSystems}"
-        style="position: absolute; right: 15%; display: none"
+        style="position: absolute; right: 10%; display: none; top: 10rem"
       >
         <div
           style="position: relative; text-align: center"
           th:each="planet : ${starSystem.planets}"
         >
           <button
+            class="button-30"
+            role="button"
             th:text="${planet.name}"
             th:data-url="@{http://localhost:8080/planet/{id}(id=${planet.planetId})}"
             onclick="window.open(this.getAttribute('data-url'))"
-          ></button>
+          >
+            hello
+          </button>
         </div>
       </div>
     </div>
@@ -70,7 +78,7 @@
       function show(id) {
         var size = document.querySelector("#size").dataset.size;
         var x = document.getElementById("div" + id);
-        console.log(id)
+        console.log(id);
         if (x.style.display == "none") {
           x.style.display = "inline-block";
         } else {
@@ -79,7 +87,7 @@
         for (var i = 1; i <= size; i++) {
           if (i == id) continue;
           var y = document.getElementById("div" + i);
-          console.log(i)
+          console.log(i);
           y.style.display = "none";
         }
       }
