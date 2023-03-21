@@ -25,7 +25,8 @@ public class WebSecurityConfig { // this class is needed for authentication
             .usernameParameter("email") // email from User model is used as login parameter
             .permitAll())
         .logout((logout) -> logout.permitAll())
-        .csrf().disable();
+        .csrf().disable()
+        .cors().disable();
     return http.build();
   }
 

@@ -14,36 +14,75 @@
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
   </head>
-  <body
-    style="
-      background-image: url('https://images.wallpaperscraft.com/image/single/stars_space_dark_139528_1920x1080.jpg');
-      background-size: cover;
-      background-position: center;
-    "
-  >
-    <div style="position: relative">
-      <button
-        th:each="starSystem : ${listStarSystems}"
-        type="button"
-        id="buttonMaster"
-        th:inline="javascript"
+  <body>
+    <div>
+      <div
+        id="size"
+        th:attr="data-size=${listStarSystems.size()}"
         style="
-          position: absolute;
-          height: 1px;
-          width: 1px;
-          padding: 0px;
-          background-size: cover;
+          position: relative;
+          background-image: url('https://images.wallpaperscraft.com/image/single/stars_space_dark_139528_1920x1080.jpg');
+          background-position: center;
+          width: 70%;
+          height: 720px;
+          float: left;
         "
-        th:styleappend="|left: ${starSystem.location[0]*40}px; top: ${starSystem.location[1]*40}px|"
-        th:data-url="@{http://localhost:8080/planetfromstarsystem/{id}(id=${starSystem.starsystemId})}"
-        onclick="window.open(this.getAttribute('data-url'))"
       >
-        <img
-          src="https://www.universetoday.com/wp-content/uploads/2013/10/milky_way.jpg"
-          width="90px"
-          height="90px"
-        />
-      </button>
+        <button
+          th:each="starSystem : ${listStarSystems}"
+          type="button"
+          th:inline="javascript"
+          style="
+            position: absolute;
+            height: 1px;
+            width: 1px;
+            padding: 0px;
+            background-size: cover;
+          "
+          th:styleappend="|left: ${starSystem.location[0]*10}px; top: ${starSystem.location[1]*10}px|"
+          th:onclick="|show('${starSystem.starsystemId}')|"
+        >
+          <img
+            src="https://www.universetoday.com/wp-content/uploads/2013/10/milky_way.jpg"
+            width="30px"
+            height="30px"
+          />
+        </button>
+      </div>
+      <div
+        th:id="'div'+${starSystem.starsystemId}"
+        th:each="starSystem : ${listStarSystems}"
+        style="position: absolute; right: 15%; display: none"
+      >
+        <div
+          style="position: relative; text-align: center"
+          th:each="planet : ${starSystem.planets}"
+        >
+          <button
+            th:text="${planet.name}"
+            th:data-url="@{http://localhost:8080/planet/{id}(id=${planet.planetId})}"
+            onclick="window.open(this.getAttribute('data-url'))"
+          ></button>
+        </div>
+      </div>
     </div>
+    <script>
+      function show(id) {
+        var size = document.querySelector("#size").dataset.size;
+        var x = document.getElementById("div" + id);
+        console.log(id)
+        if (x.style.display == "none") {
+          x.style.display = "inline-block";
+        } else {
+          x.style.display = "none";
+        }
+        for (var i = 1; i <= size; i++) {
+          if (i == id) continue;
+          var y = document.getElementById("div" + i);
+          console.log(i)
+          y.style.display = "none";
+        }
+      }
+    </script>
   </body>
 </html>
