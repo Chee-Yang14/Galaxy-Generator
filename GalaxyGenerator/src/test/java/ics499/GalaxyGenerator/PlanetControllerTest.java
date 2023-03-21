@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,18 +23,20 @@ import ics499.GalaxyGenerator.repository.StarSystemRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PlanetControllerTest {
 	
 	@Autowired
 	private PlanetController controller;
 	
 	@Autowired
-	private StarSystemRepository starSystemRepo;
+	private StarSystemRepository starSystemRepo; 
 	
 	@Autowired
 	private PlanetRepository repo;
 	
 	@Test
+	@Order(1)
 	void testCreatePlanet() throws Exception{
 		Planet newPlanet = new Planet();
 		Planet planetAdded = controller.create(newPlanet, 1);
@@ -45,6 +50,7 @@ class PlanetControllerTest {
 	}
 	
 	@Test
+	@Order(2)
 	void testGetPlanet() {
 		ResponseEntity<Planet> response = controller.getPlanetById(1);
 		assertNotNull(controller.getPlanetById(1));
@@ -55,6 +61,7 @@ class PlanetControllerTest {
 	}
 	
 	@Test
+	@Order(3)
 	void testPutPlanet() { 
 		Planet newPlanet = new Planet();
 		ResponseEntity<Planet> responsePlanet = controller.getPlanetById(1);
@@ -67,6 +74,7 @@ class PlanetControllerTest {
 	}
 	
 	@Test
+	@Order(4)
 	void testDeletePlanet() {
 		Planet planet = new Planet();
 		controller.delete(1);
