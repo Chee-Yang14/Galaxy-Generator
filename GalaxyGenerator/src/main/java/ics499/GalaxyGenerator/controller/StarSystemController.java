@@ -161,11 +161,11 @@ public class StarSystemController {
     repo.deleteById(starSystemId);
   }
 
-  // @GetMapping("/planetfromstarsystem/{id}")
-  // public List<Object> getPlanetsFromStarSystemById(@PathVariable(value = "id")
-  // Integer starSystemId) {
-  // List<Object> planets = repo.findPlanetsByStarSystem(starSystemId);
-  // return planets;
-  // }
+//   @GetMapping("/planetfromstarsystem/{id}")
+//   public List<Object> getPlanetsFromStarSystemById(@PathVariable(value = "id")
+//   Integer starSystemId) {
+//   List<Object> planets = repo.findPlanetsByStarSystem(starSystemId);
+//   return planets;
+//   }
 
 }
