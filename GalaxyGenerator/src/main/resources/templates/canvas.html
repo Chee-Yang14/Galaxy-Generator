@@ -25,7 +25,7 @@
         th:attr="data-size=${listStarSystems.size()}"
         style="
           position: relative;
-          background-image: url('https://images.wallpaperscraft.com/image/single/stars_space_dark_139528_1920x1080.jpg');
+          background-image: url('https://imageio.forbes.com/specials-images/imageserve/5ed68e8310716f0007411996/0x0.jpg?format=jpg&width=1200');
           background-position: center;
           width: 70%;
           height: 720px;
@@ -47,7 +47,7 @@
           th:onclick="|show('${starSystem.starsystemId}')|"
         >
           <img
-            src="https://www.universetoday.com/wp-content/uploads/2013/10/milky_way.jpg"
+            th:src="${'images/GStar.png'}"
             width="30px"
             height="30px"
           />
