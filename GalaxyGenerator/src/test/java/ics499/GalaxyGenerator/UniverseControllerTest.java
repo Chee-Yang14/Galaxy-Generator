@@ -60,8 +60,9 @@ public class UniverseControllerTest {
 
 	@Test
 	void testgetUniverseById() {
-		Integer uniId = repo.findAll().get(0).getUniverseId();
-		Universe universe = repo.findAll().get(0);
+		
+		Universe universe = controller.create();
+		Integer uniId = universe.getUniverseId();
 		ResponseEntity<Universe> uni = controller.getUniverseById(uniId);
 		ResponseEntity<Universe> failed = controller.getUniverseById(550);
 
