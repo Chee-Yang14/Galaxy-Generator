@@ -97,10 +97,14 @@
               height: 500px;
               display: none;
               border-style: solid;
-              background-color: white;
+              padding: 20px;
+              border-radius: 1;
+              background: white;
+              border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+              box-shadow: 20px 20px #7f7fff;
             "
           >
-            <h3 th:text="${planet.name}"></h3>
+            <h3 th:text="${planet.name}" class="planetname"></h3>
             <dl>
               <dt>Economy Level:</dt>
               <p th:text="${planet.economyLevel}"></p>
@@ -109,7 +113,7 @@
               <dt>Description:</dt>
               <p
                 th:text="${planet.description}"
-                style="inline-size: 700px; word-wrap: break-word"
+                style="inline-size: 600px; word-wrap: break-word"
               ></p>
               <dt>Population:</dt>
               <p th:text="${planet.population}"></p>
@@ -117,7 +121,13 @@
               <p th:text="${planet.naturalResources}"></p>
               <dt>Size:</dt>
               <p th:text="${planet.size}"></p>
-            <button th:onclick="|closeA('${planet.planetId}')|">Close</button>
+              <button
+                class="button-54"
+                role="button"
+                th:onclick="|closeA('${planet.planetId}')|"
+              >
+                Close
+              </button>
             </dl>
           </div>
         </div>
