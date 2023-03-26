@@ -85,27 +85,6 @@ h3 {
   text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
-.planetinfo {
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  left: -1000px;
-  width: 700px;
-  height: 500px;
-  display: none;
-  border-style: solid;
-  padding: 20px;
-  border-radius: 1;
-  background: white;
-  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
-  box-shadow: 20px 20px #7F7FFF;
-  transition: all 0.4s ease;
-}
-
-.planetinfo:hover {
-  border-radius: 0% 0% 50% 50% / 0% 0% 5% 5%;
-  box-shadow: 10px 10px #7F7FFF;
-}
 
 .button-54 {
   font-family: "Open Sans", sans-serif;

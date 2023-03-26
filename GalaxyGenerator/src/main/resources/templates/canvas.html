@@ -86,7 +86,24 @@
             th:text="${planet.name}"
             th:onclick="|showPlanet('${planet.planetId}')|"
           ></button>
-          <div th:id="'planet'+${planet.planetId}" class="planetinfo">
+          <div
+            th:id="'planet'+${planet.planetId}"
+            style="
+              top: 50%;
+              left: 50%;
+              position: absolute;
+              left: -1000px;
+              width: 700px;
+              height: 500px;
+              display: none;
+              border-style: solid;
+              padding: 20px;
+              border-radius: 1;
+              background: white;
+              border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+              box-shadow: 20px 20px #7f7fff;
+            "
+          >
             <h3 th:text="${planet.name}" class="planetname"></h3>
             <dl>
               <dt>Economy Level:</dt>
@@ -96,7 +113,7 @@
               <dt>Description:</dt>
               <p
                 th:text="${planet.description}"
-                style="inline-size: 660px; word-wrap: break-word"
+                style="inline-size: 600px; word-wrap: break-word"
               ></p>
               <dt>Population:</dt>
               <p th:text="${planet.population}"></p>
