@@ -8,10 +8,17 @@
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap"
       rel="stylesheet"
-      th:href="@{'css/style.css'}"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{'css/style.css'}" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script
       type="text/javascript"
@@ -28,7 +35,7 @@
           background-image: url('https://imageio.forbes.com/specials-images/imageserve/5ed68e8310716f0007411996/0x0.jpg?format=jpg&width=1200');
           background-position: center;
           width: 70%;
-          height: 720px;
+          height: 1000px;
           float: left;
         "
       >
@@ -46,41 +53,82 @@
           th:styleappend="|left: ${starSystem.location[0]*10}px; top: ${starSystem.location[1]*10}px|"
           th:onclick="|show('${starSystem.starsystemId}')|"
         >
-          <img
-            th:src="${'images/GStar.png'}"
-            width="30px"
-            height="30px"
-          />
+          <img th:src="${'images/GStar.png'}" width="30px" height="30px" />
         </button>
       </div>
       <div
         th:id="'div'+${starSystem.starsystemId}"
         th:each="starSystem : ${listStarSystems}"
-        style="position: absolute; right: 10%; display: none; top: 10rem"
+        style="position: relative; right: 5%; display: none; float: right"
       >
-        <h2>Star Name Here</h2>
-        <p>Some stats here.</p>
+        <div style="text-align: center">
+          <h3 th:text="${starSystem.name}"></h3>
+          <dl>
+            <dt>Economy Level:</dt>
+            <dd th:text="${starSystem.economyLevel}"></dd>
+            <dt>Government:</dt>
+            <dd th:text="${starSystem.goverment}"></dd>
+            <dt>Population:</dt>
+            <dd th:text="${starSystem.population}"></dd>
+            <dt>Space Resources:</dt>
+            <dd th:text="${starSystem.spaceResources}"></dd>
+            <dt>Type:</dt>
+            <dd th:text="${starSystem.type}"></dd>
+          </dl>
+        </div>
         <div
-          style="position: relative; text-align: center"
+          style="text-align: center"
           th:each="planet : ${starSystem.planets}"
         >
           <button
             class="button-30"
             role="button"
             th:text="${planet.name}"
-            th:data-url="@{http://localhost:8080/planet/{id}(id=${planet.planetId})}"
-            onclick="window.open(this.getAttribute('data-url'))"
+            th:onclick="|showPlanet('${planet.planetId}')|"
+          ></button>
+          <div
+            th:id="'planet'+${planet.planetId}"
+            style="
+              top: 50%;
+              left: 50%;
+              position: absolute;
+              left: -1000px;
+              width: 700px;
+              height: 500px;
+              display: none;
+              border-style: solid;
+              background-color: white;
+            "
           >
-            hello
-          </button>
+            <h3 th:text="${planet.name}"></h3>
+            <dl>
+              <dt>Economy Level:</dt>
+              <p th:text="${planet.economyLevel}"></p>
+              <dt>Economy Type:</dt>
+              <p th:text="${planet.economyType}"></p>
+              <dt>Description:</dt>
+              <p
+                th:text="${planet.description}"
+                style="inline-size: 700px; word-wrap: break-word"
+              ></p>
+              <dt>Population:</dt>
+              <p th:text="${planet.population}"></p>
+              <dt>Natural Resources:</dt>
+              <p th:text="${planet.naturalResources}"></p>
+              <dt>Size:</dt>
+              <p th:text="${planet.size}"></p>
+            <button th:onclick="|closeA('${planet.planetId}')|">Close</button>
+            </dl>
+          </div>
         </div>
       </div>
     </div>
+
     <script>
+      //Function to show buttons of planets
       function show(id) {
         var size = document.querySelector("#size").dataset.size;
         var x = document.getElementById("div" + id);
-        console.log(id);
         if (x.style.display == "none") {
           x.style.display = "inline-block";
         } else {
@@ -89,9 +137,25 @@
         for (var i = 1; i <= size; i++) {
           if (i == id) continue;
           var y = document.getElementById("div" + i);
-          console.log(i);
           y.style.display = "none";
         }
+      }
+
+      //Function to show planet's info
+      function showPlanet(id) {
+        var x = document.getElementById("planet" + id);
+        if (x.style.display == "none") {
+          x.style.display = "inline";
+          x.style.position = "absolute";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      //Function to close box
+      function closeA(id) {
+        var x = document.getElementById("planet" + id);
+        x.style.display = "none";
       }
     </script>
   </body>
