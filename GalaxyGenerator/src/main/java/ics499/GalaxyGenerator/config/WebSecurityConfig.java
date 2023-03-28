@@ -19,7 +19,7 @@ public class WebSecurityConfig { // this class is needed for authentication
     http
         .authorizeHttpRequests((requests) -> requests
             // the line below will make any access to /planets need to be logged in first
-            // .requestMatchers("/planets").authenticated()
+            .requestMatchers("/planets", "/canvas", "/generator").authenticated()
             .anyRequest().permitAll()) // anything is permit (does not require log in)
         .formLogin((form) -> form
             .defaultSuccessUrl("/home") // return to home after sucessful login

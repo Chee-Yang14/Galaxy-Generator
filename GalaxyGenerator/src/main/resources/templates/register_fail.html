@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Registration Success</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/webjars/bootstrap/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container text-center">
+      <h3>Email/username is taken</h3>
+      <h4>redirect after 3 seconds</h4>
+      <script>
+        var countdown = setTimeout(function() {
+            window.location="/register"
+        }, 3000);
+      </script>
+      <h5>Or</h5>
+      <h5><a th:href="@{/register}">Click here to go back</a></h5>
+    </div>
+  </body>
+</html>

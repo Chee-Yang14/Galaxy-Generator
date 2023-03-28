@@ -49,7 +49,13 @@ public class AppController {
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Password encoder
     String encodedPassword = passwordEncoder.encode(user.getPassword());
     user.setPassword(encodedPassword);
-    userRepo.save(user);
+    try {
+    	userRepo.save(user);
+    }
+    catch (Exception e) {
+    	return "register_fail";
+    }
+    
     return "register_success"; // returns register_sucess.html
   }
 
