@@ -13,30 +13,38 @@
       type="text/javascript"
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
+    <link rel="stylesheet" th:href="@{'css/style.css'}" />
     <title>Home page</title>
   </head>
   <body>
-    <h1 class="text-center">Welcome!</h1>
-    <br />
-    <br />
-    <div sec:authorize="!isAuthenticated()">
-      <h4 class="text-center">
-        Click <a th:href="@{/login}">here</a> to login.
-      </h4>
-      <h4 class="text-center">
-        Click <a th:href="@{/register}">here</a> to register.
-      </h4>
+    <div class="topnav">
+      <a class="active" th:href="@{/}">Home</a>
+      <a th:href="@{/generator}">Generate a Universe</a>
+      <a th:href="@{/canvas}">Map of Star Systems</a>
+      <a th:href="@{/about}">About</a>
     </div>
-    <div sec:authorize="isAuthenticated()">
-      <h4 class="text-center">
-        Click <a th:href="@{/planets}">here</a> to see list of planets.
-      </h4>
-      <h4 class="text-center">
-        Click <a th:href="@{/canvas}">here</a> to see map of star systems.
-      </h4>
-      <h4 class="text-center">
-        Click <a th:href="@{/generator}">here</a> to generate a universe.
-      </h4>
-    </div>
+    
+      <h1 class="text-center" >Welcome!</h1>
+      <br />
+      <br />
+      <div sec:authorize="!isAuthenticated()">
+        <h4 class="text-center">
+          Click <a th:href="@{/login}">here</a> to login.
+        </h4>
+        <h4 class="text-center">
+          Click <a th:href="@{/register}">here</a> to register.
+        </h4>
+      </div>
+      <div sec:authorize="isAuthenticated()">
+        <h4 class="text-center">
+          Click <a th:href="@{/planets}">here</a> to see list of planets.
+        </h4>
+        <h4 class="text-center">
+          Click <a th:href="@{/canvas}">here</a> to see map of star systems.
+        </h4>
+        <h4 class="text-center">
+          Click <a th:href="@{/generator}">here</a> to generate a universe.
+        </h4>
+      </div>
   </body>
 </html>

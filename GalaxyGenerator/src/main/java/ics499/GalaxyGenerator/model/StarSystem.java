@@ -40,7 +40,7 @@ public class StarSystem {
 	private Universe u;
 	private Random random = new Random();
 	private String name;
-	private StarType type;
+	private String type;
 	private String goverment;
 	private long population;
 	private int economyLevel;
@@ -61,7 +61,7 @@ public class StarSystem {
 	 * @param planets         determine the planets that orbit this starsystem.
 	 * @param location		  determine this star system location in the universe. 
 	 */
-	public StarSystem(Integer id, String name, StarType type, String goverment, long population, int economyLevel,
+	public StarSystem(Integer id, String name, String type, String goverment, long population, int economyLevel,
 			int spaceResources,
 			List<Planet> planets, int[] location) {
 		this.starsystemId = id;
@@ -228,24 +228,31 @@ public class StarSystem {
 	 * M  what ever is left
 	 * @return the star type
 	 */
-	public StarType createStarType() {
+	public String createStarType() {
 		int starTableRoll = random.nextInt(1000); // The real probabilities of the star types can be found here
-		StarType type = null;
+		String type = "";
 		// https://en.wikipedia.org/wiki/Stellar_classification
 		if (starTableRoll < 450) { // I have fudged the numbers a little bit for a bir more even a spread.
-			type = StarType.M;
+			// type = StarType.M;
+			type = "M";
 		} else if (starTableRoll < 750) {
-			type = StarType.K;
+			// type = StarType.K;
+			type = "K";
 		} else if (starTableRoll < 900) {
-			type = StarType.G;
+			// type = StarType.G;
+			type = "G";
 		} else if (starTableRoll < 950) {
-			type = StarType.F;
+			// type = StarType.F;
+			type = "F";
 		} else if (starTableRoll < 990) {
-			type = StarType.A;
+			// type = StarType.A;
+			type = "A";
 		} else if (starTableRoll < 996) {
-			type = StarType.B;
+			// type = StarType.B;
+			type = "B";
 		} else {
-			type = StarType.O;
+			// type = StarType.O;
+			type = "O";
 		}
 		return type;
 	}
@@ -340,12 +347,12 @@ public class StarSystem {
 		this.name = name;
 	}
 
-	public StarType getType() {
+	public String getType() {
 		return this.type;
 	}
 
-	public void setType(StarType type) {
-		this.type = type;
+	public void setType(String string) {
+		this.type = string;
 	}
 
 	public String getGoverment() {

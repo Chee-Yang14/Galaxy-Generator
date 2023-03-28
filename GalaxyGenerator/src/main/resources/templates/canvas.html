@@ -45,15 +45,25 @@
           th:inline="javascript"
           style="
             position: absolute;
-            height: 1px;
-            width: 1px;
+            height: 0px;
+            width: 0px;
             padding: 0px;
             background-size: cover;
           "
           th:styleappend="|left: ${starSystem.location[0]*10}px; top: ${starSystem.location[1]*10}px|"
           th:onclick="|show('${starSystem.starsystemId}')|"
         >
-          <img th:src="${'images/GStar.png'}" width="30px" height="30px" />
+          <div th:switch="${starSystem.type}">
+            <img th:case="'A'" th:src="${'images/AStar.png'}" width="30px" height="30px" />
+            <img th:case="'B'" th:src="${'images/BStar.png'}" width="30px" height="30px" />
+            <img th:case="'F'" th:src="${'images/FStar.png'}" width="30px" height="30px" />
+            <img th:case="'G'" th:src="${'images/GStar.png'}" width="30px" height="30px" />
+            <img th:case="'K'" th:src="${'images/KStar.png'}" width="30px" height="30px" />
+            <img th:case="'M'" th:src="${'images/MStar.png'}" width="30px" height="30px" />
+            <img th:case="'O'" th:src="${'images/OStar.png'}" width="30px" height="30px" />
+            <!-- <img th:case="*" th:src="${'images/KStar.png'}" width="30px" height="30px" /> -->
+          </div>
+          <div th:text="${starSystem.type}">Al</div>
         </button>
       </div>
       <div
