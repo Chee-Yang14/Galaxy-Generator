@@ -66,9 +66,10 @@ public class AppController {
     return "planets";
   }
 
-  @GetMapping("/canvas")
-  public String listStarSystems(Model model) {
-    List<StarSystem> listStarSystems = starSystemRepo.findAll();
+  @GetMapping("/canvas/{id}")
+  public String listStarSystems(@PathVariable(value = "id") Integer universeId, Model model) {
+    Universe universeWithId = universeRepo.findById(universeId).get();
+    List<StarSystem> listStarSystems = universeWithId.getStarSystem();
     model.addAttribute("listStarSystems", listStarSystems);
     return "canvas";
   }
