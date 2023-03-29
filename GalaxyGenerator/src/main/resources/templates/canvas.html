@@ -54,13 +54,13 @@
           th:onclick="|show('${starSystem.starsystemId}')|"
         >
           <div th:switch="${starSystem.type}">
-            <img th:case="'A'" th:src="${'images/AStar.png'}" width="30px" height="30px" />
-            <img th:case="'B'" th:src="${'images/BStar.png'}" width="30px" height="30px" />
-            <img th:case="'F'" th:src="${'images/FStar.png'}" width="30px" height="30px" />
-            <img th:case="'G'" th:src="${'images/GStar.png'}" width="30px" height="30px" />
-            <img th:case="'K'" th:src="${'images/KStar.png'}" width="30px" height="30px" />
-            <img th:case="'M'" th:src="${'images/MStar.png'}" width="30px" height="30px" />
-            <img th:case="'O'" th:src="${'images/OStar.png'}" width="30px" height="30px" />
+            <img th:case="'A'" th:src="${'/images/AStar.png'}" width="30px" height="30px" />
+            <img th:case="'B'" th:src="${'/images/BStar.png'}" width="30px" height="30px" />
+            <img th:case="'F'" th:src="${'/images/FStar.png'}" width="30px" height="30px" />
+            <img th:case="'G'" th:src="${'/images/GStar.png'}" width="30px" height="30px" />
+            <img th:case="'K'" th:src="${'/images/KStar.png'}" width="30px" height="30px" />
+            <img th:case="'M'" th:src="${'/images/MStar.png'}" width="30px" height="30px" />
+            <img th:case="'O'" th:src="${'/images/OStar.png'}" width="30px" height="30px" />
             <!-- <img th:case="*" th:src="${'images/KStar.png'}" width="30px" height="30px" /> -->
           </div>
         </button>
