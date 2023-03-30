@@ -37,6 +37,7 @@ public class Universe {
 
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<StarSystem> starSystem = new ArrayList<StarSystem>();
+  private List<StarSystem> capitals = new ArrayList<StarSystem>();
   @Transient
   private int size;
   private GalaxyShape shape;
@@ -65,8 +66,28 @@ public class Universe {
     generateNames(1000);
     this.universeId = rand.nextInt(9000) + 1000;
     for (int i = 0; i < this.size; i++) {
-      starSystem.add(StarSystem.generate(this));
+    	StarSystem newSystem = (StarSystem.generate(this));
+    	if(i < Math.sqrt(this.size)) {
+    		newSystem.setCapital(true);
+    		capitals.add(newSystem);
+    	}
+      starSystem.add(newSystem);
     }
+    for(int i = 0; i<starSystem.size(); i++) {
+    	if(starSystem.get(i).isCapital()) {
+    		
+    	}else {
+    		starSystem.get(i).setVassalTo(capitals.get(0));
+    		for(int j = 1; j < capitals.size(); j++) {
+    			if(starSystem.get(i).getInfluence(capitals.get(j)) > starSystem.get(i).getInfluence(starSystem.get(i).getVassalTo())) {
+    				starSystem.get(i).setVassalTo(capitals.get(j));
+    			}
+    		}
+    	}
+    }
+    
+    
+    
   }
 
   public Universe() {

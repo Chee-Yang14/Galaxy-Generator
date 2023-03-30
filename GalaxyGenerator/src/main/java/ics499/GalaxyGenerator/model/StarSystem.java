@@ -38,6 +38,8 @@ public class StarSystem {
 
 	@Transient
 	private Universe u;
+	private boolean capital;
+	private StarSystem vassalTo;
 	private Random random = new Random();
 	private String name;
 	private String type;
@@ -330,6 +332,18 @@ public class StarSystem {
 		}
 		return name;
 	}
+	
+	public double getDistance(StarSystem s) {
+		int[] c = s.getLocation();
+		double dist = Math.sqrt((c[0] - location[0])*(c[0] - location[0]) + (c[1] - location[1])*(c[1] - location[1]));
+		return dist;
+		
+	}
+	
+	public double getInfluence(StarSystem s) {
+		double influence = s.getEconomyLevel() - getDistance(s) * getDistance(s);
+		return influence;
+	}
 
 	public Integer getStarsystemId() {
 		return this.starsystemId;
@@ -421,6 +435,22 @@ public class StarSystem {
 
 	public void setUniverse(Universe u) {
 		this.u = u;
+	}
+
+	public boolean isCapital() {
+		return capital;
+	}
+
+	public void setCapital(boolean capital) {
+		this.capital = capital;
+	}
+
+	public StarSystem getVassalTo() {
+		return vassalTo;
+	}
+
+	public void setVassalTo(StarSystem vassalTo) {
+		this.vassalTo = vassalTo;
 	}
 
 }
