@@ -95,12 +95,38 @@ public class PlanetController {
   public ResponseEntity<?> update(@RequestBody Planet planetToUpdate, @PathVariable Integer id) {
     try {
       Planet existedPlanet = repo.findById(id).get();
-
+      int i = 0;
+      List<StarSystem> starSystems = starSystemRepo.findAll();
+	  for (i = 0; i < starSystems.size(); i++) {
+		  List<Planet> planets = starSystems.get(i).getPlanets();
+		  if (planets.contains(existedPlanet)) {
+			  break;
+		  }
+	  }
+	  
       existedPlanet.setSize(planetToUpdate.getSize());
-      existedPlanet.setEconomyLevel(planetToUpdate.getEconomyLevel());
+      if (planetToUpdate.getEconomyLevel() != existedPlanet.getEconomyLevel()) {
+    	  int econLevel = starSystems.get(i).getEconomyLevel();
+    	  econLevel -= existedPlanet.getEconomyLevel();
+    	  econLevel += planetToUpdate.getEconomyLevel();
+    	  starSystems.get(i).setEconomyLevel(econLevel);
+    	  existedPlanet.setEconomyLevel(planetToUpdate.getEconomyLevel());
+      }
       existedPlanet.setLocation(planetToUpdate.getLocation());
-      existedPlanet.setNaturalResources(planetToUpdate.getNaturalResources());
-      existedPlanet.setPopulation(planetToUpdate.getPopulation());
+      if (planetToUpdate.getNaturalResources() != existedPlanet.getNaturalResources()) {
+    	  int naturalResource = starSystems.get(i).getSpaceResources();
+    	  naturalResource -= existedPlanet.getNaturalResources();
+    	  naturalResource += planetToUpdate.getNaturalResources();
+    	  starSystems.get(i).setSpaceResources(naturalResource);
+    	  existedPlanet.setNaturalResources(planetToUpdate.getNaturalResources());
+      }
+      if (planetToUpdate.getPopulation() != existedPlanet.getPopulation()) {
+    	  long population = starSystems.get(i).getPopulation();
+		  population -= existedPlanet.getPopulation();
+		  population += planetToUpdate.getPopulation();
+		  starSystems.get(i).setPopulation(population);
+    	  existedPlanet.setPopulation(planetToUpdate.getPopulation());
+      }
       existedPlanet.setName(planetToUpdate.getName());
 
       repo.save(existedPlanet);
