@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.thymeleaf.engine.AttributeName;
 
 import ics499.GalaxyGenerator.model.Planet;
 import ics499.GalaxyGenerator.model.StarSystem;
@@ -50,12 +51,11 @@ public class AppController {
     String encodedPassword = passwordEncoder.encode(user.getPassword());
     user.setPassword(encodedPassword);
     try {
-    	userRepo.save(user);
+      userRepo.save(user);
+    } catch (Exception e) {
+      return "register_fail";
     }
-    catch (Exception e) {
-    	return "register_fail";
-    }
-    
+
     return "register_success"; // returns register_sucess.html
   }
 
@@ -70,7 +70,10 @@ public class AppController {
   public String listStarSystems(@PathVariable(value = "id") Integer universeId, Model model) {
     Universe universeWithId = universeRepo.findById(universeId).get();
     List<StarSystem> listStarSystems = universeWithId.getStarSystem();
+    List<Universe> universes = universeRepo.findAll();
+    model.addAttribute("listUniverse", universes);
     model.addAttribute("listStarSystems", listStarSystems);
+    model.addAttribute("currentUniverse", universeWithId);
     return "canvas";
   }
 
