@@ -75,7 +75,7 @@ public class Universe {
     }
     for(int i = 0; i<starSystem.size(); i++) {
     	if(starSystem.get(i).isCapital()) {
-    		
+    		starSystem.get(i).setVassalTo(starSystem.get(i));
     	}else {
     		starSystem.get(i).setVassalTo(capitals.get(0));
     		for(int j = 1; j < capitals.size(); j++) {
