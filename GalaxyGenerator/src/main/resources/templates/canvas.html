@@ -155,12 +155,11 @@
     <script >
       
       function increment(id) {
-              var url = document.getElementById('nextUniverse').href;
               var size = document.querySelector("#size2").dataset.size;
               var increUrlPart1 = 'http://localhost:8080/canvas/';
               var increParameter = parseInt(id);
 
-              if (increParameter<size) {
+              if (increParameter<size && increParameter != size) {
                 increParameter += 1;
               }
 
@@ -170,7 +169,6 @@
             }
 
       function decrement(id) {
-        var url = document.getElementById('nextUniverse').href;
         var size = document.querySelector("#size2").dataset.size;
         var decreUrlPart1 = 'http://localhost:8080/canvas/';
         var decreParameter = parseInt(id);
