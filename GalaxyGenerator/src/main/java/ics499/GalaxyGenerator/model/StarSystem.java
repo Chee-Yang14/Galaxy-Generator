@@ -38,7 +38,11 @@ public class StarSystem {
 
 	@Transient
 	private Universe u;
+	
+	@Transient
 	private boolean capital;
+	
+	@Transient
 	private StarSystem vassalTo;
 	private Random random = new Random();
 	private String name;
