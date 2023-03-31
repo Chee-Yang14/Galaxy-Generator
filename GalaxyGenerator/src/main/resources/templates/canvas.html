@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
+  <head >
     <meta charset="ISO-8859-1" />
     <title>All star systems</title>
     <link
@@ -143,6 +143,7 @@
       </div>
       <div id="size2" th:attr="data-size=${listUniverse.size()}">
         <a href="http://localhost:8080/canvas/1" id="nextUniverse"></a>
+        <h1 th:text="'Universe '+${currentUniverse.universeId}"></h1>
         <button style="width: 70px; height: 50px; position: absolute"th:onclick="|increment('${currentUniverse.universeId}')|">  next</button>
         <button
           style="width: 70px; height: 50px; position: absolute; right: 0;"
