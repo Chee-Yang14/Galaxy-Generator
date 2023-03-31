@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head >
+  <head>
     <meta charset="ISO-8859-1" />
     <title>All star systems</title>
     <link
@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700;900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -25,8 +25,8 @@
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
   </head>
-  <body >
-    <div >
+  <body>
+    <div>
       <div
         id="size"
         th:attr="data-size=${listStarSystems.size()}"
@@ -54,13 +54,48 @@
           th:onclick="|show('${starSystem.starsystemId}')|"
         >
           <div th:switch="${starSystem.type}">
-            <img th:case="'A'" th:src="${'/images/AStar.png'}" width="30px" height="30px" />
-            <img th:case="'B'" th:src="${'/images/BStar.png'}" width="30px" height="30px" />
-            <img th:case="'F'" th:src="${'/images/FStar.png'}" width="30px" height="30px" />
-            <img th:case="'G'" th:src="${'/images/GStar.png'}" width="30px" height="30px" />
-            <img th:case="'K'" th:src="${'/images/KStar.png'}" width="30px" height="30px" />
-            <img th:case="'M'" th:src="${'/images/MStar.png'}" width="30px" height="30px" />
-            <img th:case="'O'" th:src="${'/images/OStar.png'}" width="30px" height="30px" />
+            <img
+              th:case="'A'"
+              th:src="${'/images/AStar.png'}"
+              width="30px"
+              height="30px"
+            />
+            <img
+              th:case="'B'"
+              th:src="${'/images/BStar.png'}"
+              width="30px"
+              height="30px"
+            />
+            <img
+              th:case="'F'"
+              th:src="${'/images/FStar.png'}"
+              width="30px"
+              height="30px"
+            />
+            <img
+              th:case="'G'"
+              th:src="${'/images/GStar.png'}"
+              width="30px"
+              height="30px"
+            />
+            <img
+              th:case="'K'"
+              th:src="${'/images/KStar.png'}"
+              width="30px"
+              height="30px"
+            />
+            <img
+              th:case="'M'"
+              th:src="${'/images/MStar.png'}"
+              width="30px"
+              height="30px"
+            />
+            <img
+              th:case="'O'"
+              th:src="${'/images/OStar.png'}"
+              width="30px"
+              height="30px"
+            />
             <!-- <img th:case="*" th:src="${'images/KStar.png'}" width="30px" height="30px" /> -->
           </div>
         </button>
@@ -71,6 +106,9 @@
         style="position: relative; right: 5%; display: none; float: right"
       >
         <div style="text-align: center">
+          <br />
+          <br />
+          <br />
           <h3 th:text="${starSystem.name}"></h3>
           <dl>
             <dt>Economy Level:</dt>
@@ -141,44 +179,54 @@
           </div>
         </div>
       </div>
-      <div id="size2" th:attr="data-size=${listUniverse.size()}">
+      <div id="size2" th:attr="data-size=${listUniverse.size()}" style="height: 200px">
         <a href="http://localhost:8080/canvas/1" id="nextUniverse"></a>
-        <h1 th:text="'Universe '+${currentUniverse.universeId}"></h1>
-        <button style="width: 70px; height: 50px; position: absolute"th:onclick="|increment('${currentUniverse.universeId}')|">  next</button>
+        <h1 th:text="'Universe '+${currentUniverse.universeId}" ></h1>
         <button
-          style="width: 70px; height: 50px; position: absolute; right: 0;"
+          class="button-30"
+          role="button"
+          style="width: 70px; height: 50px; position: absolute"
+          th:onclick="|increment('${currentUniverse.universeId}')|"
+        >
+          next
+        </button>
+        <button
+          class="button-30"
+          role="button"
+          style="width: 70px; height: 50px; position: absolute; right: 0"
           th:onclick="|decrement('${currentUniverse.universeId}')|"
         >
           back
         </button>
       </div>
-  </div>
-    <script >
-      
+    </div>
+    <script>
       function increment(id) {
-              var size = document.querySelector("#size2").dataset.size;
-              var increUrlPart1 = 'http://localhost:8080/canvas/';
-              var increParameter = parseInt(id);
+        var size = document.querySelector("#size2").dataset.size;
+        var increUrlPart1 = "http://localhost:8080/canvas/";
+        var increParameter = parseInt(id);
 
-              if (increParameter<size && increParameter != size) {
-                increParameter += 1;
-              }
+        if (increParameter < size && increParameter != size) {
+          increParameter += 1;
+        }
 
-              var newURL = increUrlPart1 +  increParameter;
-              document.getElementById('nextUniverse').href = newURL;
-              window.location = newURL;
-            }
+        var newURL = increUrlPart1 + increParameter;
+        document.getElementById("nextUniverse").href = newURL;
+        window.location = newURL;
+      }
 
       function decrement(id) {
         var size = document.querySelector("#size2").dataset.size;
-        var decreUrlPart1 = 'http://localhost:8080/canvas/';
+        var decreUrlPart1 = "http://localhost:8080/canvas/";
         var decreParameter = parseInt(id);
-        if(decreParameter>1){decreParameter -= 1;}
-        
+        if (decreParameter > 1) {
+          decreParameter -= 1;
+        }
+
         var newURL = decreUrlPart1 + decreParameter;
-        document.getElementById('nextUniverse').href = newURL;
+        document.getElementById("nextUniverse").href = newURL;
         window.location = newURL;
-     }
+      }
 
       //Function to show buttons of planets
       function show(id) {
