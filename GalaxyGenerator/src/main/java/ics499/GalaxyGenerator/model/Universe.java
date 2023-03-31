@@ -37,6 +37,7 @@ public class Universe {
 
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<StarSystem> starSystem = new ArrayList<StarSystem>();
+  @Transient
   private List<StarSystem> capitals = new ArrayList<StarSystem>();
   @Transient
   private int size;
