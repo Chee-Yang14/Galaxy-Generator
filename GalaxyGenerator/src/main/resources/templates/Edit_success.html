@@ -15,11 +15,11 @@
       <h3>You will be directed back in 3 seconds</h3>
       <script>
         var countdown = setTimeout(function() {
-            window.location="/canvas/1"
+            window.location=window.history.go(-2);
         }, 3000);
       </script>
       <h4>or</h4>
-      <h4><a th:href="@{/canvas/1}">Click here to go back to canvas</a></h4>
+      <h4><a href="#" onclick="window.history.go(-2);">Click here to go back to canvas</a></h4>
     </div>
   </body>
 </html>
