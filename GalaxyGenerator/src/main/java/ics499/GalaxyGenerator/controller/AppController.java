@@ -3,12 +3,15 @@ package ics499.GalaxyGenerator.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.thymeleaf.engine.AttributeName;
 
@@ -29,6 +32,8 @@ public class AppController {
   PlanetRepository planetRepo;
   @Autowired
   StarSystemRepository starSystemRepo;
+  @Autowired
+  StarSystemController starSystemController;
   @Autowired
   UniverseRepository universeRepo;
 
@@ -113,4 +118,24 @@ public class AppController {
     universeRepo.save(newUniverse);
     return "generate_success";
   }
+  
+  @GetMapping("/StarSystemEditPage/{id}")
+  public String starSystemPage(@PathVariable(value = "id") Integer starSystemId, Model model) {
+	StarSystem starSystem = starSystemRepo.findById(starSystemId).get();
+	model.addAttribute("starSystem", starSystem);
+	return "Starsystem_PUT";
+  }
+  
+  @PostMapping("/starSystemEdit/{id}")
+  public String starSystemEdit(StarSystem starSystem, Model model) {
+	  ResponseEntity response = starSystemController.update(starSystem, starSystem.getStarsystemId());
+	  model.addAttribute("starsystemID", starSystem.getStarsystemId());
+	  if (response.getStatusCode() == HttpStatus.OK) {
+		  return "Edit_success";
+	  }
+	  return "Edit_fail";
+  }
+  
+  
+  
 }
