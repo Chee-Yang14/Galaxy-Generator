@@ -84,6 +84,17 @@
             <dt>Type:</dt>
             <dd th:text="${starSystem.type}"></dd>
           </dl>
+          <div style="position: absolute; left: 135px; top: 120px">
+	          <form th:action="'/StarSystemEditPage/'+${starSystem.starsystemId}" method="get">
+	          	<button 
+	          		style="background-color:white; border-color:black; 
+	          			color:black; width: 60px; height: 45px;"
+	          		role = "button"
+	          		class="btn btn-primary" 
+	          		th:text="edit">
+	          	</button>
+	          </form>
+	      </div>
         </div>
         <div
           style="text-align: center"
