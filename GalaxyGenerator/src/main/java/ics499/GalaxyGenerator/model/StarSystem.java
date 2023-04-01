@@ -42,8 +42,11 @@ public class StarSystem {
 	@Transient
 	private boolean capital;
 	
-	@Transient
-	private StarSystem vassalTo;
+	//@Transient
+	//private StarSystem vassalTo;
+	
+	//private int liegeSystemID;
+	private String liegeSystemName;
 	private Random random = new Random();
 	private String name;
 	private String type;
@@ -448,13 +451,31 @@ public class StarSystem {
 	public void setCapital(boolean capital) {
 		this.capital = capital;
 	}
-
+/*
 	public StarSystem getVassalTo() {
 		return vassalTo;
 	}
 
 	public void setVassalTo(StarSystem vassalTo) {
 		this.vassalTo = vassalTo;
+		this.liegeSystemID = vassalTo.getStarsystemId();
+		this.liegeSystemName = vassalTo.getName();
+	}
+
+	public int getLiegeSystemID() {
+		return liegeSystemID;
+	}
+
+	public void setLiegeSystemID(int liegeSystemID) {
+		this.liegeSystemID = liegeSystemID;
+	}
+*/
+	public String getLiegeSystemName() {
+		return liegeSystemName;
+	}
+
+	public void setLiegeSystemName(String liegeSystemName) {
+		this.liegeSystemName = liegeSystemName;
 	}
 
 }

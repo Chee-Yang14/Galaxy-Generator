@@ -37,8 +37,8 @@ public class Universe {
 
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<StarSystem> starSystem = new ArrayList<StarSystem>();
-  @Transient
-  private List<StarSystem> capitals = new ArrayList<StarSystem>();
+  //@Transient
+ // private List<StarSystem> capitals = new ArrayList<StarSystem>();
   @Transient
   private int size;
   private GalaxyShape shape;
@@ -66,24 +66,28 @@ public class Universe {
     this.names = new Stack<String>();
     generateNames(1000);
     this.universeId = rand.nextInt(9000) + 1000;
+    List<StarSystem> capitals = new ArrayList<StarSystem>();
     for (int i = 0; i < this.size; i++) {
     	StarSystem newSystem = (StarSystem.generate(this));
     	if(i < Math.sqrt(this.size)) {
+    		System.out.println(newSystem.isCapital());
     		newSystem.setCapital(true);
+    		System.out.println(newSystem.isCapital());
     		capitals.add(newSystem);
     	}
       starSystem.add(newSystem);
     }
     for(int i = 0; i<starSystem.size(); i++) {
     	if(starSystem.get(i).isCapital()) {
-    		starSystem.get(i).setVassalTo(starSystem.get(i));
+    		starSystem.get(i).setLiegeSystemName(capitals.get(i).getName());
     	}else {
-    		starSystem.get(i).setVassalTo(capitals.get(0));
+    		StarSystem frontrunner = capitals.get(0);
     		for(int j = 1; j < capitals.size(); j++) {
-    			if(starSystem.get(i).getInfluence(capitals.get(j)) > starSystem.get(i).getInfluence(starSystem.get(i).getVassalTo())) {
-    				starSystem.get(i).setVassalTo(capitals.get(j));
+    			if(starSystem.get(i).getInfluence(capitals.get(j)) > starSystem.get(i).getInfluence(frontrunner)) {
+    				frontrunner = capitals.get(j);
     			}
     		}
+    		starSystem.get(i).setLiegeSystemName(frontrunner.getName());
     	}
     }
     
