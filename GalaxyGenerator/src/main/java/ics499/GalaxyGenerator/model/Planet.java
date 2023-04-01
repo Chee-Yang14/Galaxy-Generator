@@ -33,7 +33,6 @@ public class Planet {
 	private long population;
 	private int naturalResources;
 	private int economyLevel;
-	private int[] location;
 	private String economyType;
 	private String description;
 	private String type;
@@ -53,7 +52,7 @@ public class Planet {
 	 * @param location         coordinate of where the planet is.
 	 */
 	public Planet(Integer id, String name, String type, String description, long population, int naturalResources,
-			int economyLevel, String economyType, int[] location) {
+			int economyLevel, String economyType) {
 		this.planetId = id;
 		this.name = name;
 		this.population = population;
@@ -503,14 +502,6 @@ public class Planet {
 	// this.economyType = economyType;
 	// }
 
-	public int[] getLocation() {
-		return this.location;
-	}
-
-	public void setLocation(int[] location) {
-		this.location = location;
-	}
-
 	public String getEconomyType() {
 		return economyType;
 	}
@@ -530,8 +521,8 @@ public class Planet {
 	@Override
 	public String toString() {
 		return "Planet [planetId=" + planetId + ", name=" + name + ", size=" + size + ", population=" + population
-				+ ", naturalResources=" + naturalResources + ", economyLevel=" + economyLevel + ", location="
-				+ Arrays.toString(location) + ", economyType=" + economyType + ", description=" + description
+				+ ", naturalResources=" + naturalResources + ", economyLevel=" + economyLevel +
+				", economyType=" + economyType + ", description=" + description
 				+ ", type=" + type + "]";
 	}
 }

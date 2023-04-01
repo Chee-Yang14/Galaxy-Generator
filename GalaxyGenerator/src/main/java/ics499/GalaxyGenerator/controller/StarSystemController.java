@@ -118,9 +118,6 @@ public class StarSystemController {
     	  existedStarSystem.setLocation(starSystemToUpdate.getLocation());
       }
       existedStarSystem.setName(starSystemToUpdate.getName());
-      existedStarSystem.setPopulation(starSystemToUpdate.getPopulation());
-      existedStarSystem.setSpaceResources(starSystemToUpdate.getSpaceResources());
-      existedStarSystem.setType(starSystemToUpdate.getType());
 
       repo.save(existedStarSystem);
       new ResponseEntity<>(HttpStatus.OK);

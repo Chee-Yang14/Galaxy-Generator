@@ -11,8 +11,5 @@ public class GalaxyGeneratorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GalaxyGeneratorApplication.class, args);
-
-		GalaxyShape s = GalaxyShape.SCATTER;
-		Universe universe = Universe.generate(0, 10, s.SCATTER);
 	}
 }

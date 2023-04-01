@@ -38,7 +38,6 @@ public class StarSystem {
 
 	@Transient
 	private Universe u;
-	
 	@Transient
 	private boolean capital;
 	
@@ -47,6 +46,7 @@ public class StarSystem {
 	
 	//private int liegeSystemID;
 	private String liegeSystemName;
+
 	private Random random = new Random();
 	private String name;
 	private String type;

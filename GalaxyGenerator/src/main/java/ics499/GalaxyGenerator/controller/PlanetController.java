@@ -112,7 +112,6 @@ public class PlanetController {
     	  starSystems.get(i).setEconomyLevel(econLevel);
     	  existedPlanet.setEconomyLevel(planetToUpdate.getEconomyLevel());
       }
-      existedPlanet.setLocation(planetToUpdate.getLocation());
       if (planetToUpdate.getNaturalResources() != existedPlanet.getNaturalResources()) {
     	  int naturalResource = starSystems.get(i).getSpaceResources();
     	  naturalResource -= existedPlanet.getNaturalResources();
