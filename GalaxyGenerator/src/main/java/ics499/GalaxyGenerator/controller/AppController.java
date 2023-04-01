@@ -31,6 +31,8 @@ public class AppController {
   @Autowired
   PlanetRepository planetRepo;
   @Autowired
+  PlanetController planetController;
+  @Autowired
   StarSystemRepository starSystemRepo;
   @Autowired
   StarSystemController starSystemController;
@@ -130,6 +132,23 @@ public class AppController {
   public String starSystemEdit(StarSystem starSystem, Model model) {
 	  ResponseEntity response = starSystemController.update(starSystem, starSystem.getStarsystemId());
 	  model.addAttribute("starsystemID", starSystem.getStarsystemId());
+	  if (response.getStatusCode() == HttpStatus.OK) {
+		  return "Edit_success";
+	  }
+	  return "Edit_fail";
+  }
+  
+  @GetMapping("/PlanetEditPage/{id}")
+  public String planetPage(@PathVariable(value = "id") Integer planetId, Model model) {
+	Planet planet = planetRepo.findById(planetId).get();
+	model.addAttribute("planet", planet);
+	return "PlanetEditPage";
+  }
+  
+  @PostMapping("/planetEdit/{id}")
+  public String planetEdit(Planet planet, Model model) {
+	  ResponseEntity response = planetController.update(planet, planet.getPlanetId());
+	  model.addAttribute("planetID", planet.getPlanetId());
 	  if (response.getStatusCode() == HttpStatus.OK) {
 		  return "Edit_success";
 	  }
