@@ -27,18 +27,23 @@
   </head>
   <body>
     <div>
+      <!-- Left div -->
       <div
         id="size"
-        th:attr="data-size=${listStarSystems.size()}"
+        th:attr="data-size=${listStarSystems.size()}, data-first=${listStarSystems[0].starsystemId}"
         style="
           position: relative;
-          background-image: url('https://imageio.forbes.com/specials-images/imageserve/5ed68e8310716f0007411996/0x0.jpg?format=jpg&width=1200');
+          background-color: black;
           background-position: center;
           width: 70%;
-          height: 1000px;
+          height: 300vh;
           float: left;
         "
       >
+        <div id="stars" style="position: absolute; left: -700px"></div>
+        <div id="stars2" style="position: absolute; left: -700px"></div>
+        <div id="stars3" style="position: absolute; left: -700px"></div>
+        <div id="stars4" style="position: absolute; left: -700px"></div>
         <button
           th:each="starSystem : ${listStarSystems}"
           type="button"
@@ -57,32 +62,32 @@
             <img
               th:case="'A'"
               th:src="${'/images/AStar.png'}"
-              width="30px"
-              height="30px"
+              width="70px;"
+              height="60px"
             />
             <img
               th:case="'B'"
               th:src="${'/images/BStar.png'}"
-              width="30px"
-              height="30px"
+              width="70px;"
+              height="60px"
             />
             <img
               th:case="'F'"
               th:src="${'/images/FStar.png'}"
-              width="30px"
-              height="30px"
+              width="70px;"
+              height="60px"
             />
             <img
               th:case="'G'"
               th:src="${'/images/GStar.png'}"
-              width="30px"
-              height="30px"
+              width="70px;"
+              height="60px"
             />
             <img
               th:case="'K'"
               th:src="${'/images/KStar.png'}"
-              width="30px"
-              height="30px"
+              width="70px;"
+              height="60px"
             />
             <img
               th:case="'M'"
@@ -100,16 +105,44 @@
           </div>
         </button>
       </div>
+      <!-- Right div -->
       <div
         th:id="'div'+${starSystem.starsystemId}"
         th:each="starSystem : ${listStarSystems}"
-        style="position: relative; right: 5%; display: none; float: right"
+        style="
+          position: absolute;
+          right: 5%;
+          display: none;
+          float: right;
+          background-color: white;
+        "
       >
+        <!-- Star system info  -->
         <div style="text-align: center">
           <br />
           <br />
           <br />
           <h3 th:text="${starSystem.name}"></h3>
+          <div>
+            <form
+              th:action="'/StarSystemEditPage/'+${starSystem.starsystemId}"
+              method="get"
+            >
+              <button
+                class="button-30"
+                role="button"
+                style="
+                  background-color: white;
+                  border-color: black;
+                  color: black;
+                  width: 60px;
+                  height: 45px;
+                "
+              >
+                Edit
+              </button>
+            </form>
+          </div>
           <dl>
             <dt>Economy Level:</dt>
             <dd th:text="${starSystem.economyLevel}"></dd>
@@ -118,25 +151,18 @@
             <dt>Population:</dt>
             <dd th:text="${starSystem.population}"></dd>
             <dt>Space Resources:</dt>
-            <dd th:text="${starSystem.spaceResources}"></dd> 
+            <dd th:text="${starSystem.spaceResources}"></dd>
             <dt>Type:</dt>
             <dd th:text="${starSystem.type}"></dd>
           </dl>
-          <div style="position: absolute; left: 125px; top: 182px">
-	          <form th:action="'/StarSystemEditPage/'+${starSystem.starsystemId}" method="get">
-	          	<button
-	          		class = "button-30" 
-	          		role = "button"
-	          		style="background-color:white; border-color:black; 
-	          			color:black; width: 60px; height: 45px;"
-	          		th:text="edit">
-	          	</button>
-	          </form>
-	      </div>
+          <!-- Edit star system -->
         </div>
+        <!-- Planet info -->
         <div
+          id="planetinfo"
           style="text-align: center"
           th:each="planet : ${starSystem.planets}"
+          th:attr="data-planetssize=${starSystem.planets.size()}, data-planetfirst=${starSystem.planets[0].planetId}"
         >
           <button
             class="button-30"
@@ -144,6 +170,7 @@
             th:text="${planet.name}"
             th:onclick="|showPlanet('${planet.planetId}')|"
           ></button>
+          <!-- Planet page -->
           <div
             th:id="'planet'+${planet.planetId}"
             style="
@@ -152,7 +179,7 @@
               position: absolute;
               left: -1000px;
               width: 700px;
-              height: 500px;
+              height: 550px;
               display: none;
               border-style: solid;
               padding: 20px;
@@ -163,22 +190,32 @@
             "
           >
             <h3 th:text="${planet.name}" class="planetname"></h3>
+            <div>
+              <!-- Edit button -->
+              <form
+                th:action="'/PlanetEditPage/'+${planet.planetId}"
+                method="get"
+              >
+                <button class="button-54" role="button">edit</button>
+              </form>
+            </div>
             <dl>
               <dt>Economy Level:</dt>
-              <p th:text="${planet.economyLevel}"></p>
+              <p class="text-center" th:text="${planet.economyLevel}"></p>
               <dt>Economy Type:</dt>
-              <p th:text="${planet.economyType}"></p>
+              <p class="text-center" th:text="${planet.economyType}"></p>
               <dt>Description:</dt>
               <p
+                class="text-center"
                 th:text="${planet.description}"
                 style="inline-size: 600px; word-wrap: break-word"
               ></p>
               <dt>Population:</dt>
-              <p th:text="${planet.population}"></p>
+              <p class="text-center" th:text="${planet.population}"></p>
               <dt>Natural Resources:</dt>
-              <p th:text="${planet.naturalResources}"></p>
+              <p class="text-center" th:text="${planet.naturalResources}"></p>
               <dt>Size:</dt>
-              <p th:text="${planet.size}"></p>
+              <p class="text-center" th:text="${planet.size}"></p>
               <button
                 class="button-54"
                 role="button"
@@ -186,38 +223,33 @@
               >
                 Close
               </button>
-              <div style="position: absolute; left: 210px; top: 423px">
-	              <form th:action="'/PlanetEditPage/'+${planet.planetId}" method="get">
-		              <button
-		                class="button-54"
-		                role="button"
-		              >
-		                edit
-		              </button>
-		          </form>
-		      </div>
             </dl>
           </div>
         </div>
       </div>
-      <div id="size2" th:attr="data-size=${listUniverse.size()}" style="height: 200px">
+      <!-- Universe # with next back button -->
+      <div
+        id="size2"
+        th:attr="data-size=${listUniverse.size()}"
+        style="height: 200px"
+      >
         <a href="http://localhost:8080/canvas/1" id="nextUniverse"></a>
-        <h1 th:text="'Universe '+${currentUniverse.universeId}" ></h1>
+        <h2 th:text="'Universe '+${currentUniverse.universeId}" style="position: absolute;right: 10%; top: 12px"></h2>
         <button
           class="button-30"
           role="button"
-          style="width: 70px; height: 50px; position: absolute"
-          th:onclick="|increment('${currentUniverse.universeId}')|"
+          style="width: 70px; height: 50px; position: absolute; "
+          th:onclick="|decrement('${currentUniverse.universeId}')|"
         >
-          next
+          back
         </button>
         <button
           class="button-30"
           role="button"
-          style="width: 70px; height: 50px; position: absolute; right: 0"
-          th:onclick="|decrement('${currentUniverse.universeId}')|"
+          style="width: 70px; height: 50px; position: absolute; right: 0;"
+          th:onclick="|increment('${currentUniverse.universeId}')|"
         >
-          back
+          next
         </button>
       </div>
     </div>
@@ -252,13 +284,15 @@
       //Function to show buttons of planets
       function show(id) {
         var size = document.querySelector("#size").dataset.size;
+        var first = document.querySelector("#size").dataset.first;
         var x = document.getElementById("div" + id);
         if (x.style.display == "none") {
           x.style.display = "inline-block";
         } else {
           x.style.display = "none";
         }
-        for (var i = 1; i <= size; i++) {
+
+        for (var i = first; i < size + first - 2; i++) {
           if (i == id) continue;
           var y = document.getElementById("div" + i);
           y.style.display = "none";
@@ -267,6 +301,8 @@
 
       //Function to show planet's info
       function showPlanet(id) {
+        // var size = document.querySelector("#planetinfo").dataset.planetssize;
+        // var first = document.querySelector("#planetinfo").dataset.planetfirst;
         var x = document.getElementById("planet" + id);
         if (x.style.display == "none") {
           x.style.display = "inline";
@@ -274,6 +310,12 @@
         } else {
           x.style.display = "none";
         }
+
+        // for (var i = first ; i < size + first - 1; i++) {
+        //   if (i == id) continue;
+        //   var y = document.getElementById("planet" + id);
+        //   y.style.display = "none";
+        // }
       }
 
       //Function to close box
