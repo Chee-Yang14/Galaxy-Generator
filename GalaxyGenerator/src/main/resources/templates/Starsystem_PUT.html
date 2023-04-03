@@ -8,6 +8,7 @@
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" th:href="@{'/css/form.css'}" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script
       type="text/javascript"
@@ -15,9 +16,9 @@
     ></script>
   </head>
   <body>
-    <div class="container text-center">
+    <div class="container text-center form">
       <div>
-        <h1 th:text="'Starsystem '+${starSystem.name}"></h1>
+        <h1 th:text="${starSystem.name}"></h1>
       </div>
       <form
         th:action="'/starSystemEdit/'+${starSystem.starsystemId}"
@@ -27,32 +28,32 @@
       >
         <div class="m-3">
           <div class="form-group row">
-            <label class="col-4 col-form-label">id: </label>
+            <label class="col-4 col-form-label font-weight-bold">Id: </label>
             <div class="col-8">
               <input th:field="*{starsystemId}" class="form-control" required />
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-4 col-form-label">name: </label>
+            <label class="col-4 col-form-label font-weight-bold">Name: </label>
             <div class="col-8">
               <input th:field="*{name}" class="form-control" required />
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-4 col-form-label">Economy Level: </label>
+            <label class="col-4 col-form-label font-weight-bold">Economy Level: </label>
             <div class="col-8">
               <input th:field="*{economyLevel}" class="form-control" required />
             </div>
           </div>
           
           <div class="form-group row">
-            <label class="col-4 col-form-label">Government: </label>
+            <label class="col-4 col-form-label font-weight-bold">Government: </label>
             <div class="col-8">
               <input th:field="*{goverment}" class="form-control" required />
             </div>
           </div>
           <div>
-            <button type="submit" class="btn btn-primary">submit</button>
+            <button type="submit" class="btn btn-primary font-weight-bold">Submit</button>
           </div>
         </div>
       </form>
