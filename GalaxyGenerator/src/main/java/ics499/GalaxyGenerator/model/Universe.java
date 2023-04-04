@@ -47,7 +47,7 @@ public class Universe {
   private Random rand = new Random();
   @Transient
   private int seed;
-
+  private String universeName;
   /**
    * this is the default constructor
    * it generate a universe with the given parameters.
@@ -65,6 +65,7 @@ public class Universe {
     this.size = size;
     this.names = new Stack<String>();
     generateNames(1000);
+    this.universeName = names.pop();
     this.universeId = rand.nextInt(9000) + 1000;
     List<StarSystem> capitals = new ArrayList<StarSystem>();
     for (int i = 0; i < this.size; i++) {
@@ -213,4 +214,12 @@ public class Universe {
   public void setSize(int size) {
     this.size = size;
   }
+
+public String getUniverseName() {
+	return universeName;
+}
+
+public void setUniverseName(String universeName) {
+	this.universeName = universeName;
+}
 }
