@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
->
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
+    <style>
+     .container {
+  height: 200px;
+  position: relative;
+  margin: 0;
+  top: 50%;
+  left: 23%;
+  border: 3px solid black;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+      </style>
     <link
       rel="stylesheet"
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
-    />
+      />
     <script
       type="text/javascript"
-      src="/webjars/bootstrap/js/bootstrap.min.js"
-    ></script>
+      src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" th:href="@{'css/style.css'}" />
     <title>Home page</title>
   </head>
@@ -25,13 +42,23 @@
     <h1 class="text-center">Welcome!</h1>
     <br />
     <br />
-    <div sec:authorize="!isAuthenticated()">
-      <h4 class="text-center">
-        Click <a th:href="@{/login}">here</a> to login.
-      </h4>
-      <h4 class="text-center">
-        Click <a th:href="@{/register}">here</a> to register.
-      </h4>
+    <div class="container" sec:authorize="!isAuthenticated()">
+      <div class="center">
+      <button
+          style="color: black;"
+          class="button-30"
+            role="button"
+            onclick="window.location.href='http://localhost:8080/login'">
+            login
+          </button>
+      <button
+          style="color: black;"
+          class="button-30"
+            role="button"
+            onclick="window.location.href='http://localhost:8080/register'">
+            register
+          </button>
+        </div>
     </div>
     <div sec:authorize="isAuthenticated()">
       <div id="logout" ; style="position: absolute; left: 1666px; top: 0px">
@@ -39,15 +66,30 @@
           <input type="submit" class="btn btn-primary" value="Logout" />
         </form>
       </div>
-      <h4 class="text-center">
-        Click <a th:href="@{/planets}">here</a> to see list of planets.
-      </h4>
-      <h4 class="text-center">
-        Click <a th:href="@{/canvas/1}">here</a> to see map of universe 1.
-      </h4>
-      <h4 class="text-center">
-        Click <a th:href="@{/generator}">here</a> to generate a universe.
-      </h4>
+      <div  class="container">
+        <div class="center">
+          <button
+          class="button-54"
+            role="button"
+            onclick="window.location.href='http://localhost:8080/planets'">
+            Click to see list of planets
+          </button>
+  
+          <button
+          class="button-54"
+          role="button"
+          onclick="window.location.href='http://localhost:8080/canvas/1'">
+            Click to see universe 1
+          </button>
+          <button
+          class="button-54"
+            role="button"
+            onclick="window.location.href='http://localhost:8080/generator'">
+            Click to generate universe
+          </button>
+        </div>
+      </div>
     </div>
+
   </body>
 </html>
