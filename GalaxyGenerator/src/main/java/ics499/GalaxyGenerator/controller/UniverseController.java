@@ -34,7 +34,8 @@ public class UniverseController {
 
 	@Autowired
 	private UniverseRepository repo;
-
+	@Autowired
+	private AppController appController;
 	/**
 	 * This method find all the universe in the repository
 	 * Upon GET request
@@ -78,6 +79,7 @@ public class UniverseController {
 	@PostMapping("/adduniverse")
 	public Universe create() {
 		Universe universeToAdd = new Universe(GalaxyShape.CLUSTER, new Random(), 5, 6);
+		appController.count += 1;
 		return repo.saveAndFlush(universeToAdd);
 	}
 
