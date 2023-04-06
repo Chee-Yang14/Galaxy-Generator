@@ -1,0 +1,18 @@
+Universe
+shape= SCATTER, size= 0, universeName= Litba
+StarSystem
+name= Newta, capital= false, liegeSystemName= Newta, type= M, goverment= Oligarchy, population= 4221467295, economyLevel= 3, spaceResources= 206, location= [69, 40]
+Planet
+name= Twi, size= 204039992, population= 4221467295, naturalResources= 206, economyLevel= 3, economyType= Traditional economic system, description= Twi is reasonably well known for Satcoruje snake steak but plagued by cannibal tribes, type= Arean
+StarSystem
+name= Deepshin, capital= false, liegeSystemName= Deepshin, type= M, goverment= Theocracy, population= 9197024947, economyLevel= 25, spaceResources= 2465, location= [38, 86]
+Planet
+name= Conmeljra, size= 136040114, population= 2584762166, naturalResources= 141, economyLevel= 2, economyType= Market economic system, description= This world is  well known for lethal Twidelto brew, type= Ymirian
+Planet
+name= Britashin, size= 123499466, population= 1975991456, naturalResources= 338, economyLevel= 5, economyType= Command economic system, description= The planet Britashin is a dull place, type= Barren
+Planet
+name= Bri, size= 112056922, population= 1120569220, naturalResources= 648, economyLevel= 5, economyType= Market economic system, description= Bri is  famous for its exotic cuisine, type= Cytherian
+Planet
+name= Kaeldrodale, size= 191190204, population= 1334754254, naturalResources= 445, economyLevel= 6, economyType= Traditional economic system, description= This planet is very noted for its exciting eagles cutlet and Shirashdel evil gargle blasters, type= Ymirian
+Planet
+name= Bres, size= 114786729, population= 2180947851, naturalResources= 893, economyLevel= 7, economyType= Traditional economic system, description= The world Bres is reasonably noted for Casin ultimate tennis but plagued by cannibal tribes, type= Arean
