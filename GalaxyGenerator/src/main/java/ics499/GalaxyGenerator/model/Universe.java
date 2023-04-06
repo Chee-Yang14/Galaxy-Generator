@@ -199,8 +199,7 @@ public class Universe {
 
   @Override
   public String toString() {
-    return "Universe [universeId=" + universeId + ", seed=" + seed + ", shape=" + shape + ", starSystem=" + starSystem
-        + ", names=" + names + "]";
+    return "shape= " + shape + ", size= " + size + ", universeName= " + universeName;
   }
 
   public void addStarSystem(StarSystem starSystemToAdd) {
