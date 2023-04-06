@@ -55,7 +55,7 @@ public class AppController {
   @Autowired
   UniverseRepository universeRepo;
 
-  public int count = 0;
+  private boolean input = true;
   
   @GetMapping("")
   public String homePage() { // this returns home.html
@@ -136,7 +136,6 @@ public class AppController {
   public String addUniverse(Universe universe) {
     Universe newUniverse = universe.generate(6, universe.getSize(), universe.getShape());
     universeRepo.save(newUniverse);
-    count += 1;
     return "generate_success";
   }
   
@@ -219,105 +218,111 @@ public class AppController {
 	List<Planet> planets = new ArrayList<>();
 	StarSystem starsystem = new StarSystem();
 	Planet planet = new Planet();
+	String fName = file.getOriginalFilename();
 	try {
-		String line;
-		BufferedReader buffer = new BufferedReader(new InputStreamReader(file.getInputStream()));
-		while ((line = buffer.readLine()) != null) {
-			String[] lineArr = line.split(",");
-			switch (lineArr[0]) {
-				case "Universe":
-					if ((line = buffer.readLine()) != null) {
-						lineArr = line.split(",");
-						lineArr[0] = lineArr[0].replace("shape= ", "");
-						if (lineArr[0].equals("CLUSTER")) {
-							universe.setShape(GalaxyShape.CLUSTER);
+		if (fName.contains(".txt")) {
+			input = true;
+			String line;
+			BufferedReader buffer = new BufferedReader(new InputStreamReader(file.getInputStream()));
+			while ((line = buffer.readLine()) != null) {
+				String[] lineArr = line.split(",");
+				switch (lineArr[0]) {
+					case "Universe":
+						if ((line = buffer.readLine()) != null) {
+							lineArr = line.split(",");
+							lineArr[0] = lineArr[0].replace("shape= ", "");
+							if (lineArr[0].equals("CLUSTER")) {
+								universe.setShape(GalaxyShape.CLUSTER);
+							}
+							else if(lineArr[0].equals("SCATTER")) {
+								universe.setShape(GalaxyShape.SCATTER);
+							}
+							else {
+								universe.setShape(GalaxyShape.SCATTERED_CLUSTER);
+							}
+							lineArr[1] = lineArr[1].replace(" size= ", "");
+							System.out.println(lineArr[1]);
+							universe.setSize(Integer.parseInt(lineArr[1]));
+							lineArr[2] = lineArr[2].replace(" universeName= ", "");
+							universe.setUniverseName(lineArr[2]);
 						}
-						else if(lineArr[0].equals("SCATTER")) {
-							universe.setShape(GalaxyShape.SCATTER);
+						break;
+					case "StarSystem":
+						starsystem = new StarSystem();
+						planets = new ArrayList<>();
+						if ((line = buffer.readLine()) != null) {
+							lineArr = line.split(",");
+							lineArr[0] = lineArr[0].replace("name= ", "");
+							starsystem.setName(lineArr[0]);
+							lineArr[1] = lineArr[1].replace(" capital= ", "");
+							if (lineArr[1].equals("true")) {
+								starsystem.setCapital(true);
+							}
+							else {
+								starsystem.setCapital(false);
+							}
+							lineArr[2] = lineArr[2].replace(" liegeSystemName= ", "");
+							starsystem.setLiegeSystemName(lineArr[2]);
+							lineArr[3] = lineArr[3].replace(" type= ", "");
+							starsystem.setType(lineArr[3]);
+							lineArr[4] = lineArr[4].replace(" goverment= ", "");
+							starsystem.setGoverment(lineArr[4]);
+							lineArr[5] = lineArr[5].replace(" population= ", "");
+							starsystem.setPopulation(Long.parseLong(lineArr[5]));
+							lineArr[6] = lineArr[6].replace(" economyLevel= ", "");
+							starsystem.setEconomyLevel(Integer.parseInt(lineArr[6]));
+							lineArr[7] = lineArr[7].replace(" spaceResources= ", "");
+							starsystem.setSpaceResources(Integer.parseInt(lineArr[7]));
+							int[] location = {1,2};
+							lineArr[8] = lineArr[8].replace(" location= [", "");
+							location[0] = Integer.parseInt(lineArr[8]);
+							lineArr[9] = lineArr[9].replace(" ", "");
+							lineArr[9] = lineArr[9].replace("]", "");
+							location[1] = Integer.parseInt(lineArr[9]);
+							starsystem.setLocation(location);
+							starSystems.add(starsystem);
 						}
-						else {
-							universe.setShape(GalaxyShape.SCATTERED_CLUSTER);
+						break;
+					case "Planet":
+						planet = new Planet();
+						if ((line = buffer.readLine()) != null) {
+							lineArr = line.split(",");
+							lineArr[0] = lineArr[0].replace("name= ", "");
+							planet.setName(lineArr[0]);
+							lineArr[1] = lineArr[1].replace(" size= ", "");
+							planet.setSize(Integer.parseInt(lineArr[1]));
+							lineArr[2] = lineArr[2].replace(" population= ", "");
+							planet.setPopulation(Long.parseLong(lineArr[2]));
+							lineArr[3] = lineArr[3].replace(" naturalResources= ", "");
+							planet.setNaturalResources(Integer.parseInt(lineArr[3]));
+							lineArr[4] = lineArr[4].replace(" economyLevel= ", "");
+							planet.setEconomyLevel(Integer.parseInt(lineArr[4]));
+							lineArr[5] = lineArr[5].replace(" economyType= ", "");
+							planet.setEconomyType(lineArr[5]);
+							lineArr[6] = lineArr[6].replace(" description= ", "");
+							planet.setDescription(lineArr[6]);
+							lineArr[7] = lineArr[7].replace(" type= ", "");
+							planet.setType(lineArr[7]);
+							planets.add(planet);
+							starsystem.setPlanets(planets);
 						}
-						lineArr[1] = lineArr[1].replace(" size= ", "");
-						System.out.println(lineArr[1]);
-						universe.setSize(Integer.parseInt(lineArr[1]));
-						lineArr[2] = lineArr[2].replace(" universeName= ", "");
-						universe.setUniverseName(lineArr[2]);
-					}
-					break;
-				case "StarSystem":
-					starsystem = new StarSystem();
-					planets = new ArrayList<>();
-					if ((line = buffer.readLine()) != null) {
-						lineArr = line.split(",");
-						lineArr[0] = lineArr[0].replace("name= ", "");
-						starsystem.setName(lineArr[0]);
-						lineArr[1] = lineArr[1].replace(" capital= ", "");
-						if (lineArr[1].equals("true")) {
-							starsystem.setCapital(true);
-						}
-						else {
-							starsystem.setCapital(false);
-						}
-						lineArr[2] = lineArr[2].replace(" liegeSystemName= ", "");
-						starsystem.setLiegeSystemName(lineArr[2]);
-						lineArr[3] = lineArr[3].replace(" type= ", "");
-						starsystem.setType(lineArr[3]);
-						lineArr[4] = lineArr[4].replace(" goverment= ", "");
-						starsystem.setGoverment(lineArr[4]);
-						lineArr[5] = lineArr[5].replace(" population= ", "");
-						starsystem.setPopulation(Long.parseLong(lineArr[5]));
-						lineArr[6] = lineArr[6].replace(" economyLevel= ", "");
-						starsystem.setEconomyLevel(Integer.parseInt(lineArr[6]));
-						lineArr[7] = lineArr[7].replace(" spaceResources= ", "");
-						starsystem.setSpaceResources(Integer.parseInt(lineArr[7]));
-						int[] location = {1,2};
-						lineArr[8] = lineArr[8].replace(" location= [", "");
-						location[0] = Integer.parseInt(lineArr[8]);
-						lineArr[9] = lineArr[9].replace(" ", "");
-						lineArr[9] = lineArr[9].replace("]", "");
-						location[1] = Integer.parseInt(lineArr[9]);
-						starsystem.setLocation(location);
-						starSystems.add(starsystem);
-					}
-					break;
-				case "Planet":
-					planet = new Planet();
-					if ((line = buffer.readLine()) != null) {
-						lineArr = line.split(",");
-						lineArr[0] = lineArr[0].replace("name= ", "");
-						planet.setName(lineArr[0]);
-						lineArr[1] = lineArr[1].replace(" size= ", "");
-						planet.setSize(Integer.parseInt(lineArr[1]));
-						lineArr[2] = lineArr[2].replace(" population= ", "");
-						planet.setPopulation(Long.parseLong(lineArr[2]));
-						lineArr[3] = lineArr[3].replace(" naturalResources= ", "");
-						planet.setNaturalResources(Integer.parseInt(lineArr[3]));
-						lineArr[4] = lineArr[4].replace(" economyLevel= ", "");
-						planet.setEconomyLevel(Integer.parseInt(lineArr[4]));
-						lineArr[5] = lineArr[5].replace(" economyType= ", "");
-						planet.setEconomyType(lineArr[5]);
-						lineArr[6] = lineArr[6].replace(" description= ", "");
-						planet.setDescription(lineArr[6]);
-						lineArr[7] = lineArr[7].replace(" type= ", "");
-						planet.setType(lineArr[7]);
-						planets.add(planet);
-						starsystem.setPlanets(planets);
-					}
-					break;
+						break;
+				}
 			}
+			if (starSystems.size() != 0) {
+				universe.setStarSystem(starSystems);
+				universeRepo.saveAndFlush(universe);
+			}
+			buffer.close();
+		} 
+		else {
+			input = false;
+			return "upload_fail";
 		}
-		if (starSystems.size() != 0) {
-			universe.setStarSystem(starSystems);
-			universeRepo.saveAndFlush(universe);
-		}
-		buffer.close();
-		
 	} 
 	catch (Exception e) {
 		// TODO Auto-generated catch block
 	}
-	count += 1;
 	return "upload_success";
   }
   
@@ -328,9 +333,7 @@ public class AppController {
   
   @GetMapping("/checkUpload") 
   public String checkUpload(){
-	  List<Universe> universes = universeRepo.findAll();
-	  if (count > universes.size()) {
-		  count = universes.size();
+	  if (!input) {
 		  return "upload_fail";
 	  }
 	  return "upload_success";
