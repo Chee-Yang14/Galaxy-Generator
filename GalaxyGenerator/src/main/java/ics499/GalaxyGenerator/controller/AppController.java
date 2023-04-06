@@ -55,7 +55,7 @@ public class AppController {
   @Autowired
   UniverseRepository universeRepo;
 
-  private boolean input = true;
+  private boolean input = false;
   
   @GetMapping("")
   public String homePage() { // this returns home.html
@@ -182,6 +182,7 @@ public class AppController {
 	  File actualFile = new File(directory, fileName);
 	  try {
 		FileWriter writer = new FileWriter(actualFile, false);
+		writer.write("SaveFile\r\n");
 		writer.write("Universe\r\n");
 		writer.write(universe.toString() + "\r\n");
 		List<StarSystem> starSystems = universe.getStarSystem();
@@ -221,9 +222,14 @@ public class AppController {
 	String fName = file.getOriginalFilename();
 	try {
 		if (fName.contains(".txt")) {
-			input = true;
+			System.out.println("run in here!");
 			String line;
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(file.getInputStream()));
+			line = buffer.readLine();
+			if (line.contains("SaveFile") == false || line == null || file.isEmpty()) {
+				input = false;
+				return "upload_fail";
+			}
 			while ((line = buffer.readLine()) != null) {
 				String[] lineArr = line.split(",");
 				switch (lineArr[0]) {
@@ -310,6 +316,7 @@ public class AppController {
 				}
 			}
 			if (starSystems.size() != 0) {
+				input = true;
 				universe.setStarSystem(starSystems);
 				universeRepo.saveAndFlush(universe);
 			}
