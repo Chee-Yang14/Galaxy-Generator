@@ -31,7 +31,7 @@ import jakarta.persistence.Transient;
 public class Universe {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @SequenceGenerator(name = "universe", allocationSize = 1)
   private Integer universeId;
 
