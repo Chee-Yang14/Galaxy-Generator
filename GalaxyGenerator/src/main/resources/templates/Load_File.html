@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<style>
+  		body{
+	    background-image: url('images/uploadBackground.gif');
+	    background-size: cover;
+	    height: 100vh;
+	    padding:0;
+	    margin:0;
+		}
+	</style>
+    <meta charset="ISO-8859-1" />
+    <title>uploadFile</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/webjars/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" th:href="@{'/css/style.css'}" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/webjars/bootstrap/js/bootstrap.min.js"
+    ></script>
+  </head>
+  <body>
+  	<div style="
+  		position: absolute;
+	  	width: 600px;
+	  	right: 32%;
+	    top: 355px;
+	    height: 200px;
+	    border: thin solid white;
+	    background-image: url('images/uploadDivBackground.gif')">
+	    <h1 style = "color: blue; text-align: center"> Upload Saved Universe </h1>
+
+	  	<input id="fileID" type="file"  name="uploadFile" style = "color: white; position: absolute; right: 25%" />
+		<button id="upload-button" style = "position: absolute; right: 30%" onclick="upload()"> load </button>
+		<script>
+		async function upload() {
+		  let data = new FormData(); 
+		  data.append("file", fileID.files[0]);
+		  let response = await fetch('/universeLoad', {
+		    method: "POST", 
+		    body: data
+		  }); 
+		
+		  if (response.status == 200) {
+		    window.location.href='http://localhost:8080/checkUpload';
+		  }
+		  else {
+		  	alert("unable to load universe from file.");
+		  }
+		}
+		</script>
+		
+	</div>
+  </body>
+</html>
