@@ -37,6 +37,8 @@ public class Planet {
 	private String description;
 	private String type;
 
+	
+
 	/**
 	 * This the constructor of the planet class
 	 * where it create the planet that has all these param.
@@ -518,11 +520,19 @@ public class Planet {
 		this.description = description;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	@Override
 	public String toString() {
-		return "Planet [planetId=" + planetId + ", name=" + name + ", size=" + size + ", population=" + population
-				+ ", naturalResources=" + naturalResources + ", economyLevel=" + economyLevel +
-				", economyType=" + economyType + ", description=" + description
-				+ ", type=" + type + "]";
+		return "name= " + name + ", size= " + size + ", population= " + population
+				+ ", naturalResources= " + naturalResources + ", economyLevel= " + economyLevel +
+				", economyType= " + economyType + ", description= " + description
+				+ ", type= " + type;
 	}
 }

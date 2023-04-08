@@ -1,0 +1,35 @@
+SaveFile
+Universe
+shape= SCATTER, size= 0, universeName= Deeprash
+StarSystem
+name= Le, capital= false, liegeSystemName= Le, type= F, goverment= Socialism, population= 2318282340, economyLevel= 9, spaceResources= 486, location= [22, 40]
+Planet
+name= Deeplashen, size= 122014860, population= 2318282340, naturalResources= 486, economyLevel= 9, economyType= Market economic system, description= Deeplashen is a lonely planet, type= Barren
+StarSystem
+name= Sejshin, capital= false, liegeSystemName= Sejshin, type= K, goverment= Monarchy, population= 15822050548, economyLevel= 30, spaceResources= 3145, location= [42, 31]
+Planet
+name= Sal, size= 102116799, population= 1123284789, naturalResources= 586, economyLevel= 9, economyType= Traditional economic system, description= The world Sal is  fabled for its fabulous leopard steak, type= Ymirian
+Planet
+name= Hur'coru, size= 116913542, population= 1753703130, naturalResources= 982, economyLevel= 5, economyType= Command economic system, description= The world Hur'coru is mostly well known for its exotic wildlife and its fabulous culture, type= Eucytherian
+Planet
+name= Kiin, size= 103656632, population= 1243879584, naturalResources= 385, economyLevel= 5, economyType= Market economic system, description= Kiin is a lonely planet, type= Barren
+Planet
+name= Cata, size= 121622925, population= 2675704350, naturalResources= 608, economyLevel= 8, economyType= Traditional economic system, description= Cata is  noted for its great dust clouds but scourged by alien invasion, type= Ymirian
+Planet
+name= Ame'corudra, size= 142521308, population= 1169030179, naturalResources= 461, economyLevel= 2, economyType= Traditional economic system, description= This planet is threatened by a deadly disease, type= Arean
+Planet
+name= Newcorudel, size= 218234681, population= 7856448516, naturalResources= 123, economyLevel= 1, economyType= Command economic system, description= The planet Newcorudel is a unremarkable place, type= Ymirian
+StarSystem
+name= Ame, capital= false, liegeSystemName= Sejshin, type= M, goverment= Democracy, population= 29289105396, economyLevel= 37, spaceResources= 2052, location= [56, 35]
+Planet
+name= Altsinse, size= 198206108, population= 6739007672, naturalResources= 445, economyLevel= 7, economyType= Market economic system, description= This world is ravaged by unpredictable nuclear war, type= Ymirian
+Planet
+name= Hur'kanje, size= 109869778, population= 1757916448, naturalResources= 423, economyLevel= 9, economyType= Command economic system, description= This world is mildly famous for its peculiar Sej banana plantations, type= Barren
+Planet
+name= Ledel, size= 109924589, population= 909262299, naturalResources= 520, economyLevel= 8, economyType= Command economic system, description= The world Ledel is reasonably famous for its exciting wildlife, type= Ymirian
+Planet
+name= Leladro, size= 246193752, population= 12309687600, naturalResources= 54, economyLevel= 1, economyType= Market economic system, description= The planet Leladro is scourged by asteroid, type= Barren
+Planet
+name= Saldelri, size= 128598441, population= 1442083332, naturalResources= 481, economyLevel= 8, economyType= Command economic system, description= Saldelri is mildly famous for its exciting culture, type= Ymirian
+Planet
+name= Hur, size= 185792365, population= 6131148045, naturalResources= 129, economyLevel= 4, economyType= Command economic system, description= This world is reasonably notable for its pink Huesinje Twiladro apple plantations, type= Arean

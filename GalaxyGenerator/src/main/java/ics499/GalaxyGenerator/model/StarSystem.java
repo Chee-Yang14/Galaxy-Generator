@@ -430,10 +430,10 @@ public class StarSystem {
 
 	@Override
 	public String toString() {
-		return "StarSystem [starsystemId=" + starsystemId + ", name=" + name + ", type=" + type
-				+ ", goverment=" + goverment + ", population=" + population + ", economyLevel=" + economyLevel
-				+ ", spaceResources=" + spaceResources + ", planets=" + planets + ", location="
-				+ Arrays.toString(location) + "]";
+		return "name= " + name + ", capital= " + isCapital() + ", liegeSystemName= " + liegeSystemName + ", type= " + type
+				+ ", goverment= " + goverment + ", population= " + population + ", economyLevel= " + economyLevel
+				+ ", spaceResources= " + spaceResources + ", location= "
+				+ Arrays.toString(location);
 	}
 
 	public Universe getUniverse() {

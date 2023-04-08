@@ -31,7 +31,7 @@ import jakarta.persistence.Transient;
 public class Universe {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @SequenceGenerator(name = "universe", allocationSize = 1)
   private Integer universeId;
 
@@ -199,8 +199,7 @@ public class Universe {
 
   @Override
   public String toString() {
-    return "Universe [universeId=" + universeId + ", seed=" + seed + ", shape=" + shape + ", starSystem=" + starSystem
-        + ", names=" + names + "]";
+    return "shape= " + shape + ", size= " + size + ", universeName= " + universeName;
   }
 
   public void addStarSystem(StarSystem starSystemToAdd) {

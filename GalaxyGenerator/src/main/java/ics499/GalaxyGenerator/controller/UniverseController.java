@@ -34,7 +34,6 @@ public class UniverseController {
 
 	@Autowired
 	private UniverseRepository repo;
-
 	/**
 	 * This method find all the universe in the repository
 	 * Upon GET request
