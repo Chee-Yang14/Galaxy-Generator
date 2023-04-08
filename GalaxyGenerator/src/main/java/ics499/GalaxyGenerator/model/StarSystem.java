@@ -320,9 +320,9 @@ public class StarSystem {
 		String name = "";
 		String[] firstSylable = { "Ame", "Shi", "Kiin", "Kael", "Sal", "Sale", "Her", "Hur", "Hue", "New",
 				"Old", "Bri", "Twi", "Kel", "Lit", "Le", "Lye", "Deep", "Dark", "Alt", "Ber", "Bres", "Sat", "Fal",
-				"Ka", "Ca", "Sej", "Con" };
+				"Ka", "Ca", "Sej", "Con", "Neu", "Neur", "Noc" };
 		String[] secondSylable = { "rash", "nar", "'kan", "kan", "sho", "del", "le", "la", "ta", "coru", "mel",
-				"'coru", "sin", "shin", "ba", "sed", "dro" };
+				"'coru", "sin", "shin", "ba", "sed", "dro", "eur","th" };
 		String[] thirdSylable = { "shin", "shen", "dale", "dreg", "je", "se", "ae", "te", "to", "toe", "ri",
 				"dro", "dra", "jra", "del", "rel", "ni" };
 
