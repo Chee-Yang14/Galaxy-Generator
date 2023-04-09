@@ -136,7 +136,7 @@ public class PlanetController {
     }
   }
 
-  /**
+    /**
    * this method delete a planet from the repository
    * it take an id and use it to find and delete a planet in the repositroy
    * 
@@ -172,5 +172,4 @@ public class PlanetController {
 	}
     repo.deleteById(planetId);
   }
-
 }

@@ -135,16 +135,37 @@
                   background-color: white;
                   border-color: black;
                   color: black;
-                  width: 60px;
+                  width: 70px;
                   height: 45px;
                 "
               >
                 Edit
               </button>
             </form>
+            <form
+              th:action="'/deletestarsystem/'+${starSystem.starsystemId}"
+              th:object="${starSystem}"
+              method="post"
+            >
+              <input type="hidden" name="_method" value="delete" />
+              <button
+                type="click"
+                class="button-30"
+                role="button"
+                style="
+                  width: 70px;
+                  border-color: black;
+                  color: black;
+                  background-color: white;
+                  height: 45px;
+                "
+              >
+                Delete
+              </button>
+            </form>
           </div>
           <dl>
-          	<dt>Liege System:</dt>
+            <dt>Liege System:</dt>
             <dd th:text="${starSystem.liegeSystemName}"></dd>
             <dt>Economy Level:</dt>
             <dd th:text="${starSystem.economyLevel}"></dd>
@@ -200,8 +221,20 @@
               >
                 <button class="button-54" role="button">edit</button>
               </form>
+              <!-- Delete button -->
+              <form
+                th:action="'/deleteplanet/'+${planet.planetId}"
+                th:object="${planet}"
+                method="post"
+                style="max-width: 600px; margin: 0 auto"
+              >
+                <input type="hidden" name="_method" value="delete" />
+                <button type="click" class="button-54" role="button">
+                  delete
+                </button>
+              </form>
             </div>
-            <br/>
+            <br />
             <dl>
               <dt>Economy Level:</dt>
               <p class="text-center" th:text="${planet.economyLevel}"></p>
@@ -237,23 +270,32 @@
         style="height: 200px"
       >
         <a href="http://localhost:8080/canvas/1" id="nextUniverse"></a>
-        <h2 th:text="'Universe '+${currentUniverse.universeId}" style="position: absolute;right: 10%; top: 12px"></h2>
+        <h2
+          th:text="'Universe '+${currentUniverse.universeId}"
+          style="position: absolute; right: 10%; top: 12px"
+        ></h2>
         <form
-        	th:action="'/universeSave/' + ${currentUniverse.universeId}"
-        	method = "get"
+          th:action="'/universeSave/' + ${currentUniverse.universeId}"
+          method="get"
         >
-		    <button
-		      class="button-30"
-		      role="button"
-		      style="position: absolute;right: 9.5%; top: 40px; width: 155px; height: 50px "
-		    >
-	        	save
-	    	</button>
-	    </form>
+          <button
+            class="button-30"
+            role="button"
+            style="
+              position: absolute;
+              right: 9.5%;
+              top: 40px;
+              width: 155px;
+              height: 50px;
+            "
+          >
+            save
+          </button>
+        </form>
         <button
           class="button-30"
           role="button"
-          style="width: 70px; height: 50px; position: absolute; "
+          style="width: 70px; height: 50px; position: absolute"
           th:onclick="|decrement('${currentUniverse.universeId}')|"
         >
           back
@@ -261,7 +303,7 @@
         <button
           class="button-30"
           role="button"
-          style="width: 70px; height: 50px; position: absolute; right: 0;"
+          style="width: 70px; height: 50px; position: absolute; right: 0"
           th:onclick="|increment('${currentUniverse.universeId}')|"
         >
           next
