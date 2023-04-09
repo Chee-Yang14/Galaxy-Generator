@@ -5,6 +5,10 @@
 >
   <head>
     <style>
+      body{
+	    background-image: url('images/background-gif.gif');
+	    background-size: cover;
+		}
       .container {
         height: 200px;
         position: relative;
@@ -57,7 +61,7 @@
         </div>
       </div>
     </div>
-    <h1 class="text-center">Welcome!</h1>
+    <h1 class="text-center" style="color: white;">Welcome!</h1>
     <br />
     <br />
     <div class="container" sec:authorize="!isAuthenticated()">
