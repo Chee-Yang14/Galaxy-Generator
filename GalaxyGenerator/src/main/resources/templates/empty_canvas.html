@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>All star systems</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/webjars/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{'/css/style.css'}" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/webjars/bootstrap/js/bootstrap.min.js"
+    ></script>
+  </head>
+  <body>
+    <div>
+      <!-- Left div -->
+      <div
+        id="size"
+        style="
+          position: relative;
+          background-color: black;
+          background-position: center;
+          width: 70%;
+          height: 100vh;
+          float: left;
+          background-image: url('images/background-gif.gif');
+          background-size: cover;
+        "
+      >
+      </div>
+      <!-- Right div -->
+      <div
+        style="
+          position: absolute;
+          right: 5%;
+          display: none;
+          float: right;
+          background-color: white;
+        "
+      >
+          </div>
+      <!-- Universe # with next back, save button -->
+      <div>
+        <form>
+	    </form>
+        <button
+          class="button-30"
+          role="button"
+          style="width: 70px; height: 50px; position: absolute; "
+        >
+          back
+        </button>
+        <button
+          class="button-30"
+          role="button"
+          style="width: 70px; height: 50px; position: absolute; right: 0;"
+        >
+          next
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
