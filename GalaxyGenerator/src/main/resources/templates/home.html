@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
   <head>
     <style>
-     .container {
-  height: 200px;
-  position: relative;
-  margin: 0;
-  top: 50%;
-  left: 23%;
-  border: 3px solid black;
-}
+      .container {
+        height: 200px;
+        position: relative;
+        margin: 0;
+        top: 50%;
+        left: 23%;
+        border: 3px solid black;
+      }
 
-.center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-      </style>
+      .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    </style>
     <link
       rel="stylesheet"
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
-      />
+    />
     <script
       type="text/javascript"
-      src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+      src="/webjars/bootstrap/js/bootstrap.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" th:href="@{'css/style.css'}" />
     <title>Home page</title>
   </head>
@@ -37,66 +43,82 @@
     <div class="topnav">
       <a class="active" th:href="@{/}">Home</a>
       <a th:href="@{/generator}">Generate a Universe</a>
-      <a th:href="@{/canvas/1}">Map of Universe #1</a>
+      <div class="dropdown1">
+        <button class="dropbtn1">
+          All Universes
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content1">
+          <a
+            th:each="universe : ${ListUniverses}"
+            th:href="@{'/canvas/' + ${universe.universeId}}"
+            th:text="${universe.universeName}"
+          ></a>
+        </div>
+      </div>
     </div>
     <h1 class="text-center">Welcome!</h1>
     <br />
     <br />
     <div class="container" sec:authorize="!isAuthenticated()">
       <div class="center">
-      <button
-          style="color: black;"
+        <button
+          style="color: black"
           class="button-30"
-            role="button"
-            onclick="window.location.href='http://localhost:8080/login'">
-            login
-          </button>
-      <button
-          style="color: black;"
+          role="button"
+          onclick="window.location.href='http://localhost:8080/login'"
+        >
+          login
+        </button>
+        <button
+          style="color: black"
           class="button-30"
-            role="button"
-            onclick="window.location.href='http://localhost:8080/register'">
-            register
-          </button>
-        </div>
+          role="button"
+          onclick="window.location.href='http://localhost:8080/register'"
+        >
+          register
+        </button>
+      </div>
     </div>
     <div sec:authorize="isAuthenticated()">
       <div id="logout" ; style="position: absolute; left: 1666px; top: 0px">
         <form action="/logout" method="post">
-          <input type="submit" class="btn btn-primary" value="Logout" />
+          <input type="hidden" class="btn btn-primary" value="Logout" />
+          <button class="button-30" style="width: 90px; height: 30px; right: 0%">Logout</button>
         </form>
       </div>
-      <div  class="container">
-        <div class="center">
+      <div class="container">
+        <div class="center" >
           <button
-          class="button-54"
-            role="button"
-            onclick="window.location.href='http://localhost:8080/planets'">
-            Click to see list of planets
-          </button>
-  
-          <button
-          class="button-54"
-          role="button"
-          onclick="window.location.href='http://localhost:8080/canvas/1'">
-            Click to see universe 1
-          </button>
-          <button
-          class="button-54"
-            role="button"
-            onclick="window.location.href='http://localhost:8080/generator'">
+            class="button-54"
+            role="button"style="margin:10px"
+            onclick="window.location.href='http://localhost:8080/generator'"
+          >
             Click to generate universe
           </button>
-          
-          <button
-          class="button-54"
+          <!-- <button
+            class="button-54"
             role="button"
-            onclick="window.location.href='http://localhost:8080/load'">
+            onclick="window.location.href='http://localhost:8080/canvas/1'"
+          >
+            Click to see universe from #1
+          </button> -->
+          <button
+            class="button-54"
+            role="button"style="margin:10px"
+            onclick="window.location.href='http://localhost:8080/planets'"
+          >
+            Click to see list of planets
+          </button>
+          <button
+            class="button-54"
+            role="button"style="margin:10px"
+            onclick="window.location.href='http://localhost:8080/load'"
+          >
             Click to load save file
           </button>
         </div>
       </div>
     </div>
-
   </body>
 </html>
