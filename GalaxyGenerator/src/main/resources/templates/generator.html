@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
+    <style>
+  		body{
+	    background-image: url('images/uploadBackground.gif');
+	    background-size: cover;
+	    height: 100vh;
+	    padding:0;
+	    margin:0;
+		}
+
+  
+	</style>
     <meta charset="ISO-8859-1" />
     <title>Sign Up</title>
     <link
@@ -15,7 +26,7 @@
     ></script>
   </head>
   <body>
-    <div class="container text-center">
+    <div style="color: white;" class="container text-center">
       <div>
         <h1>Universe Generator</h1>
       </div>
@@ -27,7 +38,7 @@
       >
         <div class="m-3">
           <div class="form-group row">
-            <label class="col-4 col-form-label" for="shapes">Shape</label>
+            <label style="color: white;" class="col-4 col-form-label" for="shapes">Shape</label>
             <div>
               <select name="shapes" th:field="*{shape}">
                 <option th:value="SCATTER">SCATTER</option>
@@ -38,7 +49,7 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-4 col-form-label">Number of Star Systems</label>
+            <label style="color: white;" class="col-4 col-form-label">Number of Star Systems</label>
             <div class="col-8">
               <input th:field="*{size}" class="form-control" />
             </div>
