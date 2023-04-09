@@ -101,6 +101,19 @@ public class AppController {
     model.addAttribute("currentUniverse", universeWithId);
     return "canvas";
   }
+  
+  @GetMapping("/canvas")
+  public String getCanvas(Model model) {
+	  List<Universe> universes = universeRepo.findAll();
+	  System.out.println(universes.size() == 0);
+	  System.out.println(universes == null);
+	  if (universes.size() == 0) {
+		  return "empty_canvas";
+	  }
+	  return listStarSystems(1, model);
+  }
+
+  
 
   /**
    * the method accept a http request to return all planets of a star system
