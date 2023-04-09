@@ -92,9 +92,9 @@ public class AppController {
 		} catch (Exception e) {
 			return "register_fail";
 		}
-
 		return "register_success"; // returns register_sucess.html
 	}
+
 
 	@GetMapping("/planets")
 	public String listPlanets(Model model) {
