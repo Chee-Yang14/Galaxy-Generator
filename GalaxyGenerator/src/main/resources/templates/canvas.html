@@ -54,16 +54,19 @@
             width: 0px;
             padding: 0px;
             background-size: cover;
+            
           "
           th:styleappend="|left: ${starSystem.location[0]*10}px; top: ${starSystem.location[1]*10}px|"
           th:onclick="|show('${starSystem.starsystemId}')|"
         >
+        
           <div th:switch="${starSystem.type}">
             <img
               th:case="'A'"
               th:src="${'/images/galaxy1.gif'}"
               width="70px;"
               height="60px"
+              
             />
             <img
               th:case="'B'"
@@ -84,6 +87,7 @@
               height="60px"
             />
             <img
+            class="starsys"
               th:case="'K'"
               th:src="${'/images/galaxy5.gif'}"
               width="70px;"
