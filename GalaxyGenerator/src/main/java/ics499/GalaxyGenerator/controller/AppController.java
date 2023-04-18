@@ -76,9 +76,10 @@ public class AppController {
 
 	@GetMapping("/register") // this returns register.html
 	public String register(Model model) {
-		model.addAttribute("user", new User()); // @ModelAttribute is an annotation that binds a method parameter or method
-																						// return value to a named model attribute, and then exposes it to a web
-																						// view.
+		model.addAttribute("user", new User()); // @ModelAttribute is an annotation that binds a method parameter or
+												// method
+												// return value to a named model attribute, and then exposes it to a web
+												// view.
 		return "register";
 	}
 
@@ -94,7 +95,6 @@ public class AppController {
 		}
 		return "register_success"; // returns register_sucess.html
 	}
-
 
 	@GetMapping("/planets")
 	public String listPlanets(Model model) {
@@ -346,6 +346,11 @@ public class AppController {
 		return "Load_File";
 	}
 
+	@GetMapping("/deleteUniverse")
+	public String checkDeleteUniverse() {
+		return "delete_Universe";
+	}
+
 	@GetMapping("/checkUpload")
 	public String checkUpload() {
 		if (!input) {
@@ -389,6 +394,19 @@ public class AppController {
 			}
 		}
 		planetRepo.deleteById(planetId);
+		return "delete";
+	}
+
+	@DeleteMapping("/deleteUniverse/{id}")
+	public String deleteUniverse(@PathVariable(value = "id") Integer universeId) {
+		List<Universe> universe = universeRepo.findAll();
+		boolean indicator = false;
+		for (int i = 0; i < universe.size(); i++) {
+			if (universe.get(i).getUniverseId() == universeId) {
+				universe.remove(i);
+			}
+		}
+		universeRepo.deleteById(universeId);
 		return "delete";
 	}
 
