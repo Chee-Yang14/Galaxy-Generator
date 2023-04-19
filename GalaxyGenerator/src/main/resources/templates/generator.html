@@ -1,56 +1,138 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
   <head>
-    <meta charset="ISO-8859-1" />
-    <title>Sign Up</title>
     <link
       rel="stylesheet"
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
     />
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script
       type="text/javascript"
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{'css/home.css'}" />
+    <!-- <link rel="stylesheet" th:href="@{'css/style.css'}" /> -->
+    <title>Home page</title>
   </head>
-  <body style ="background-image: url('images/Generator.jpg');
-	    background-size: cover;
-	    height: 100vh">
-	<div style="color: black; height: 20px; " class="container text-center">
-	  <div>
-	    <h1 style =" color: white">Universe Generator</h1>
-	  </div>
-	  <form
-	    th:action="@{/generateuniverse}"
-	    th:object="${universe}"
-	    method="post"
-	    style="max-width: 600px; margin: 0 auto"
-	  >
-	  <div class="m-3">
-	    <div class="form-group row">
-	      <label style="color: white;" class="col-4 col-form-label" for="shapes">Shape</label>
-	        <div>
-	          <select name="shapes" th:field="*{shape}">
-	            <option th:value="SCATTER">SCATTER</option>
-	            <option th:value="CLUSTER">CLUSTER</option>
-	            <option th:value="SCATTERED_CLUSTER">SCATTERED_CLUSTER</option>
-	          </select>
-	        </div>
-	    </div>
-	      <div class="form-group row">
-	        <label style="color: white;" class="col-4 col-form-label">Number of Star Systems</label>
-	          <div class="col-8">
-	            <input th:field="*{size}" class="form-control" />
-	          </div>
-	    </div>
-	    <div>
-	      <button type="submit" class="btn btn-primary">
-	        Create Universe
-	      </button>
-	    </div>
-	   </div>
-	 </form>
-   </div>
+  <body>
+    <div class="topnav">
+      <a class="active" th:href="@{/}">Home</a>
+      <a th:href="@{/generator}">Generate a Universe</a>
+      <div class="dropdown1">
+        <button class="dropbtn1">
+          All Universes
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content1">
+          <a
+            th:each="universe : ${ListUniverses}"
+            th:href="@{'/canvas/' + ${universe.universeId}}"
+            th:text="${universe.universeName}"
+          ></a>
+        </div>
+      </div>
+      <a
+        sec:authorize="!isAuthenticated()"
+        th:href="@{/login}"
+        style="position: absolute; left: 87%"
+        >Login</a
+      >
+      <a
+        sec:authorize="!isAuthenticated()"
+        th:href="@{/register}"
+        style="position: absolute; left: 93%"
+        >Register</a
+      >
+    </div>
+    <div style="position: relative">
+      <div
+        style="
+          background-image: url('images/frontheader.jpg');
+          background-repeat: no-repeat;
+          background-size: 100% 1000px;
+          height: 1000px;
+          width: 100%;
+        "
+      ></div>
+      <div class="background" style="position: absolute; height: 0px">
+        <div
+          class="text-center reveal"
+          style="
+            color: black;
+            background-color: white;
+            position: absolute;
+            top: -700px;
+            left: 28%;
+            width: 840px;
+            height: 300px;
+            padding-top: 10px;
+            border-radius: 25px;
+          "
+        >
+          <h3 style="margin-bottom: 15px; font-weight: 200">Universe Generator</h3>
+          <form
+	    	th:action="@{/generateuniverse}"
+	    	th:object="${universe}"
+	    	method="post"
+	    	style="max-width: 700px; margin: 0 auto"
+	  	  >
+	  		<div class="m-3">
+	    		<div class="form-group row">
+	      		<label style="color: black;" class="col-4 col-form-label" for="shapes">Shape</label>
+	       		<div>
+	          		<select name="shapes" th:field="*{shape}">
+	            	<option th:value="SCATTER">SCATTER</option>
+	            	<option th:value="CLUSTER">CLUSTER</option>
+	            	<option th:value="SCATTERED_CLUSTER">SCATTERED_CLUSTER</option>
+	          		</select>
+	       		</div>
+	    		</div>
+	      		<div class="form-group row">
+	        		<label style="color: black;" class="col-4 col-form-label">Number of Star Systems</label>
+	          			<div class="col-8">
+	            			<input th:field="*{size}" class="form-control" />
+	          			</div>
+	    		</div>
+	    		<div>
+	      			<button type="submit" class="btn btn-primary" style = "position:relative; left:300px; top:10px; width: 100px; height: 40px">
+	        			Create
+	      			</button>
+	    		</div>
+	   		</div>
+	 	</form>
+        </div>
+      </div>
+    </div>
+    <script>
+      function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+
+        for (var i = 0; i < 1; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 150;
+
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          } else {
+            reveals[i].classList.remove("active");
+          }
+        }
+      }
+      window.addEventListener("scroll", reveal);
+    </script>
   </body>
 </html>

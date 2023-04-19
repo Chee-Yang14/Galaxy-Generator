@@ -1,61 +1,128 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
   <head>
-  	<style>
-  		body{
-	    background-image: url('images/uploadBackground.gif');
-	    background-size: cover;
-	    height: 100vh;
-	    padding:0;
-	    margin:0;
-		}
-	</style>
-    <meta charset="ISO-8859-1" />
-    <title>uploadFile</title>
     <link
       rel="stylesheet"
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" th:href="@{'/css/style.css'}" />
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script
       type="text/javascript"
       src="/webjars/bootstrap/js/bootstrap.min.js"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{'css/home.css'}" />
+    <!-- <link rel="stylesheet" th:href="@{'css/style.css'}" /> -->
+    <title>Home page</title>
   </head>
   <body>
-  	<div style="
-  		position: absolute;
-	  	width: 600px;
-	  	right: 32%;
-	    top: 355px;
-	    height: 200px;
-	    border: thin solid white;
-	    background-image: url('images/uploadDivBackground.gif')">
-	    <h1 style = "color: blue; text-align: center"> Upload Saved Universe </h1>
+    <div class="topnav">
+      <a class="active" th:href="@{/}">Home</a>
+      <a th:href="@{/generator}">Generate a Universe</a>
+      <div class="dropdown1">
+        <button class="dropbtn1">
+          All Universes
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content1">
+          <a
+            th:each="universe : ${ListUniverses}"
+            th:href="@{'/canvas/' + ${universe.universeId}}"
+            th:text="${universe.universeName}"
+          ></a>
+        </div>
+      </div>
+      <a
+        sec:authorize="!isAuthenticated()"
+        th:href="@{/login}"
+        style="position: absolute; left: 87%"
+        >Login</a
+      >
+      <a
+        sec:authorize="!isAuthenticated()"
+        th:href="@{/register}"
+        style="position: absolute; left: 93%"
+        >Register</a
+      >
+    </div>
+    <div style="position: relative">
+      <div
+        style="
+          background-image: url('images/frontheader.jpg');
+          background-repeat: no-repeat;
+          background-size: 100% 1000px;
+          height: 1000px;
+          width: 100%;
+        "
+      ></div>
+      <div class="background" style="position: absolute; height: 0px">
+        <div
+          class="text-center reveal"
+          style="
+            color: black;
+            background-color: white;
+            position: absolute;
+            top: -700px;
+            left: 32%;
+            width: 700px;
+            height: 200px;
+            padding-top: 10px;
+            border-radius: 25px;
+          "
+        >
+          <h3 style="margin-bottom: 15px; font-weight: 200">Upload Saved Universe</h3>
+          <input id="fileID" type="file"  name="uploadFile" style = "color: black; position: absolute; right: 30%" />
+		  <button id="upload-button" style = "position: absolute; right: 35%" onclick="upload()"> load </button>
+		  <script>
+			async function upload() {
+		  		let data = new FormData(); 
+		  		data.append("file", fileID.files[0]);
+		  		let response = await fetch('/universeLoad', {
+		    		method: "POST", 
+		    		body: data
+		  		}); 
+		
+		  	if (response.status == 200) {
+		    	alert("Success!");
+		    	window.location.href='http://localhost:8080/home';
+		  	}
+		  	else {
+		  		alert("unable to load universe from file.");
+		  	}
+			}
+		  </script>
+        </div>
+      </div>
+    </div>
+    <script>
+      function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
 
-	  	<input id="fileID" type="file"  name="uploadFile" style = "color: white; position: absolute; right: 25%" />
-		<button id="upload-button" style = "position: absolute; right: 30%" onclick="upload()"> load </button>
-		<script>
-		async function upload() {
-		  let data = new FormData(); 
-		  data.append("file", fileID.files[0]);
-		  let response = await fetch('/universeLoad', {
-		    method: "POST", 
-		    body: data
-		  }); 
-		
-		  if (response.status == 200) {
-		    alert("Success!");
-		    window.location.href='http://localhost:8080/home';
-		  }
-		  else {
-		  	alert("unable to load universe from file.");
-		  }
-		}
-		</script>
-		
-	</div>
+        for (var i = 0; i < 1; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 150;
+
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          } else {
+            reveals[i].classList.remove("active");
+          }
+        }
+      }
+      window.addEventListener("scroll", reveal);
+    </script>
   </body>
 </html>
