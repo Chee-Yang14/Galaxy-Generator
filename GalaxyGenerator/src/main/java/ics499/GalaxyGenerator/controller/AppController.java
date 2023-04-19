@@ -231,7 +231,7 @@ public class AppController {
 	}
 
 	@PostMapping("/universeLoad")
-	public ResponseEntity<?>  load(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<?> load(@RequestParam("file") MultipartFile file) {
 		Universe universe = Universe.generate(0, 0, null);
 		List<StarSystem> starSystems = new ArrayList<>();
 		List<Planet> planets = new ArrayList<>();
@@ -352,7 +352,9 @@ public class AppController {
 	}
 
 	@GetMapping("/deleteUniverse")
-	public String checkDeleteUniverse() {
+	public String checkDeleteUniverse(Model model) {
+		List<Universe> ListUniverses = universeRepo.findAll();
+		model.addAttribute("ListUniverses", ListUniverses);
 		return "delete_Universe";
 	}
 
@@ -381,9 +383,12 @@ public class AppController {
 				List<Planet> Planets = starSystems.get(x).getPlanets();
 				for (int y = 0; y < Planets.size(); y++) {
 					if (Planets.get(y).getPlanetId() == planetId) {
-						starSystems.get(x).setEconomyLevel(starSystems.get(x).getEconomyLevel() - Planets.get(y).getEconomyLevel());
-						starSystems.get(x).setPopulation(starSystems.get(x).getPopulation() - Planets.get(y).getPopulation());
-						starSystems.get(x).setSpaceResources(starSystems.get(x).getSpaceResources() - Planets.get(y).getNaturalResources());
+						starSystems.get(x).setEconomyLevel(
+								starSystems.get(x).getEconomyLevel() - Planets.get(y).getEconomyLevel());
+						starSystems.get(x)
+								.setPopulation(starSystems.get(x).getPopulation() - Planets.get(y).getPopulation());
+						starSystems.get(x).setSpaceResources(
+								starSystems.get(x).getSpaceResources() - Planets.get(y).getNaturalResources());
 						Planets.remove(y);
 						indicator2 = true;
 						break;
@@ -408,14 +413,13 @@ public class AppController {
 	@DeleteMapping("/deleteUniverse/{id}")
 	public String deleteUniverse(@PathVariable(value = "id") Integer universeId) {
 		List<Universe> universe = universeRepo.findAll();
-		boolean indicator = false;
 		for (int i = 0; i < universe.size(); i++) {
 			if (universe.get(i).getUniverseId() == universeId) {
 				universe.remove(i);
 			}
 		}
 		universeRepo.deleteById(universeId);
-		return "universe_delete";
+		return "delete_Universe";
 	}
 
 	@DeleteMapping("/deletestarsystem/{id}")
