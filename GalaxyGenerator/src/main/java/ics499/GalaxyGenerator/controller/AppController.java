@@ -107,6 +107,19 @@ public class AppController {
 		return "register_success"; // returns register_sucess.html
 	}
 
+	@PostMapping("/addusertest")
+	public String addUserTest(User user) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Password encoder
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		try {
+			userRepo.save(user);
+		} catch (Exception e) {
+			return "register_fail";
+		}
+		return "register_success"; // returns register_sucess.html
+	}
+
 	@GetMapping("/planets")
 	public String listPlanets(Model model) {
 		List<Planet> listPlanets = planetRepo.findAll();
