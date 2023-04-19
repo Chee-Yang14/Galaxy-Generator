@@ -4,29 +4,6 @@
   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 >
   <head>
-    <style>
-      body{
-	    background-image: url('images/space.jpg');
-	    background-size: cover;
-		}
-      .container {
-        height: 200px;
-        position: relative;
-        margin: 0;
-        top: 50%;
-        left: 23%;
-        border: 3px solid black;
-      }
-
-      .center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-      }
-    </style>
     <link
       rel="stylesheet"
       type="text/css"
@@ -40,7 +17,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" th:href="@{'css/style.css'}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{'css/home.css'}" />
+    <!-- <link rel="stylesheet" th:href="@{'css/style.css'}" /> -->
     <title>Home page</title>
   </head>
   <body>
@@ -60,85 +44,229 @@
           ></a>
         </div>
       </div>
+      <a
+        sec:authorize="!isAuthenticated()"
+        th:href="@{/login}"
+        style="position: absolute; left: 87%"
+        >Login</a
+      >
+      <a
+        sec:authorize="!isAuthenticated()"
+        th:href="@{/register}"
+        style="position: absolute; left: 93%"
+        >Register</a
+      >
     </div>
-    <h1 class="text-center" style="color: white;">Welcome!</h1>
-    <br />
-    <br />
-    <div class="container" sec:authorize="!isAuthenticated()">
-      <div class="center">
-        <button
-          style="color: black"
-          class="button-30"
-          role="button"
-          onclick="window.location.href='http://localhost:8080/login'"
+    <div style="position: relative">
+      <div
+        style="
+          background-image: url('images/frontheader.jpg');
+          background-repeat: no-repeat;
+          background-size: 100% 800px;
+          height: 1000px;
+          width: 100%;
+        "
+      ></div>
+      <div class="background" style="position: absolute">
+        <div
+          class="text-center reveal"
+          style="
+            color: black;
+            background-color: white;
+            position: absolute;
+            top: -460px;
+            left: 28%;
+            width: 840px;
+            height: 270px;
+            padding-top: 40px;
+          "
         >
-          login
-        </button>
-        <button
-          style="color: black"
-          class="button-30"
-          role="button"
-          onclick="window.location.href='http://localhost:8080/register'"
-        >
-          register
-        </button>
-      </div>
-    </div>
-    <div sec:authorize="isAuthenticated()">
-      <div id="logout" ; style="position: absolute; left: 1666px; top: 0px">
-        <form action="/logout" method="post">
-          <input type="hidden" class="btn btn-primary" value="Logout" />
-          <button
-            class="button-30"
-            style="width: 90px; height: 30px; right: 0%"
-          >
-            Logout
-          </button>
-        </form>
-      </div>
-      <div class="container">
-        <div class="center">
-          <button
-          class="button-54"
-            role="button"
-            style="margin: 10px"
-            onclick="window.location.href='http://localhost:8080/deleteUniverse'"
-            >
-           Delete a universe
-          </button>
-          <button
-            class="button-54"
-            role="button"
-            style="margin: 10px"
-            onclick="window.location.href='http://localhost:8080/generator'"
-          >
-            Click to generate universe
-          </button>
-          <!-- <button
-            class="button-54"
-            role="button"
-            onclick="window.location.href='http://localhost:8080/canvas/1'"
-          >
-            Click to see universe from #1
-          </button> -->
-          <button
-            class="button-54"
-            role="button"
-            style="margin: 10px"
-            onclick="window.location.href='http://localhost:8080/planets'"
-          >
-            Click to see list of planets
-          </button>
-          <button
-            class="button-54"
-            role="button"
-            style="margin: 10px"
-            onclick="window.location.href='http://localhost:8080/load'"
-          >
-            Click to load save file
-          </button>
+          <h3 style="margin-bottom: 15px; font-weight: 200">Welcome!</h3>
+          <h1 style="font-weight: 400; font-size: 70px">GALAXY GENERATOR</h1>
         </div>
       </div>
     </div>
+    <div sec:authorize="!isAuthenticated()">
+      <div
+        class="row "
+        style="
+          position: absolute;
+          top: 600px;
+          /* width: 100%; */
+          left: 30%;
+          margin-top: 400px;
+        "
+      >
+        <div class="column">
+          <div class="card1">
+            <h3 style="height: 100px">Login</h3>
+            <p
+              style="
+                text-align: center;
+                height: 100px;
+                font-stretch: expanded;
+                margin-bottom: 45px;
+              "
+            >
+              Click here to log in to access the functionality of the generator
+            </p>
+            <button
+              class="button-4"
+              role="button"
+              onclick="window.location.href='http://localhost:8080/login'"
+            >
+              Log In
+            </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card1">
+            <h3 style="height: 100px">Register</h3>
+            <p
+              style="
+                text-align: center;
+                height: 100px;
+                font-stretch: expanded;
+                margin-bottom: 45px;
+              "
+            >
+              Click here to register first if you don't have an account
+            </p>
+            <button
+              class="button-4"
+              role="button"
+              onclick="window.location.href='http://localhost:8080/register'"
+            >
+            Register
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+      <div id="logout" ; style="position: absolute; left: 93%; top: 0px">
+        <form action="/logout" method="post">
+          <input type="hidden" value="Logout" />
+          <button>Logout</button>
+        </form>
+      </div>
+      <div
+        class="row reveal"
+        style="
+          position: absolute;
+          top: 600px;
+          /* width: 100%; */
+          left: 9%;
+          margin-top: 500px;
+        "
+      >
+        <div class="column">
+          <div class="card1">
+            <h3 style="height: 100px">Generate a Universe</h3>
+            <p
+              style="
+                text-align: center;
+                height: 100px;
+                font-stretch: expanded;
+                margin-bottom: 45px;
+              "
+            >
+              Click here to generate a list of universe with all star systems
+              and planetse randomly generated within
+            </p>
+            <button
+              class="button-4"
+              role="button"
+              onclick="window.location.href='http://localhost:8080/generator'"
+            >
+              Generate
+            </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card1">
+            <h3 style="height: 100px">All Planets</h3>
+            <p style="height: 100px; margin-bottom: 45px">
+              Click here to see all planets. These are all the planets gathered
+              from every universes and star systems with full stats
+            </p>
+            <button
+              class="button-4"
+              role="button"
+              onclick="window.location.href='http://localhost:8080/planets'"
+            >
+              List of planets
+            </button>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card1">
+            <h3 style="height: 100px">Load Universe</h3>
+            <p style="height: 100px; margin-bottom: 45px">
+              Click here to load all entities from a save file including
+              universes, star systems and planets
+            </p>
+            <button
+              class="button-4"
+              role="button"
+              onclick="window.location.href='http://localhost:8080/load'"
+            >
+              Load save file
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="reveal"
+      style="
+        position: absolute;
+        top: 1700px;
+        background-image: url('images/footer.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% 800px;
+        height: 700px;
+        width: 100%;
+      "
+    >
+      <h2
+        class="text-center"
+        style="color: white; padding: 40px; margin-top: 40px"
+      >
+        About Our Project
+      </h2>
+      <p
+        class="text-center"
+        style="position: absolute; color: white; width: 25%; left: 37%"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur
+        dolor laboriosam eaque asperiores perspiciatis laborum, iusto numquam,
+        pariatur beatae quam veniam tempore natus, nemo recusandae voluptates
+        molestiae porro accusamus voluptatum? Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Cupiditate accusantium cumque optio fuga
+        ex beatae, aut illo iste enim praesentium saepe quae numquam. Sunt ab
+        iure at ad blanditiis quis.
+      </p>
+    </div>
+    <script>
+      function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+
+        for (var i = 0; i < reveals.length; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 150;
+
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          } else {
+            reveals[i].classList.remove("active");
+          }
+        }
+      }
+
+      window.addEventListener("scroll", reveal);
+    </script>
   </body>
 </html>
