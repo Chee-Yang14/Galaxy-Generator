@@ -1,26 +1,59 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="ISO-8859-1" />
-    <title>Registration Success</title>
+    <title>Sign Up</title>
     <link
       rel="stylesheet"
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
     />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/webjars/bootstrap/js/bootstrap.min.js"
+    ></script>
   </head>
   <body>
+  	<script>
+    	 var countdown = setTimeout(function() {
+            alert("email taken"); 
+        }, 100);
+    </script>
     <div class="container text-center">
-      <h3>Email/username is taken</h3>
-      <h4>redirect after 3 seconds</h4>
-      <script>
-        var countdown = setTimeout(function() {
-            window.location="/register"
-        }, 3000);
-      </script>
-      <h5>Or</h5>
-      <h5><a th:href="@{/register}">Click here to go back</a></h5>
+      <div>
+        <h1>User Registration - Sign Up</h1>
+      </div>
+      <form
+        th:action="@{/adduser}"
+        th:object="${user}"
+        method="post"
+        style="max-width: 600px; margin: 0 auto"
+      >
+        <div class="m-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label">E-mail: </label>
+            <div class="col-8">
+              <input th:field="*{email}" class="form-control" required />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label">Password: </label>
+            <div class="col-8">
+              <input
+                type="password"
+                th:field="*{password}"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </div>
+        </div>
+      </form>
     </div>
   </body>
 </html>

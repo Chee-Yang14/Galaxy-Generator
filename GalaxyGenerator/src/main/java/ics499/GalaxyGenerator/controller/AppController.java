@@ -84,9 +84,10 @@ public class AppController {
 	}
 
 	@PostMapping("/adduser")
-	public String addUser(User user) {
+	public String addUser(User user, Model model) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Password encoder
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		model.addAttribute("user", new User());
 		user.setPassword(encodedPassword);
 		try {
 			userRepo.save(user);
@@ -147,7 +148,11 @@ public class AppController {
 	}
 
 	@PostMapping("/generateuniverse")
-	public String addUniverse(Universe universe) {
+	public String addUniverse(Universe universe, Model model) {
+		model.addAttribute("universe", new Universe());
+		if (universe.getSize() == 0) {
+			return "generate_fail";
+		}
 		Universe newUniverse = universe.generate(6, universe.getSize(), universe.getShape());
 		universeRepo.save(newUniverse);
 		return "generate_success";
@@ -163,11 +168,11 @@ public class AppController {
 	@PostMapping("/starSystemEdit/{id}")
 	public String starSystemEdit(StarSystem starSystem, Model model) {
 		ResponseEntity response = starSystemController.update(starSystem, starSystem.getStarsystemId());
-		model.addAttribute("starsystemID", starSystem.getStarsystemId());
+		model.addAttribute("starSystem", starSystemRepo.findById(starSystem.getStarsystemId()).get());
 		if (response.getStatusCode() == HttpStatus.OK) {
-			return "Edit_success";
+			return "Starsystem_PUT_success";
 		}
-		return "Edit_fail";
+		return "Starsystem_PUT_fail";
 	}
 
 	@GetMapping("/PlanetEditPage/{id}")
@@ -180,11 +185,11 @@ public class AppController {
 	@PostMapping("/planetEdit/{id}")
 	public String planetEdit(Planet planet, Model model) {
 		ResponseEntity response = planetController.update(planet, planet.getPlanetId());
-		model.addAttribute("planetID", planet.getPlanetId());
+		model.addAttribute("planet", planetRepo.findById(planet.getPlanetId()).get());
 		if (response.getStatusCode() == HttpStatus.OK) {
-			return "Edit_success";
+			return "Planet_Edit_success";
 		}
-		return "Edit_fail";
+		return "Planet_Edit_fail";
 	}
 
 	@GetMapping("/universeSave/{id}")
@@ -226,7 +231,7 @@ public class AppController {
 	}
 
 	@PostMapping("/universeLoad")
-	public String load(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<?>  load(@RequestParam("file") MultipartFile file) {
 		Universe universe = Universe.generate(0, 0, null);
 		List<StarSystem> starSystems = new ArrayList<>();
 		List<Planet> planets = new ArrayList<>();
@@ -241,7 +246,7 @@ public class AppController {
 				line = buffer.readLine();
 				if (line.contains("SaveFile") == false || line == null || file.isEmpty()) {
 					input = false;
-					return "upload_fail";
+					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 				}
 				while ((line = buffer.readLine()) != null) {
 					String[] lineArr = line.split(",");
@@ -333,12 +338,12 @@ public class AppController {
 				buffer.close();
 			} else {
 				input = false;
-				return "upload_fail";
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}
-		return "upload_success";
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@GetMapping("/load")
@@ -376,6 +381,9 @@ public class AppController {
 				List<Planet> Planets = starSystems.get(x).getPlanets();
 				for (int y = 0; y < Planets.size(); y++) {
 					if (Planets.get(y).getPlanetId() == planetId) {
+						starSystems.get(x).setEconomyLevel(starSystems.get(x).getEconomyLevel() - Planets.get(y).getEconomyLevel());
+						starSystems.get(x).setPopulation(starSystems.get(x).getPopulation() - Planets.get(y).getPopulation());
+						starSystems.get(x).setSpaceResources(starSystems.get(x).getSpaceResources() - Planets.get(y).getNaturalResources());
 						Planets.remove(y);
 						indicator2 = true;
 						break;
@@ -407,11 +415,11 @@ public class AppController {
 			}
 		}
 		universeRepo.deleteById(universeId);
-		return "delete";
+		return "universe_delete";
 	}
 
 	@DeleteMapping("/deletestarsystem/{id}")
-	public String deletestarsystem(@PathVariable(value = "id") Integer starSystemId) {
+	public String deletestarsystem(@PathVariable(value = "id") Integer starSystemId, Model model) {
 		List<Universe> universes = universeRepo.findAll();
 		for (int i = 0; i < universes.size(); i++) {
 			boolean indicator = false;
@@ -424,6 +432,10 @@ public class AppController {
 				}
 			}
 			if (indicator == true) {
+				if (starSystems.size() == 0) {
+					deleteUniverse(universes.get(i).getUniverseId());
+					return "universe_delete";
+				}
 				universes.get(i).setStarSystem(starSystems);
 				universeController.update(universes.get(i), universes.get(i).getUniverseId());
 				break;

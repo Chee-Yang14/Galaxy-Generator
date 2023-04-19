@@ -31,7 +31,7 @@ public class UserTest {
     User user = new User();
     user.setEmail("test");
     user.setPassword("test");
-    userController.addUser(user);
+    userController.addUser(user, null);
     Assertions.assertThat(user.getId()).isGreaterThan(0);
   }
 

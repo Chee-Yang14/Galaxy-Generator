@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Edit Star System</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/webjars/bootstrap/css/bootstrap.min.css"
+    />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/webjars/bootstrap/js/bootstrap.min.js"
+    ></script>
+    <link rel="stylesheet" th:href="@{'/css/form.css'}" />
+  </head>
+  <body>
+    <script>
+    	 var countdown = setTimeout(function() {
+            alert("fail! return back to page);
+            window.history.go(-2);
+        }, 100);
+    </script>
+    <div class="container text-center form">
+      <div>
+        <h1 th:text="${planet.name}"></h1>
+      </div>
+      <form
+        th:action="'/planetEdit/'+${planet.planetId}"
+        th:object="${planet}"
+        method="post"
+        style="max-width: 600px; margin: 0 auto"
+      >
+        <div class="m-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label font-weight-bold">Id: </label>
+            <div class="col-8">
+              <input th:field="*{planetId}" class="form-control" readonly required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label font-weight-bold">Name: </label>
+            <div class="col-8">
+              <input th:field="*{name}" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label font-weight-bold">Economy Level: </label>
+            <div class="col-8">
+              <input th:field="*{economyLevel}" class="form-control" required />
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label class="col-4 col-form-label font-weight-bold">Natural Resources: </label>
+            <div class="col-8">
+              <input th:field="*{naturalResources}" class="form-control" required />
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label class="col-4 col-form-label font-weight-bold">Population: </label>
+            <div class="col-8">
+              <input th:field="*{population}" class="form-control" required />
+            </div>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
