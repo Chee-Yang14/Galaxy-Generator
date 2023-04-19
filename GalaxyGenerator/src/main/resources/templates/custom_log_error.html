@@ -28,10 +28,9 @@
     <title>Home page</title>
   </head>
   <body>
-    <script>
+  	<script>
     	 var countdown = setTimeout(function() {
-            alert("registered! redirect to login");
-            window.location.href='http://localhost:8080/login_page';
+            alert("Email/password is incorrect! please Re-enter");
         }, 100);
     </script>
     <div class="topnav">
@@ -68,43 +67,27 @@
             position: absolute;
             top: -700px;
             left: 28%;
-            width: 840px;
+            width: 750px;
             height: 300px;
             padding-top: 10px;
             border-radius: 25px;
           "
         >
-          <h3 style="margin-bottom: 15px; font-weight: 200">Register</h3>
-          <form
-        	th:action="@{/adduser}"
-        	th:object="${user}"
-        	method="post"
-        	style="max-width: 600px; margin: 0 auto"
-      	  >
-          <div class="m-3">
-            <div class="form-group row">
-              <label class="col-4 col-form-label">E-mail: </label>
-              <div class="col-8">
-                <input th:field="*{email}" class="form-control" required />
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-4 col-form-label">Password: </label>
-              <div class="col-8">
-                <input
-                  type="password"
-                  th:field="*{password}"
-                  class="form-control"
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <button type="submit" class="btn btn-primary" style = "position:relative; left:250px; top:10px; width: 100px; height: 40px">Sign Up</button>
-            </div>
-          </div>
-          </form>
+          <h3 style="margin-bottom: 15px; font-weight: 200">Sign in</h3>
+          <form class="form-signin" method="post" action="/login">     
+			<p>
+          		<label for="username" class="sr-only">Username</label>
+          		<input type="text" id="username" name="email" class="form-control" placeholder="Email" required autofocus>
+        	</p>
+        	<p>
+          		<label for="password" class="sr-only">Password</label>
+          		<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        	</p>
+        	<button class="btn btn-lg btn-primary btn-block" type="submit"
+        		style = "position:relative; left: 190px; top:10px; width: 375px; height: 40px">
+        	  Sign in
+        	</button>
+      	  </form>
         </div>
       </div>
     </div>

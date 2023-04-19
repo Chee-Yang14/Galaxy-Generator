@@ -30,8 +30,11 @@
   <body>
     <div class="topnav">
       <a class="active" th:href="@{/}">Home</a>
-      <a th:href="@{/generator}">Generate a Universe</a>
-      <div class="dropdown1">
+      <a
+      	sec:authorize="isAuthenticated()"
+      	th:href="@{/generator}">Generate a Universe
+      </a>
+      <div class="dropdown1" sec:authorize="isAuthenticated()">
         <button class="dropbtn1">
           All Universes
           <i class="fa fa-caret-down"></i>
@@ -46,7 +49,7 @@
       </div>
       <a
         sec:authorize="!isAuthenticated()"
-        th:href="@{/login}"
+        th:href="@{/login_page}"
         style="position: absolute; left: 87%"
         >Login</a
       >

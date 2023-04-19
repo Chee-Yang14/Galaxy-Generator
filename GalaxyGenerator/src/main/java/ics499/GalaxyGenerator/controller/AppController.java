@@ -73,7 +73,17 @@ public class AppController {
 		model.addAttribute("ListUniverses", ListUniverses);
 		return "home";
 	}
-
+	
+	@GetMapping("/login_page")
+	public String loginPage() {
+		return "custom_login";
+	}
+	
+	@PostMapping("/error_login")
+	public String errorLogin() {
+		return "custom_log_error";
+	}
+	
 	@GetMapping("/register") // this returns register.html
 	public String register(Model model) {
 		model.addAttribute("user", new User()); // @ModelAttribute is an annotation that binds a method parameter or
@@ -144,12 +154,14 @@ public class AppController {
 	@GetMapping("/generator")
 	public String generateUniverse(Model model) {
 		model.addAttribute("universe", new Universe());
+		model.addAttribute("ListUniverses", universeRepo.findAll());
 		return "generator";
 	}
 
 	@PostMapping("/generateuniverse")
 	public String addUniverse(Universe universe, Model model) {
 		model.addAttribute("universe", new Universe());
+		model.addAttribute("ListUniverses", universeRepo.findAll());
 		if (universe.getSize() == 0) {
 			return "generate_fail";
 		}
@@ -347,7 +359,8 @@ public class AppController {
 	}
 
 	@GetMapping("/load")
-	public String loading() {
+	public String loading(Model model) {
+		model.addAttribute("ListUniverses", universeRepo.findAll());
 		return "Load_File";
 	}
 
