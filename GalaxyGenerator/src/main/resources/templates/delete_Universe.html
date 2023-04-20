@@ -45,7 +45,8 @@
     ></script>
   </head>
   <body>
-  	<div style="
+  	<div
+	style="
   		position: absolute;
 	  	width: 600px;
 	  	right: 32%;
@@ -64,17 +65,29 @@
 				th:text="${universe.universeName}">
 				</option>
 			</select>
+			<!-- <form
+                th:action="'/deleteUniverse/'+${universeContent.value}"
+                th:object="${universe}"
+                method="post"
+                style="max-width: 600px; margin: 0 auto"
+              >
+                <input type="hidden" name="_method" value="delete" />
+                <button type="click" class="button-54" role="button" style = "position: absolute; right: 30%" onclick = "alert('success!');">
+                  delete
+                </button>
+              </form> -->
 
-		<button id="btn" style = "position: absolute; right: 30%" > Delete </button>
+		<button id="btn" th:onClick="'/deleteUniverse/'+th:returnSelector" method="post"  style = "position: absolute; right: 30%" > Delete </button>
 </form>
 		<script>
-// 				const ub=document.getElementById("universeContent");
-// 				const btn = document.getElementById("btn");
+			const ub=document.getElementById("universeContent");
 
-// 				btn.onclick = (event) => {
-// 				event.preventDefault();
-// 				fetch('http://localhost:8080//deleteUniverse/'+ub.selectedIndex)
-// }
+
+			function returnSelector(){
+				var value = selectedIndex.value;
+				event.preventDefault();
+				return value;
+		}
 
 		</script>
 		

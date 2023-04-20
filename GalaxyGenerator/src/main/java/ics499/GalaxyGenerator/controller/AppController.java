@@ -73,17 +73,17 @@ public class AppController {
 		model.addAttribute("ListUniverses", ListUniverses);
 		return "home";
 	}
-	
+
 	@GetMapping("/login_page")
 	public String loginPage() {
 		return "custom_login";
 	}
-	
+
 	@PostMapping("/error_login")
 	public String errorLogin() {
 		return "custom_log_error";
 	}
-	
+
 	@GetMapping("/register") // this returns register.html
 	public String register(Model model) {
 		model.addAttribute("user", new User()); // @ModelAttribute is an annotation that binds a method parameter or
@@ -368,7 +368,8 @@ public class AppController {
 	public String checkDeleteUniverse(Model model) {
 		List<Universe> ListUniverses = universeRepo.findAll();
 		model.addAttribute("ListUniverses", ListUniverses);
-		return "delete_Universe";
+
+		return "delete_Universe.html";
 	}
 
 	@GetMapping("/checkUpload")
@@ -429,10 +430,12 @@ public class AppController {
 		for (int i = 0; i < universe.size(); i++) {
 			if (universe.get(i).getUniverseId() == universeId) {
 				universe.remove(i);
+			} else if (universe.get(i).getUniverseId() == universeId && i == universe.size() - 1) {
+				System.out.println("didn't delete");
 			}
 		}
 		universeRepo.deleteById(universeId);
-		return "delete_Universe";
+		return "delete_Universe.html";
 	}
 
 	@DeleteMapping("/deletestarsystem/{id}")

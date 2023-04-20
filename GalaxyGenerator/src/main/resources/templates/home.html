@@ -48,6 +48,9 @@
         </div>
       </div>
       <a
+      th:href="@{/deleteUniverse}" sec:authorize="isAuthenticated()"
+      >Delete Universe</a>
+      <a
         sec:authorize="!isAuthenticated()"
         th:href="@{/login_page}"
         style="position: absolute; left: 87%"
