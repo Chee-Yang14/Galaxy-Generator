@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.ui.Model;
 
 import ics499.GalaxyGenerator.controller.AppController;
 import ics499.GalaxyGenerator.model.User;
@@ -31,7 +32,7 @@ public class UserTest {
     User user = new User();
     user.setEmail("test");
     user.setPassword("test");
-    userController.addUser(user, null);
+    userController.addUserTest(user);
     Assertions.assertThat(user.getId()).isGreaterThan(0);
   }
 
