@@ -131,10 +131,12 @@ public class AppController {
 
 	@GetMapping("/canvas/{id}")
 	public String listStarSystems(@PathVariable(value = "id") Integer universeId, Model model) {
+		String universeName = universeRepo.findById(universeId).get().getUniverseName();
 		Universe universeWithId = universeRepo.findById(universeId).get();
 		List<StarSystem> listStarSystems = universeWithId.getStarSystem();
 		List<Universe> universes = universeRepo.findAll();
 		model.addAttribute("listUniverse", universes);
+		model.addAttribute("universeName", universeName);
 		model.addAttribute("listStarSystems", listStarSystems);
 		model.addAttribute("currentUniverse", universeWithId);
 		return "canvas";

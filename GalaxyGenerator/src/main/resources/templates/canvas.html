@@ -282,8 +282,8 @@
       >
         <a href="http://localhost:8080/canvas/1" id="nextUniverse"></a>
         <h2
-          th:text="'Universe '+${currentUniverse.universeId}"
-          style="position: absolute; right: 10%; top: 12px"
+          th:text="${universeName}"
+          style="position: absolute; right: 13%; top: 12px"
         ></h2>
         <form
           th:action="'/universeSave/' + ${currentUniverse.universeId}"
