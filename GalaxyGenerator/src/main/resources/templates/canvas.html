@@ -294,7 +294,7 @@
             role="button"
             style="
               position: absolute;
-              right: 9.5%;
+              right: 15%;
               top: 40px;
               width: 155px;
               height: 50px;
@@ -303,6 +303,21 @@
             save
           </button>
         </form>
+
+        <form 
+        th:action="'/deleteUniverse/'+${currentUniverse.universeId}"
+        method="post"
+>
+		    <input  type="hidden" name="_method" value="delete"/>
+		    <button class="button-30" type="click" id="btn" role="button"  style="
+        position: absolute;
+          right: 6%;
+            top: 40px;
+           width: 155px;
+            height: 50px;" > Delete </button>
+          </form>
+
+<!-- 
         <button
           class="button-30"
           role="button"
@@ -318,36 +333,36 @@
           th:onclick="|increment('${currentUniverse.universeId}')|"
         >
           next
-        </button>
+        </button> -->
       </div>
     </div>
     <script>
-      function increment(id) {
-        var size = document.querySelector("#size2").dataset.size;
-        var increUrlPart1 = "http://localhost:8080/canvas/";
-        var increParameter = parseInt(id);
+      // function increment(id) {
+      //   var size = document.querySelector("#size2").dataset.size;
+      //   var increUrlPart1 = "http://localhost:8080/canvas/";
+      //   var increParameter = parseInt(id);
 
-        if (increParameter < size && increParameter != size) {
-          increParameter += 1;
-        }
+      //   if (increParameter < size && increParameter != size) {
+      //     increParameter += 1;
+      //   }
 
-        var newURL = increUrlPart1 + increParameter;
-        document.getElementById("nextUniverse").href = newURL;
-        window.location = newURL;
-      }
+      //   var newURL = increUrlPart1 + increParameter;
+      //   document.getElementById("nextUniverse").href = newURL;
+      //   window.location = newURL;
+      // }
 
-      function decrement(id) {
-        var size = document.querySelector("#size2").dataset.size;
-        var decreUrlPart1 = "http://localhost:8080/canvas/";
-        var decreParameter = parseInt(id);
-        if (decreParameter > 1) {
-          decreParameter -= 1;
-        }
+      // function decrement(id) {
+      //   var size = document.querySelector("#size2").dataset.size;
+      //   var decreUrlPart1 = "http://localhost:8080/canvas/";
+      //   var decreParameter = parseInt(id);
+      //   if (decreParameter > 1) {
+      //     decreParameter -= 1;
+      //   }
 
-        var newURL = decreUrlPart1 + decreParameter;
-        document.getElementById("nextUniverse").href = newURL;
-        window.location = newURL;
-      }
+      //   var newURL = decreUrlPart1 + decreParameter;
+      //   document.getElementById("nextUniverse").href = newURL;
+      //   window.location = newURL;
+      // }
 
       //Function to show buttons of planets
       function show(id) {

@@ -377,14 +377,6 @@ public class AppController {
 		return "Load_File";
 	}
 
-	@GetMapping("/deleteUniverse")
-	public String checkDeleteUniverse(Model model) {
-		List<Universe> ListUniverses = universeRepo.findAll();
-		model.addAttribute("ListUniverses", ListUniverses);
-
-		return "delete_Universe.html";
-	}
-
 	@GetMapping("/checkUpload")
 	public String checkUpload() {
 		if (!input) {
@@ -438,17 +430,21 @@ public class AppController {
 	}
 
 	@DeleteMapping("/deleteUniverse/{id}")
-	public String deleteUniverse(@PathVariable(value = "id") Integer universeId) {
+	public String deleteUniverse(@PathVariable(value = "id") Integer universeId, Model model) {
 		List<Universe> universe = universeRepo.findAll();
+		System.out.println("running");
 		for (int i = 0; i < universe.size(); i++) {
 			if (universe.get(i).getUniverseId() == universeId) {
+				System.out.println("running2");
 				universe.remove(i);
+				break;
 			} else if (universe.get(i).getUniverseId() == universeId && i == universe.size() - 1) {
 				System.out.println("didn't delete");
 			}
 		}
 		universeRepo.deleteById(universeId);
-		return "delete_Universe.html";
+		model.addAttribute("ListUniverses", universe);
+		return "home";
 	}
 
 	@DeleteMapping("/deletestarsystem/{id}")
