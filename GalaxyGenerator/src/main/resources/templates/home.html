@@ -30,9 +30,8 @@
   <body>
     <div class="topnav">
       <a class="active" th:href="@{/}">Home</a>
-      <a
-      	sec:authorize="isAuthenticated()"
-      	th:href="@{/generator}">Generate a Universe
+      <a sec:authorize="isAuthenticated()" th:href="@{/generator}"
+        >Generate a Universe
       </a>
       <div class="dropdown1" sec:authorize="isAuthenticated()">
         <button class="dropbtn1">
@@ -91,7 +90,7 @@
     </div>
     <div sec:authorize="!isAuthenticated()">
       <div
-        class="row "
+        class="row"
         style="
           position: absolute;
           top: 600px;
@@ -140,7 +139,7 @@
               role="button"
               onclick="window.location.href='http://localhost:8080/register'"
             >
-            Register
+              Register
             </button>
           </div>
         </div>
@@ -243,13 +242,7 @@
         class="text-center"
         style="position: absolute; color: white; width: 25%; left: 37%"
       >
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur
-        dolor laboriosam eaque asperiores perspiciatis laborum, iusto numquam,
-        pariatur beatae quam veniam tempore natus, nemo recusandae voluptates
-        molestiae porro accusamus voluptatum? Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Cupiditate accusantium cumque optio fuga
-        ex beatae, aut illo iste enim praesentium saepe quae numquam. Sunt ab
-        iure at ad blanditiis quis.
+        Type in project desciption here------------------------------------------------------------------------------------------------------------------------------------------------------
       </p>
     </div>
     <script>

@@ -8,6 +8,10 @@
       type="text/css"
       href="/webjars/bootstrap/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,6 +30,37 @@
     ></script>
   </head>
   <body>
+    <div class="topnav">
+      <a class="active" th:href="@{/}">Home</a>
+      <a sec:authorize="isAuthenticated()" th:href="@{/generator}"
+        >Generate a Universe
+      </a>
+      <div class="dropdown1" sec:authorize="isAuthenticated()">
+        <button class="dropbtn1">
+          All Universes
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content1">
+          <a
+            th:each="universe : ${listUniverse}"
+            th:href="@{'/canvas/' + ${universe.universeId}}"
+            th:text="${universe.universeName}"
+          ></a>
+        </div>
+      </div>
+      <a
+        sec:authorize="!isAuthenticated()"
+        th:href="@{/login_page}"
+        style="position: absolute; left: 87%"
+        >Login</a
+      >
+      <a
+        sec:authorize="!isAuthenticated()"
+        th:href="@{/register}"
+        style="position: absolute; left: 93%"
+        >Register</a
+      >
+    </div>
     <div>
       <!-- Left div -->
       <div
@@ -54,12 +89,10 @@
             width: 0px;
             padding: 0px;
             background-size: cover;
-            
           "
           th:styleappend="|left: ${starSystem.location[0]*10}px; top: ${starSystem.location[1]*10}px|"
           th:onclick="|show('${starSystem.starsystemId}')|"
         >
-        
           <div th:switch="${starSystem.type}">
             <img
               class="starsys"
@@ -67,7 +100,6 @@
               th:src="${'/images/AStar.png'}"
               width="70px;"
               height="60px"
-              
             />
             <img
               class="starsys"
@@ -133,10 +165,11 @@
           <br />
           <br />
           <h3 th:text="${starSystem.name}"></h3>
-          <div>
+          <div >
             <form
               th:action="'/StarSystemEditPage/'+${starSystem.starsystemId}"
               method="get"
+              style="display: inline-block;"
             >
               <button
                 class="button-30"
@@ -156,6 +189,7 @@
               th:action="'/deletestarsystem/'+${starSystem.starsystemId}"
               th:object="${starSystem}"
               method="post"
+              style="display: inline-block;"
             >
               <input type="hidden" name="_method" value="delete" />
               <button
@@ -169,7 +203,7 @@
                   background-color: white;
                   height: 45px;
                 "
-                onclick = "alert('success!');"
+                onclick="alert('success!');"
               >
                 Delete
               </button>
@@ -229,6 +263,7 @@
               <form
                 th:action="'/PlanetEditPage/'+${planet.planetId}"
                 method="get"
+              style="display: inline-block;"
               >
                 <button class="button-54" role="button">edit</button>
               </form>
@@ -237,10 +272,15 @@
                 th:action="'/deleteplanet/'+${planet.planetId}"
                 th:object="${planet}"
                 method="post"
-                style="max-width: 600px; margin: 0 auto"
+                style="max-width: 600px; margin: 0 auto; display: inline-block;"
               >
                 <input type="hidden" name="_method" value="delete" />
-                <button type="click" class="button-54" role="button" onclick = "alert('success!');">
+                <button
+                  type="click"
+                  class="button-54"
+                  role="button"
+                  onclick="alert('success!');"
+                >
                   delete
                 </button>
               </form>
@@ -300,24 +340,33 @@
               height: 50px;
             "
           >
-            save
+            Save
           </button>
         </form>
 
-        <form 
-        th:action="'/deleteUniverse/'+${currentUniverse.universeId}"
-        method="post"
->
-		    <input  type="hidden" name="_method" value="delete"/>
-		    <button class="button-30" type="click" id="btn" role="button"  style="
-        position: absolute;
-          right: 6%;
-            top: 40px;
-           width: 155px;
-            height: 50px;" > Delete </button>
-          </form>
+        <form
+          th:action="'/deleteUniverse/'+${currentUniverse.universeId}"
+          method="post"
+        >
+          <input type="hidden" name="_method" value="delete" />
+          <button
+            class="button-30"
+            type="click"
+            id="btn"
+            role="button"
+            style="
+              position: absolute;
+              right: 6%;
+              top: 40px;
+              width: 155px;
+              height: 50px;
+            "
+          >
+            Delete
+          </button>
+        </form>
 
-<!-- 
+        <!-- 
         <button
           class="button-30"
           role="button"
@@ -406,6 +455,6 @@
         var x = document.getElementById("planet" + id);
         x.style.display = "none";
       }
-    </script> 
+    </script>
   </body>
 </html>

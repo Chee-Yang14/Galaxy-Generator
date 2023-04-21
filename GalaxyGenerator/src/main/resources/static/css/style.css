@@ -117,8 +117,9 @@ h3 {
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  background-color: rgb(44, 77, 146);
   overflow: hidden;
+width: 70%;
 }
 
 /* Style the links inside the navigation bar */
