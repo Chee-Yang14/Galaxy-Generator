@@ -434,10 +434,8 @@ public class AppController {
 	@DeleteMapping("/deleteUniverse/{id}")
 	public String deleteUniverse(@PathVariable(value = "id") Integer universeId, Model model) {
 		List<Universe> universe = universeRepo.findAll();
-		System.out.println("running");
 		for (int i = 0; i < universe.size(); i++) {
 			if (universe.get(i).getUniverseId() == universeId) {
-				System.out.println("running2");
 				universe.remove(i);
 				break;
 			} else if (universe.get(i).getUniverseId() == universeId && i == universe.size() - 1) {
@@ -445,8 +443,7 @@ public class AppController {
 			}
 		}
 		universeRepo.deleteById(universeId);
-		model.addAttribute("ListUniverses", universe);
-		return "home";
+		return "delete_universe";
 	}
 
 	@DeleteMapping("/deletestarsystem/{id}")
@@ -464,8 +461,8 @@ public class AppController {
 			}
 			if (indicator == true) {
 				if (starSystems.size() == 0) {
-					deleteUniverse(universes.get(i).getUniverseId());
-					return "universe_delete";
+					deleteUniverse(universes.get(i).getUniverseId(), model);
+					return "delete_universe";
 				}
 				universes.get(i).setStarSystem(starSystems);
 				universeController.update(universes.get(i), universes.get(i).getUniverseId());
