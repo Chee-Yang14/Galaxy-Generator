@@ -40,11 +40,11 @@ public class StarSystem {
 	private Universe u;
 	@Transient
 	private boolean capital;
-	
-	//@Transient
-	//private StarSystem vassalTo;
-	
-	//private int liegeSystemID;
+
+	// @Transient
+	// private StarSystem vassalTo;
+
+	// private int liegeSystemID;
 	private String liegeSystemName;
 
 	private Random random = new Random();
@@ -61,14 +61,17 @@ public class StarSystem {
 	/**
 	 * This is the default constructor.
 	 * 
-	 * @param name            used to determine the name
-	 * @param type            is used to determine the star type 
-	 * @param goverment       determine what the government will be 
-	 * @param population      determine what population is - population is how many people live on the starsystem
-	 * @param economyLevel    determine the economylevel - which is how good the economy is
-	 * @param spaceResources  determine spaceResource - how many resource are there are from all their planet combine
-	 * @param planets         determine the planets that orbit this starsystem.
-	 * @param location		  determine this star system location in the universe. 
+	 * @param name           used to determine the name
+	 * @param type           is used to determine the star type
+	 * @param goverment      determine what the government will be
+	 * @param population     determine what population is - population is how many
+	 *                       people live on the starsystem
+	 * @param economyLevel   determine the economylevel - which is how good the
+	 *                       economy is
+	 * @param spaceResources determine spaceResource - how many resource are there
+	 *                       are from all their planet combine
+	 * @param planets        determine the planets that orbit this starsystem.
+	 * @param location       determine this star system location in the universe.
 	 */
 	public StarSystem(Integer id, String name, String type, String goverment, long population, int economyLevel,
 			int spaceResources,
@@ -87,6 +90,7 @@ public class StarSystem {
 	/**
 	 * a another constructor that generate a star system with randomized features
 	 * the only parameter it take in is a universe where the star system will be in
+	 * 
 	 * @param u the universe where this star system will be put in
 	 */
 	public StarSystem(Universe u) {
@@ -103,8 +107,10 @@ public class StarSystem {
 		// it's planets. We will need to work out the formula.
 
 	}
+
 	/**
-	 * another construtor that generate a starsytem with randomize features but this time it has no universe.
+	 * another construtor that generate a starsytem with randomize features but this
+	 * time it has no universe.
 	 */
 	public StarSystem() {
 		this.setPlanets(createPlanets());
@@ -116,11 +122,13 @@ public class StarSystem {
 		this.setSpaceResources(createSpaceResource());
 		this.setGoverment(createGovernment());
 	}
-	
+
 	/**
-	 * this method generate a single starsytem with randomized feature and then return it
+	 * this method generate a single starsytem with randomized feature and then
+	 * return it
 	 * 
-	 * @param u take in the universe to give to the starsystem so it is generated with the universe as it universe. 
+	 * @param u take in the universe to give to the starsystem so it is generated
+	 *          with the universe as it universe.
 	 * @return a single starsystem with randomized features
 	 */
 	public static StarSystem generate(Universe u) {
@@ -137,10 +145,11 @@ public class StarSystem {
 	}
 
 	/**
-	 * this method create planets for the starsytem. 
-	 * it take two random number between 1 and 10. 
+	 * this method create planets for the starsytem.
+	 * it take two random number between 1 and 10.
 	 * and used it to determine how many planets the starsytem will have.
-	 * then it generated the planet, which will all have randomized features. 
+	 * then it generated the planet, which will all have randomized features.
+	 * 
 	 * @return the list of planets
 	 */
 	public ArrayList<Planet> createPlanets() {
@@ -158,9 +167,10 @@ public class StarSystem {
 
 	/**
 	 * this method randomly determine what the starsystem government is gonna be
-	 * there a randomized number that range from 1 to 10. 
+	 * there a randomized number that range from 1 to 10.
 	 * depending on the random number the government is determine
-	 * through the switch, landing where the number is. 
+	 * through the switch, landing where the number is.
+	 * 
 	 * @return the government
 	 */
 	public String createGovernment() {
@@ -203,10 +213,12 @@ public class StarSystem {
 
 	/**
 	 * this method determine the starsytem location
-	 * there is a star shape which is either scatter or cluster. 
-	 * using that we use it to determine the starsystem location so that along with other starsytem 
-	 * it make a cluster or scatter on the map. 
-	 * @return the location 
+	 * there is a star shape which is either scatter or cluster.
+	 * using that we use it to determine the starsystem location so that along with
+	 * other starsytem
+	 * it make a cluster or scatter on the map.
+	 * 
+	 * @return the location
 	 */
 	public int[] createLocation() {
 		int[] location = {};
@@ -215,7 +227,10 @@ public class StarSystem {
 			if (shape.equals(GalaxyShape.SCATTER)) {
 				location = new int[] { random.nextInt(100), random.nextInt(100) };
 			} else if (shape.equals(GalaxyShape.CLUSTER)) {
-				location = new int[] { random.nextInt(50) + random.nextInt(50), random.nextInt(50) + random.nextInt(50) };
+				location = new int[] { random.nextInt(50) + random.nextInt(50),
+						random.nextInt(50) + random.nextInt(50) };
+			} else if (shape.equals(GalaxyShape.SCATTERED_CLUSTER)) {
+				location = new int[] { random.nextInt(50) + 20, random.nextInt(50) + 20 };
 			}
 		} catch (Exception e) {
 		}
@@ -223,18 +238,20 @@ public class StarSystem {
 	}
 
 	/**
-	 * This method determine what the starsystem star stype will be. 
-	 * there a randomized number that is generated 
+	 * This method determine what the starsystem star stype will be.
+	 * there a randomized number that is generated
 	 * and depending on that randomized number a star type is determine
 	 * the star type are taken from stellar_classification wikipedia
-	 * this the star type along with the percent chance of the star sytem being that star type
+	 * this the star type along with the percent chance of the star sytem being that
+	 * star type
 	 * O 55%
 	 * B 25%
 	 * A 10%
-	 * F  5%
-	 * G  1&
+	 * F 5%
+	 * G 1&
 	 * K .4%
-	 * M  what ever is left
+	 * M what ever is left
+	 * 
 	 * @return the star type
 	 */
 	public String createStarType() {
@@ -267,9 +284,10 @@ public class StarSystem {
 	}
 
 	/**
-	 * the method is used to determine the population of the star syste. 
+	 * the method is used to determine the population of the star syste.
 	 * the method goes through all the planets and by adding the population up
 	 * it is able to find the total population
+	 * 
 	 * @return the population
 	 */
 	public long createPopulation() {
@@ -283,7 +301,9 @@ public class StarSystem {
 	/**
 	 * this method determine what the econLevel on the starsytem will be.
 	 * 
-	 * It is able to determine the econlevel by adding all the econlevel from each planet up. 
+	 * It is able to determine the econlevel by adding all the econlevel from each
+	 * planet up.
+	 * 
 	 * @return the econlevel
 	 */
 	public int createEconLevel() {
@@ -298,6 +318,7 @@ public class StarSystem {
 	 * this method determine how much natural resource the star system have
 	 * 
 	 * this is determine by adding all the planets natural resource up.
+	 * 
 	 * @return the natural resource
 	 */
 	public int createSpaceResource() {
@@ -307,6 +328,7 @@ public class StarSystem {
 		}
 		return resource;
 	}
+
 	/**
 	 * this method generate a random name for the star system
 	 * It has three array that hold a bunchs of words represting a sylable
@@ -322,7 +344,7 @@ public class StarSystem {
 				"Old", "Bri", "Twi", "Kel", "Lit", "Le", "Lye", "Deep", "Dark", "Alt", "Ber", "Bres", "Sat", "Fal",
 				"Ka", "Ca", "Sej", "Con", "Neu", "Neur", "Noc" };
 		String[] secondSylable = { "rash", "nar", "'kan", "kan", "sho", "del", "le", "la", "ta", "coru", "mel",
-				"'coru", "sin", "shin", "ba", "sed", "dro", "eur","th" };
+				"'coru", "sin", "shin", "ba", "sed", "dro", "eur", "th" };
 		String[] thirdSylable = { "shin", "shen", "dale", "dreg", "je", "se", "ae", "te", "to", "toe", "ri",
 				"dro", "dra", "jra", "del", "rel", "ni" };
 
@@ -330,23 +352,26 @@ public class StarSystem {
 		if (num == 0) {
 			name = firstSylable[random.nextInt(firstSylable.length)];
 		} else if (num == 1) {
-			name = firstSylable[random.nextInt(firstSylable.length)] + secondSylable[random.nextInt(secondSylable.length)];
+			name = firstSylable[random.nextInt(firstSylable.length)]
+					+ secondSylable[random.nextInt(secondSylable.length)];
 		} else if (num == 2) {
-			name = firstSylable[random.nextInt(firstSylable.length)] + secondSylable[random.nextInt(secondSylable.length)]
+			name = firstSylable[random.nextInt(firstSylable.length)]
+					+ secondSylable[random.nextInt(secondSylable.length)]
 					+ thirdSylable[random.nextInt(thirdSylable.length)];
 		} else {
 			System.out.println("Random number somehow out of range");
 		}
 		return name;
 	}
-	
+
 	public double getDistance(StarSystem s) {
 		int[] c = s.getLocation();
-		double dist = Math.sqrt((c[0] - location[0])*(c[0] - location[0]) + (c[1] - location[1])*(c[1] - location[1]));
+		double dist = Math
+				.sqrt((c[0] - location[0]) * (c[0] - location[0]) + (c[1] - location[1]) * (c[1] - location[1]));
 		return dist;
-		
+
 	}
-	
+
 	public double getInfluence(StarSystem s) {
 		double influence = s.getEconomyLevel() - getDistance(s) * getDistance(s);
 		return influence;
@@ -430,7 +455,8 @@ public class StarSystem {
 
 	@Override
 	public String toString() {
-		return "name= " + name + ", capital= " + isCapital() + ", liegeSystemName= " + liegeSystemName + ", type= " + type
+		return "name= " + name + ", capital= " + isCapital() + ", liegeSystemName= " + liegeSystemName + ", type= "
+				+ type
 				+ ", goverment= " + goverment + ", population= " + population + ", economyLevel= " + economyLevel
 				+ ", spaceResources= " + spaceResources + ", location= "
 				+ Arrays.toString(location);
@@ -451,25 +477,26 @@ public class StarSystem {
 	public void setCapital(boolean capital) {
 		this.capital = capital;
 	}
-/*
-	public StarSystem getVassalTo() {
-		return vassalTo;
-	}
 
-	public void setVassalTo(StarSystem vassalTo) {
-		this.vassalTo = vassalTo;
-		this.liegeSystemID = vassalTo.getStarsystemId();
-		this.liegeSystemName = vassalTo.getName();
-	}
-
-	public int getLiegeSystemID() {
-		return liegeSystemID;
-	}
-
-	public void setLiegeSystemID(int liegeSystemID) {
-		this.liegeSystemID = liegeSystemID;
-	}
-*/
+	/*
+	 * public StarSystem getVassalTo() {
+	 * return vassalTo;
+	 * }
+	 * 
+	 * public void setVassalTo(StarSystem vassalTo) {
+	 * this.vassalTo = vassalTo;
+	 * this.liegeSystemID = vassalTo.getStarsystemId();
+	 * this.liegeSystemName = vassalTo.getName();
+	 * }
+	 * 
+	 * public int getLiegeSystemID() {
+	 * return liegeSystemID;
+	 * }
+	 * 
+	 * public void setLiegeSystemID(int liegeSystemID) {
+	 * this.liegeSystemID = liegeSystemID;
+	 * }
+	 */
 	public String getLiegeSystemName() {
 		return liegeSystemName;
 	}
