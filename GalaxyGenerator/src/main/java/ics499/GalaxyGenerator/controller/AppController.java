@@ -433,15 +433,6 @@ public class AppController {
 
 	@DeleteMapping("/deleteUniverse/{id}")
 	public String deleteUniverse(@PathVariable(value = "id") Integer universeId, Model model) {
-		List<Universe> universe = universeRepo.findAll();
-		for (int i = 0; i < universe.size(); i++) {
-			if (universe.get(i).getUniverseId() == universeId) {
-				universe.remove(i);
-				break;
-			} else if (universe.get(i).getUniverseId() == universeId && i == universe.size() - 1) {
-				System.out.println("didn't delete");
-			}
-		}
 		universeRepo.deleteById(universeId);
 		return "delete_universe";
 	}
