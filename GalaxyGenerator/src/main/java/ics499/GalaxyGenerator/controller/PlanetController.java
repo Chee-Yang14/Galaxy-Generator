@@ -145,7 +145,7 @@ public class PlanetController {
       repo.save(existedPlanet);
       new ResponseEntity<>(HttpStatus.OK);
       return ResponseEntity.ok("Update successfully");
-    } catch (NoSuchElementException e) {
+    } catch (Exception e) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
