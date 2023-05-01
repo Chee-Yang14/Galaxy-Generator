@@ -1,0 +1,17 @@
+SaveFile
+Universe
+shape= SCATTER, size= 0, universeName= Dark
+StarSystem
+name= Newdeldale, capital= false, liegeSystemName= Sovereign, type= M, goverment= Aristocracy, population= 30332956269, economyLevel= 35, spaceResources= 3151, location= [67, 6]
+Planet
+name= Kiin, size= 139696043, population= 3352705032, naturalResources= 494, economyLevel= 4, economyType= Command economic system, description= Kiin is mildly fabled for its inhabitants' exceptional amount of wildlife and its vast inhabitant tulip plantations, type= Cytherian
+Planet
+name= Amesin, size= 131819274, population= 1407627249, naturalResources= 657, economyLevel= 9, economyType= Market economic system, description= This planet is  noted for its great mountains but threatened by killer 3-headed eagles, type= Arean
+Planet
+name= Berkan, size= 230697364, population= 11765565564, naturalResources= 692, economyLevel= 6, economyType= Command economic system, description= The world Berkan is very well known for the Salshoje 3-headed bees but scourged by killer golden shark, type= Ymirian
+Planet
+name= Sale, size= 204734497, population= 7779910886, naturalResources= 546, economyLevel= 5, economyType= Traditional economic system, description= The world Sale is very notable for its inhabitants' funny intelligence and underwater baseball, type= Arean
+Planet
+name= Lit, size= 171708340, population= 632265042, naturalResources= 377, economyLevel= 6, economyType= Traditional economic system, description= The planet Lit is mildly notable for underwater hockey but scourged by vicious giant dragon, type= Barren
+Planet
+name= Bridro, size= 168590078, population= 5394882496, naturalResources= 385, economyLevel= 5, economyType= Traditional economic system, description= The planet Bridro is mostly noted for its ancient tropical forests, type= Ymirian
