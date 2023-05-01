@@ -113,7 +113,7 @@ public class PlanetController {
         List<Planet> planets = starSystems.get(i).getPlanets();
         // if (planets.contains(existedPlanet)) {
         for (int j = 0; j < planets.size(); j++) {
-          if (planets.get(i).getName().equals(existedPlanet.getName())) {
+          if (planets.get(j).getName().equals(existedPlanet.getName())) {
             break outerloop;
           }
         }
@@ -146,6 +146,7 @@ public class PlanetController {
       new ResponseEntity<>(HttpStatus.OK);
       return ResponseEntity.ok("Update successfully");
     } catch (Exception e) {
+    	System.out.println("caught error! " + e.toString());
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }

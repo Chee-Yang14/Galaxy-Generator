@@ -213,6 +213,7 @@ public class AppController {
 	@PostMapping("/planetEdit/{id}")
 	public String planetEdit(Planet planet, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			System.out.println("it run ");
 			return "Planet_Edit_fail";
 		}
 		ResponseEntity response = planetController.update(planet, planet.getPlanetId());
